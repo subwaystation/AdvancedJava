@@ -1,0 +1,101 @@
+import seq.Nucleotide;
+import seq.Sequence;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by heumos on 15.10.15.
+ *
+ * Java class providing a function to print out a list of sequences.
+ *
+ */
+public class SequencePrintFormatter {
+
+    // the sequence list one wants to print out
+    private List<Sequence> sequences;
+
+    public SequencePrintFormatter(List<Sequence> sequences) {
+        this.sequences = sequences;
+    }
+
+    public List<Sequence> getSequences() {
+        return sequences;
+    }
+
+    public void setSequences(List<Sequence> sequences) {
+        this.sequences = sequences;
+    }
+
+    public void printSequences(int seqWidth) {
+        int maxSeqIdLength = calcMaxSeqIdLength();
+        String blankSeqId = String.format("%" + maxSeqIdLength + "s", "");
+        int seqLength = this.sequences.get(0).getSequenceData().size();
+        int integerPart = seqLength / seqWidth;
+        int residualPart = seqLength % seqWidth;
+
+        int seqStartIndex = 0;
+        int seqEndIndex = seqWidth;
+
+        for (int i = 0; i < integerPart; i++) {
+            System.out.println(String.format("%-" + maxSeqIdLength + "s    %s",
+                    blankSeqId,
+                    createHeaderCounterString(seqStartIndex + 1, seqEndIndex, seqWidth)));
+            for (Sequence seq : this.sequences) {
+                String nucleotides = fetchNucleotides(seq.getSequenceData(), seqStartIndex, seqEndIndex);
+                String printout = String.format("%-" + maxSeqIdLength + "s    %s",
+                        seq.getSeqId(),
+                        nucleotides);
+                System.out.println(printout);
+            }
+            seqStartIndex = seqEndIndex;
+            seqEndIndex = seqEndIndex + seqWidth;
+        }
+
+        System.out.println(String.format("%-" + maxSeqIdLength + "s    %s",
+                blankSeqId,
+                createHeaderCounterString(seqStartIndex + 1, seqLength + 1, residualPart)));
+
+        for (Sequence seq : this.sequences) {
+            String nucleotides = fetchNucleotides(seq.getSequenceData(), seqStartIndex, seqLength);
+            String printout = String.format("%-" + maxSeqIdLength + "s    %s",
+                    seq.getSeqId(),
+                    nucleotides);
+            System.out.println(printout);
+        }
+    }
+
+    /**
+     * Calculate the maximum length of the identifiers of a given list of sequences.
+     * @return the maximum sequence identifier length.
+     */
+    private int calcMaxSeqIdLength() {
+        List<String> seqIds = new ArrayList<String>();
+        for (Sequence seq : this.sequences) {
+            seqIds.add(seq.getSeqId());
+        }
+
+        int maxSeqIdLength = seqIds.stream()
+                .mapToInt(seqId -> seqId.length())
+                .max()
+                .getAsInt();
+        return maxSeqIdLength;
+    }
+
+    private String fetchNucleotides(ArrayList<Nucleotide> nucleotideList, int start, int end) {
+        List<Nucleotide> nucleotideSubList = nucleotideList.subList(start, end);
+        StringBuilder nucleotideBuilder = new StringBuilder();
+        for (Nucleotide nucleotide : nucleotideSubList) {
+            nucleotideBuilder.append(nucleotide);
+        }
+        return nucleotideBuilder.toString();
+    }
+
+    private String createHeaderCounterString(int start, int end, int width) {
+        int startLength = String.valueOf(start).length();
+        int endLength = String.valueOf(end).length();
+        int numberOfSpaces = width - startLength - endLength;
+        String space = String.format("%" + numberOfSpaces + "s", " ");
+        return String.valueOf(start) + space + String.valueOf(end);
+    }
+}

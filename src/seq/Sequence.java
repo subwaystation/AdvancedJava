@@ -1,3 +1,8 @@
+package seq;
+
+import seq.Nucleotide;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +18,7 @@ public class Sequence {
     private String seqId;
 
     // the sequence data of the sequence
-    private List<Nucleotide> sequenceData;
+    private ArrayList<Nucleotide> sequenceData;
 
     /**
      * A sequences consists of a sequence identifier
@@ -21,7 +26,7 @@ public class Sequence {
      * @param seqId the sequence identifier.
      * @param sequenceData the sequence data.
      */
-    public Sequence(String seqId, List<Nucleotide> sequenceData) {
+    public Sequence(String seqId, ArrayList<Nucleotide> sequenceData) {
         this.seqId = seqId;
         this.sequenceData = sequenceData;
     }
@@ -44,9 +49,9 @@ public class Sequence {
 
     /**
      * Get the sequence data.
-     * @return
+     * @return the sequence data as ArrayList.
      */
-    public List<Nucleotide> getSequenceData() {
+    public ArrayList<Nucleotide> getSequenceData() {
         return sequenceData;
     }
 
@@ -54,7 +59,7 @@ public class Sequence {
      * Set the sequence data.
      * @param sequenceData the sequence data.
      */
-    public void setSequenceData(List<Nucleotide> sequenceData) {
+    public void setSequenceData(ArrayList<Nucleotide> sequenceData) {
         this.sequenceData = sequenceData;
     }
 }

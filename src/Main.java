@@ -1,17 +1,17 @@
-import java.lang.reflect.Array;
+import io.FastaReader;
+import seq.Nucleotide;
+import seq.Sequence;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("test");
-        System.out.println(args[0]);
         FastaReader fastaReader = new FastaReader(args[0]);
         List<Sequence> sequences = fastaReader.readFasta();
-        List<String> seqIds = new ArrayList<String>();
+/*        List<String> seqIds = new ArrayList<String>();
         for (Sequence seq : sequences) {
             System.out.println(seq.getSeqId());
             seqIds.add(seq.getSeqId());
@@ -33,6 +33,16 @@ public class Main {
             String test = String.format("%-" + maxIdLength + "s %s", seq.getSeqId(), nucleotideBuilder.toString());
             System.out.println(test);
         }
+
+        System.out.println(5/2);
+        System.out.println(5 % 2);
+        ArrayList<String> ab = new ArrayList<String>();
+        ab.add("a");
+        ab.add("b");
+        ab.add("c");
+        System.out.println(ab.subList(0, 1));*/
+        SequencePrintFormatter sequencePrintFormatter = new SequencePrintFormatter(sequences);
+        sequencePrintFormatter.printSequences(60);
     }
 
 }

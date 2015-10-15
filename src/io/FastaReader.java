@@ -1,3 +1,8 @@
+package io;
+
+import seq.Nucleotide;
+import seq.Sequence;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -30,7 +35,7 @@ public class FastaReader {
     public List<Sequence> readFasta() {
 
         BufferedReader bufferedFastaReader = null;
-        String line = null;
+        String line;
         String seqId = "";
         StringBuffer sequenceBuffer = new StringBuffer();
         List<Sequence> sequenceList = new ArrayList<Sequence>();
@@ -59,6 +64,7 @@ public class FastaReader {
 
                     } else if (firstChar == ';') {
                         // comment line, skip it
+                        continue;
                     } else {
                         sequenceBuffer.append(line.trim());
                     }
@@ -86,7 +92,7 @@ public class FastaReader {
 
     private void addToSequenceList(String seqId, StringBuffer sequenceBuffer, List<Sequence> sequenceList) {
         if (sequenceBuffer.length() != 0) {
-            List<Nucleotide> sequenceData = new ArrayList<Nucleotide>();
+            ArrayList<Nucleotide> sequenceData = new ArrayList<Nucleotide>();
             for (int i = 0; i < sequenceBuffer.length(); i++) {
                 char base = sequenceBuffer.charAt(i);
                 sequenceData.add(new Nucleotide(base));

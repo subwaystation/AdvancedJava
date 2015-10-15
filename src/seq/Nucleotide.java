@@ -1,3 +1,5 @@
+package seq;
+
 /**
  * Created by heumos on 14.10.15.
  *
@@ -20,7 +22,7 @@ public class Nucleotide {
 
     /**
      * Get the nucleotide.
-     * @return
+     * @return the nucleotide as char.
      */
     public char getBase() {
         return base;
