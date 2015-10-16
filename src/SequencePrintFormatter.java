@@ -27,6 +27,12 @@ public class SequencePrintFormatter {
         this.sequences = sequences;
     }
 
+    /**
+     * The main method of this class.
+     * This methods prints the list of sequences in this class to stdout.
+     *
+     * @param seqWidth the length of the sequence line.
+     */
     public void printSequences(int seqWidth) {
         int maxSeqIdLength = calcMaxSeqIdLength();
         String blankSeqId = String.format("%" + maxSeqIdLength + "s", "");
@@ -82,6 +88,15 @@ public class SequencePrintFormatter {
         return maxSeqIdLength;
     }
 
+    /**
+     * Fetches nucleotides from a nucleotide list.
+     * Note, that the end index is exclusively.
+     *
+     * @param nucleotideList the nucleotide list one wants to fetch from.
+     * @param start the start index in the nucleotide list.
+     * @param end the end index in the nucleotide list.
+     * @return the fetched nucleotides as one String.
+     */
     private String fetchNucleotides(ArrayList<Nucleotide> nucleotideList, int start, int end) {
         List<Nucleotide> nucleotideSubList = nucleotideList.subList(start, end);
         StringBuilder nucleotideBuilder = new StringBuilder();
@@ -91,6 +106,14 @@ public class SequencePrintFormatter {
         return nucleotideBuilder.toString();
     }
 
+    /**
+     * Creates the String with nucleotide counters.
+     *
+     * @param start the current start nucleotide position.
+     * @param end the current end nucleotide position.
+     * @param width the current sequence width.
+     * @return
+     */
     private String createHeaderCounterString(int start, int end, int width) {
         int startLength = String.valueOf(start).length();
         int endLength = String.valueOf(end).length();
