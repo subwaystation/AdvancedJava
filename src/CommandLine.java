@@ -1,10 +1,11 @@
-import model.RnaSeqsModel;
+import model.AlignmentModel;
 
 public class CommandLine {
 
     public static void main(String[] args) {
-        RnaSeqsModel rnaSeqsModel = new RnaSeqsModel(args);
-        System.out.println(rnaSeqsModel.getFullStringRepresentation());
+        AlignmentModel alignmentModel = new AlignmentModel(args);
+
+        System.out.println(alignmentModel.getStringRepresentation());
     }
 
 }

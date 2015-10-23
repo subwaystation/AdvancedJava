@@ -16,7 +16,7 @@ import java.util.List;
  * formatting the given rna sequences in specific ways.
  *
  */
-public class RnaSeqsModel {
+public class AlignmentModel {
 
     // the arguments from the command line
     private String[] args;
@@ -27,11 +27,14 @@ public class RnaSeqsModel {
     // the sequence width
     private int seqWidth;
 
+    // boolean array declaring what of the alignment shall be displayed
+    private boolean[] alignemntModes;
+
     /**
      * A rna seq model only needs the command line arguments.
      * @param args the command line arguments from the main method.
      */
-    public RnaSeqsModel(String[] args) {
+    public AlignmentModel(String[] args) {
         this.args = args;
         init();
     }
@@ -50,6 +53,22 @@ public class RnaSeqsModel {
 
     public void setSequences(List<Sequence> sequences) {
         this.sequences = sequences;
+    }
+
+    public int getSeqWidth() {
+        return seqWidth;
+    }
+
+    public void setSeqWidth(int seqWidth) {
+        this.seqWidth = seqWidth;
+    }
+
+    public boolean[] getAlignemntModes() {
+        return alignemntModes;
+    }
+
+    public void setAlignemntModes(boolean[] alignemntModes) {
+        this.alignemntModes = alignemntModes;
     }
 
     /**
@@ -78,9 +97,19 @@ public class RnaSeqsModel {
         FastaReader fastaReader = new FastaReader(fastaFile);
         this.sequences = fastaReader.readFasta();
         this.seqWidth = seqLineLength;
+        // FIXME
+        boolean[] test = {false, true, true};
+        this.alignemntModes = test;
     }
 
-    public String getFullStringRepresentation() {
+    // TODO implement methods to set identifers, sequences and numbering
+
+    public String getStringRepresentation() {
+        boolean[] alignmentModes = this.getAlignemntModes();
+        boolean includeIdentifiers = alignmentModes[0];
+        boolean includeSequences = alignmentModes[1];
+        boolean includeNumbering = alignmentModes[2];
+
         StringBuilder seqBuilder = new StringBuilder();
         String newLine = "\n";
         int maxSeqIdLength = calcMaxSeqIdLength();
@@ -88,38 +117,87 @@ public class RnaSeqsModel {
         int seqLength = this.sequences.get(0).getSequenceData().size();
         int integerPart = seqLength / seqWidth;
         int residualPart = seqLength % seqWidth;
-        String numbering = "";
+        String numbering;
 
         int seqStartIndex = 0;
         int seqEndIndex = seqWidth;
 
         for (int i = 0; i < integerPart; i++) {
-            numbering = String.format("%-" + maxSeqIdLength + "s    %s",
-                    blankSeqId,
-                    createHeaderCounterString(seqStartIndex + 1, seqEndIndex, seqWidth));
-            seqBuilder.append(numbering).append(newLine);
+            // do we want numbering?
+            if (includeNumbering) {
+                numbering = String.format("%-" + maxSeqIdLength + "s    %s",
+                        blankSeqId,
+                        createHeaderCounterString(seqStartIndex + 1, seqEndIndex, seqWidth));
+                seqBuilder.append(numbering).append(newLine);
+            } else {
+                seqBuilder.append(newLine);
+            }
+
             for (Sequence seq : this.sequences) {
-                String nucleotides = fetchNucleotides(seq.getSequenceData(), seqStartIndex, seqEndIndex);
-                String sequence = String.format("%-" + maxSeqIdLength + "s    %s",
-                        seq.getSeqId(),
-                        nucleotides);
+                // do we want to include the sequences?
+                String sequence;
+                if (includeSequences) {
+                    String nucleotides = fetchNucleotides(seq.getSequenceData(), seqStartIndex, seqEndIndex);
+                    if (includeIdentifiers) {
+                        sequence = String.format("%-" + maxSeqIdLength + "s    %s",
+                                seq.getSeqId(),
+                                nucleotides);
+                    } else {
+                        sequence = String.format("%-" + maxSeqIdLength + "s    %s",
+                                blankSeqId,
+                                nucleotides);
+                    }
+                } else {
+                    if (includeIdentifiers) {
+                        sequence = String.format("%-" + maxSeqIdLength + "s    %s",
+                                seq.getSeqId(),
+                                "");
+                    } else {
+                        sequence = String.format("%-" + maxSeqIdLength + "s    %s",
+                                blankSeqId,
+                                "");
+                    }
+                }
                 seqBuilder.append(sequence).append(newLine);
             }
             seqStartIndex = seqEndIndex;
             seqEndIndex = seqEndIndex + seqWidth;
         }
 
-        numbering = String.format("%-" + maxSeqIdLength + "s    %s",
-                blankSeqId,
-                createHeaderCounterString(seqStartIndex + 1, seqLength + 1, residualPart));
-        seqBuilder.append(numbering).append(newLine);
+        if (includeNumbering) {
+            numbering = String.format("%-" + maxSeqIdLength + "s    %s",
+                    blankSeqId,
+                    createHeaderCounterString(seqStartIndex + 1, seqLength + 1, residualPart));
+            seqBuilder.append(numbering).append(newLine);
+        } else {
+            seqBuilder.append(newLine);
+        }
 
         for (Sequence seq : this.sequences) {
-            String nucleotides = fetchNucleotides(seq.getSequenceData(), seqStartIndex, seqLength);
-            String sequences = String.format("%-" + maxSeqIdLength + "s    %s",
-                    seq.getSeqId(),
-                    nucleotides);
-            seqBuilder.append(sequences).append(newLine);
+            String sequence;
+            if (includeSequences) {
+                String nucleotides = fetchNucleotides(seq.getSequenceData(), seqStartIndex, seqLength);
+                if (includeIdentifiers) {
+                    sequence = String.format("%-" + maxSeqIdLength + "s    %s",
+                            seq.getSeqId(),
+                            nucleotides);
+                } else {
+                    sequence = String.format("%-" + maxSeqIdLength + "s    %s",
+                            blankSeqId,
+                            nucleotides);
+                }
+            } else {
+                if (includeIdentifiers) {
+                    sequence = String.format("%-" + maxSeqIdLength + "s    %s",
+                            seq.getSeqId(),
+                            "");
+                } else {
+                    sequence = String.format("%-" + maxSeqIdLength + "s    %s",
+                            blankSeqId,
+                            "");
+                }
+            }
+            seqBuilder.append(sequence).append(newLine);
         }
 
         return seqBuilder.toString();
