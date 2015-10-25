@@ -217,7 +217,7 @@ public class AlignmentModel {
         if (includeNumbering) {
             numbering = String.format("%-" + maxSeqIdLength + "s    %s",
                     blankSeqId,
-                    createHeaderCounterString(seqStartIndex + 1, seqLength + 1, residualPart));
+                    createHeaderCounterString(seqStartIndex + 1, seqLength, residualPart));
             seqBuilder.append(numbering).append(newLine);
         } else {
             seqBuilder.append(newLine);
