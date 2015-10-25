@@ -5,6 +5,7 @@ import seq.Nucleotide;
 import seq.Sequence;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -78,7 +79,17 @@ public class AlignmentModel {
      * (3) Set the sequences list.
      */
     private void init() {
-        String fastaFile = this.args[0];
+        String fastaFile = "";
+        try {
+            fastaFile = this.args[0];
+        } catch (IndexOutOfBoundsException e) {
+            System.err.println("You did not specify an input file.  Please chose an appropriate" +
+                    "RNA FASTA file.");
+            System.exit(1);
+        }
+
+        validateFastaEnding(fastaFile);
+
         int seqLineLength = 60;
 
         try {
@@ -97,14 +108,53 @@ public class AlignmentModel {
         FastaReader fastaReader = new FastaReader(fastaFile);
         this.sequences = fastaReader.readFasta();
         this.seqWidth = seqLineLength;
-        // FIXME
-        boolean[] test = {false, true, true};
-        this.alignemntModes = test;
+        this.alignemntModes = new boolean[3];
     }
 
-    // TODO implement methods to set identifers, sequences and numbering
+    private void validateFastaEnding(String fastaFile) {
+        // allowed endings see wikipedia: https://en.wikipedia.org/wiki/FASTA_format
+        // chapter "File extension"
+        String[] allowedFastaEndings = {".fa", ".fasta", ".fas", ".fsa"};
+        for (String ending : allowedFastaEndings) {
+            if (fastaFile.endsWith(ending)) {
+                return;
+            }
+        }
+        // no positive validation
+        System.err.println(fastaFile  + "is no valid FASTA file.");
+        System.err.println("File extensions allowed are: " + Arrays.toString(allowedFastaEndings));
+        System.exit(1);
+    }
+
+    /**
+     * Set the identifier visibility.
+     * @param bool boolean specifying if the identifiers shall be included
+     *             in the StringRepresentation.
+     */
+    public void setIdentifierVisibilty(boolean bool) {
+        this.getAlignemntModes()[0] = bool;
+    }
+
+    /**
+     * Set the sequence visibility.
+     * @param bool boolean specifying if the sequences shall be included
+     *             in the StringRepresentation.
+     */
+    public void setSequenceVisibility(boolean bool) {
+        this.getAlignemntModes()[1] = bool;
+    }
+
+    /**
+     * Set the numbering visibility.
+     * @param bool boolean specifying if the numbering shall be included
+     *             in the StringRepresentation.
+     */
+    public void setNumberingVisibility(boolean bool) {
+        this.getAlignemntModes()[2] = bool;
+    }
 
     public String getStringRepresentation() {
+        // TODO refactoring!!!
         boolean[] alignmentModes = this.getAlignemntModes();
         boolean includeIdentifiers = alignmentModes[0];
         boolean includeSequences = alignmentModes[1];
@@ -127,7 +177,7 @@ public class AlignmentModel {
             if (includeNumbering) {
                 numbering = String.format("%-" + maxSeqIdLength + "s    %s",
                         blankSeqId,
-                        createHeaderCounterString(seqStartIndex + 1, seqEndIndex, seqWidth));
+                        createHeaderCounterString(seqStartIndex + 1, seqEndIndex, this.seqWidth));
                 seqBuilder.append(numbering).append(newLine);
             } else {
                 seqBuilder.append(newLine);
@@ -151,7 +201,7 @@ public class AlignmentModel {
                     if (includeIdentifiers) {
                         sequence = String.format("%-" + maxSeqIdLength + "s    %s",
                                 seq.getSeqId(),
-                                "");
+                                "") + String.format("%" + this.seqWidth + "s", " ");;
                     } else {
                         sequence = String.format("%-" + maxSeqIdLength + "s    %s",
                                 blankSeqId,
@@ -190,7 +240,7 @@ public class AlignmentModel {
                 if (includeIdentifiers) {
                     sequence = String.format("%-" + maxSeqIdLength + "s    %s",
                             seq.getSeqId(),
-                            "");
+                            "") + String.format("%" + residualPart + "s", " ");
                 } else {
                     sequence = String.format("%-" + maxSeqIdLength + "s    %s",
                             blankSeqId,
