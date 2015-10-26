@@ -24,33 +24,16 @@ public class AlignmentVC {
         this.alignmentView = new AlignmentView();
 
         // register event_handling handler
-        alignmentView.getSelectAllB().setOnAction(new SelectAllBEventHandler());
-        alignmentView.getClearSelectionB().setOnAction(new ClearSelectionBEventHandler());
-        alignmentView.getApplyB().setOnAction(new ApplyBEventHandler());
+        alignmentView.getSelectAllB().setOnAction((actionEvent) ->
+                AlignmentVP.setAlignmentViewCheckBoxes(alignmentView, true));
+        alignmentView.getClearSelectionB().setOnAction((actionEvent) ->
+                AlignmentVP.setAlignmentViewCheckBoxes(alignmentView, false));
+        alignmentView.getApplyB().setOnAction((actionEvent) ->
+                AlignmentVP.updateAlignmentView(alignmentModel, alignmentView));
     }
 
     public void show() {
         alignmentView.show(StageManager.getInstance().getPrimaryStage());
     }
 
-    class SelectAllBEventHandler implements EventHandler<ActionEvent> {
-        @Override
-        public void handle(ActionEvent actionEvent) {
-            AlignmentVP.setAlignmentViewCheckBoxes(alignmentView, true);
-        }
-    }
-
-    class ClearSelectionBEventHandler implements EventHandler<ActionEvent> {
-        @Override
-        public void handle(ActionEvent actionEvent) {
-            AlignmentVP.setAlignmentViewCheckBoxes(alignmentView, false);
-        }
-    }
-
-    class ApplyBEventHandler implements  EventHandler<ActionEvent> {
-        @Override
-        public void handle(ActionEvent actionEvent) {
-            AlignmentVP.updateAlignmentView(alignmentModel, alignmentView);
-        }
-    }
 }
