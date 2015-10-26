@@ -1,6 +1,7 @@
 package io;
 
-import seq.Nucleotide;
+import lib.RnaNucleotideException;
+import seq.RnaNucleotide;
 import seq.Sequence;
 
 import java.io.BufferedReader;
@@ -95,7 +96,7 @@ public class FastaReader {
     private void addToSequenceList(String seqId, StringBuffer sequenceBuffer,
                                    List<Sequence> sequenceList, int totalLines) {
         if (sequenceBuffer.length() != 0) {
-            ArrayList<Nucleotide> sequenceData = new ArrayList<Nucleotide>();
+            ArrayList<RnaNucleotide> sequenceData = new ArrayList<RnaNucleotide>();
             for (int i = 0; i < sequenceBuffer.length(); i++) {
                 char base = sequenceBuffer.charAt(i);
                 if (base == 'T') {
@@ -104,7 +105,11 @@ public class FastaReader {
                     System.err.println("Error occured in line: " + totalLines);
                     System.exit(1);
                 }
-                sequenceData.add(new Nucleotide(base));
+                try {
+                    sequenceData.add(new RnaNucleotide(base));
+                } catch (RnaNucleotideException e) {
+                    e.printStackTrace();
+                }
             }
             Sequence sequence = new Sequence(seqId, sequenceData);
             sequenceList.add(sequence);

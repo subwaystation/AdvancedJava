@@ -1,7 +1,7 @@
 package model;
 
 import io.FastaReader;
-import seq.Nucleotide;
+import seq.RnaNucleotide;
 import seq.Sequence;
 
 import java.util.ArrayList;
@@ -274,16 +274,16 @@ public class AlignmentModel {
      * Fetches nucleotides from a nucleotide list.
      * Note, that the end index is exclusively.
      *
-     * @param nucleotideList the nucleotide list one wants to fetch from.
+     * @param rnaNucleotideList the nucleotide list one wants to fetch from.
      * @param start the start index in the nucleotide list.
      * @param end the end index in the nucleotide list.
      * @return the fetched nucleotides as one String.
      */
-    private String fetchNucleotides(ArrayList<Nucleotide> nucleotideList, int start, int end) {
-        List<Nucleotide> nucleotideSubList = nucleotideList.subList(start, end);
+    private String fetchNucleotides(ArrayList<RnaNucleotide> rnaNucleotideList, int start, int end) {
+        List<RnaNucleotide> rnaNucleotideSubList = rnaNucleotideList.subList(start, end);
         StringBuilder nucleotideBuilder = new StringBuilder();
-        for (Nucleotide nucleotide : nucleotideSubList) {
-            nucleotideBuilder.append(nucleotide);
+        for (RnaNucleotide rnaNucleotide : rnaNucleotideSubList) {
+            nucleotideBuilder.append(rnaNucleotide);
         }
         return nucleotideBuilder.toString();
     }
