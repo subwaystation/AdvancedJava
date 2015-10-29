@@ -1,6 +1,9 @@
 package seq;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by heumos on 29.10.15.
@@ -61,13 +64,11 @@ public abstract class ASequence {
     }
 
     public double getGcContent() {
-        String gC = "GC";
-        double gCCount = 0.0;
-        for (ANucleotide aNucleotide : this.sequenceData) {
-            if (gC.contains(String.valueOf(aNucleotide.getBase()))) {
-                gCCount += 1.0;
-            }
-        }
+        String gC = "GCcg";
+        double gCCount = this.sequenceData
+                .stream()
+                .filter(aNucleotide -> gC.contains(String.valueOf(aNucleotide.getBase())))
+                .count();
         return gCCount / (double) this.sequenceData.size();
     }
 
@@ -75,16 +76,28 @@ public abstract class ASequence {
         return this.sequenceData.size();
     }
 
-    public void reverseSeq() {
-        // TODO
+    public List<ANucleotide> getReverseSeq() {
+        List<ANucleotide> sequenceDataReverse = new ArrayList<ANucleotide>(this.sequenceData);
+        Collections.reverse(sequenceDataReverse);
+        return sequenceDataReverse;
     }
 
-    protected abstract void complementarySeq();
+    protected abstract void getComplementarySeq();
 
-    protected abstract void reverseComplementarySeq();
+    protected abstract void getReverseComplementarySeq();
 
-    protected abstract void toUpperCase();
+    public List<ANucleotide> toUpperCase() {
+        return this.sequenceData
+                .stream()
+                .map(ANucleotide::toUpperCase)
+                .collect(Collectors.toList());
+    }
 
-    protected abstract void toLowerCase();
+    public List<ANucleotide> toLowerCase() {
+        return this.sequenceData
+                .stream()
+                .map(ANucleotide::toLowerCase)
+                .collect(Collectors.toList());
+    }
 
 }

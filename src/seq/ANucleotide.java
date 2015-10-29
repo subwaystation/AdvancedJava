@@ -53,4 +53,14 @@ public abstract class ANucleotide {
     @Override public String toString() {
         return String.valueOf(this.base);
     }
+
+    public ANucleotide toUpperCase() {
+        this.base = Character.toUpperCase(this.base);
+        return this;
+    }
+
+    public ANucleotide toLowerCase() {
+        this.base = Character.toLowerCase(this.base);
+        return this;
+    }
 }
