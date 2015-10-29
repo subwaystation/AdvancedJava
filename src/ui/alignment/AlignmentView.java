@@ -1,4 +1,4 @@
-package ui;
+package ui.alignment;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;

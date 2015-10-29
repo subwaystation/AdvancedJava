@@ -1,7 +1,7 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.AlignmentModel;
-import ui.AlignmentVC;
+import ui.alignment.AlignmentVC;
 import ui.StageManager;
 
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by heumos on 25.10.15.
  */
-public class Start extends Application {
+public class StartAlignment extends Application {
 
     public static void main(String[] args) {
         launch(args);

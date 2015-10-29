@@ -1,4 +1,4 @@
-package ui;
+package ui.alignment;
 
 import model.AlignmentModel;
 

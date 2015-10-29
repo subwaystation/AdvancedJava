@@ -1,37 +1,37 @@
 package seq;
 
-import lib.RnaNucleotideException;
+import lib.DnaNucleotideException;
 
 /**
- * Created by heumos on 14.10.15.
+ * Created by heumos on 29.10.15.
  *
  * Java class representing an RNA nucleotide.
  *
  */
-public class RnaNucleotide extends ANucleotide {
+public class DnaNucleotide extends ANucleotide{
 
-    // allowed RNA nucleotides
-    private static final String ALLOWED_RNA_NUCLEOTIDES = "acug-ACUG";
+    // allowed DNA nucleotides
+    private static final String ALLOWED_DNA_NUCLEOTIDES = "actg-ACTG";
 
     /**
      * A nucleotide consists of one base.
      * @param base the nucleotide given as a char.
      */
-    public RnaNucleotide(char base) {
+    public DnaNucleotide(char base) {
         super(base);
     }
 
     @Override
     public boolean validateNucleotide(char base) {
-        return ALLOWED_RNA_NUCLEOTIDES.contains(String.valueOf(base));
+        return ALLOWED_DNA_NUCLEOTIDES.contains(String.valueOf(base));
     }
 
     @Override
     public void throwIllegalNucleotideException(char base) {
         try {
-            throw  new RnaNucleotideException("ERROR: Illegal character for RnaNucleotide: "
+            throw  new DnaNucleotideException("ERROR: Illegal character for DnaNucleotide: "
                     + String.valueOf(base));
-        } catch (RnaNucleotideException e) {
+        } catch (DnaNucleotideException e) {
             e.printStackTrace();
         }
     }

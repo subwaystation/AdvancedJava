@@ -1,8 +1,7 @@
-package ui;
+package ui.alignment;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import model.AlignmentModel;
+import ui.StageManager;
 
 /**
  * Created by heumos on 25.10.15.
