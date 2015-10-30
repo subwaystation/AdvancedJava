@@ -1,7 +1,6 @@
-package seq.sequence;
+package seq.nucleotide;
 
 import lib.DnaNucleotideException;
-import seq.nucleotide.ANucleotide;
 
 /**
  * Created by heumos on 29.10.15.
@@ -65,7 +64,6 @@ public class DnaNucleotide extends ANucleotide {
                 this.setBase('G');
                 break;
             default:
-                throwIllegalNucleotideException(this.getBase());
                 break;
         }
         return  this;

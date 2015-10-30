@@ -1,7 +1,6 @@
-package seq.sequence;
+package seq.nucleotide;
 
 import lib.RnaNucleotideException;
-import seq.nucleotide.ANucleotide;
 
 /**
  * Created by heumos on 14.10.15.
@@ -65,7 +64,6 @@ public class RnaNucleotide extends ANucleotide {
                 this.setBase('G');
                 break;
             default:
-                throwIllegalNucleotideException(this.getBase());
                 break;
         }
         return  this;

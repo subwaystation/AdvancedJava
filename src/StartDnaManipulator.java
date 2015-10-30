@@ -1,6 +1,6 @@
 import seq.nucleotide.ANucleotide;
-import seq.sequence.RnaNucleotide;
-import seq.nucleotide.RnaSequence;
+import seq.nucleotide.RnaNucleotide;
+import seq.sequence.RnaSequence;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -64,5 +64,5 @@ public abstract class ANucleotide {
         return this;
     }
 
-    protected abstract ANucleotide complementary();
+    public abstract ANucleotide complementary();
 }

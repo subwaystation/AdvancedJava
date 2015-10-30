@@ -1,5 +1,6 @@
 package seq.sequence;
 
+import lib.StringFormatter;
 import seq.nucleotide.ANucleotide;
 
 import java.util.ArrayList;
@@ -109,6 +110,18 @@ public abstract class ASequence {
                 .stream()
                 .map(ANucleotide::toLowerCase)
                 .collect(Collectors.toList());
+    }
+
+    public String seqToString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (ANucleotide aNucleotide : this.getSequenceData()) {
+            stringBuilder.append(aNucleotide.toString());
+        }
+        return stringBuilder.toString();
+    }
+
+    public String seqToString(int lineWidth) {
+        return StringFormatter.formatStringSequence(seqToString(), lineWidth);
     }
 
 }

@@ -1,8 +1,8 @@
-package seq.nucleotide;
+package seq.sequence;
 
-import seq.sequence.ASequence;
-import seq.sequence.DnaNucleotide;
-import seq.sequence.RnaNucleotide;
+import seq.nucleotide.ANucleotide;
+import seq.nucleotide.DnaNucleotide;
+import seq.nucleotide.RnaNucleotide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,5 +56,16 @@ public class DnaSequence extends ASequence {
             dnaNucleotidesComplementary.add(new DnaNucleotide(aNucleotide.complementary().getBase()));
         }
         return dnaNucleotidesComplementary;
+    }
+
+    public static DnaSequence parseStringToSequence(String s) {
+        List<ANucleotide> dnaNucleotides = new ArrayList<ANucleotide>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c != '\n') {
+                dnaNucleotides.add(new DnaNucleotide(c));
+            }
+        }
+        return new DnaSequence(null, dnaNucleotides);
     }
 }

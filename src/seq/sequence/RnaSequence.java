@@ -1,7 +1,7 @@
-package seq.nucleotide;
+package seq.sequence;
 
-import seq.sequence.ASequence;
-import seq.sequence.RnaNucleotide;
+import seq.nucleotide.ANucleotide;
+import seq.nucleotide.RnaNucleotide;
 
 import java.util.ArrayList;
 import java.util.List;
