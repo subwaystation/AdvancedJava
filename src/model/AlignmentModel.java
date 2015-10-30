@@ -1,8 +1,8 @@
 package model;
 
 import io.FastaReader;
-import seq.RnaNucleotide;
-import seq.Sequence;
+import seq.nucleotide.ANucleotide;
+import seq.sequence.ASequence;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +23,7 @@ public class AlignmentModel {
     private String[] args;
 
     // the list of rna sequences
-    private List<Sequence> sequences;
+    private List<ASequence> sequences;
 
     // the sequence width
     private int seqWidth;
@@ -48,11 +48,11 @@ public class AlignmentModel {
         this.args = args;
     }
 
-    public List<Sequence> getSequences() {
+    public List<ASequence> getSequences() {
         return sequences;
     }
 
-    public void setSequences(List<Sequence> sequences) {
+    public void setSequences(List<ASequence> sequences) {
         this.sequences = sequences;
     }
 
@@ -183,7 +183,7 @@ public class AlignmentModel {
                 seqBuilder.append(newLine);
             }
 
-            for (Sequence seq : this.sequences) {
+            for (ASequence seq : this.sequences) {
                 // do we want to include the sequences?
                 String sequence;
                 if (includeSequences) {
@@ -223,7 +223,7 @@ public class AlignmentModel {
             seqBuilder.append(newLine);
         }
 
-        for (Sequence seq : this.sequences) {
+        for (ASequence seq : this.sequences) {
             String sequence;
             if (includeSequences) {
                 String nucleotides = fetchNucleotides(seq.getSequenceData(), seqStartIndex, seqLength);
@@ -259,7 +259,7 @@ public class AlignmentModel {
      */
     private int calcMaxSeqIdLength() {
         List<String> seqIds = new ArrayList<String>();
-        for (Sequence seq : this.sequences) {
+        for (ASequence seq : this.sequences) {
             seqIds.add(seq.getSeqId());
         }
 
@@ -279,10 +279,10 @@ public class AlignmentModel {
      * @param end the end index in the nucleotide list.
      * @return the fetched nucleotides as one String.
      */
-    private String fetchNucleotides(ArrayList<RnaNucleotide> rnaNucleotideList, int start, int end) {
-        List<RnaNucleotide> rnaNucleotideSubList = rnaNucleotideList.subList(start, end);
+    private String fetchNucleotides(List<ANucleotide> rnaNucleotideList, int start, int end) {
+        List<ANucleotide> rnaNucleotideSubList = rnaNucleotideList.subList(start, end);
         StringBuilder nucleotideBuilder = new StringBuilder();
-        for (RnaNucleotide rnaNucleotide : rnaNucleotideSubList) {
+        for (ANucleotide rnaNucleotide : rnaNucleotideSubList) {
             nucleotideBuilder.append(rnaNucleotide);
         }
         return nucleotideBuilder.toString();

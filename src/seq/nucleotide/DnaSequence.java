@@ -1,4 +1,8 @@
-package seq;
+package seq.nucleotide;
+
+import seq.sequence.ASequence;
+import seq.sequence.DnaNucleotide;
+import seq.sequence.RnaNucleotide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,21 +28,33 @@ public class DnaSequence extends ASequence {
     }
 
     public List<RnaNucleotide> toRnaSequence() {
-        List<ANucleotide> rnaSeqData = new ArrayList<ANucleotide>(this.getSequenceData());
+        List<RnaNucleotide> rnaSeqData = new ArrayList<RnaNucleotide>();
         char t = 't';
         char T = 'T';
         char u = 'u';
         char U = 'U';
-        for (int i = 0; i < rnaSeqData.size(); i++) {
+        for (int i = 0; i < this.seqLength(); i++) {
             ANucleotide aNucleotide = rnaSeqData.get(i);
             if (aNucleotide.getBase() == t) {
-                aNucleotide.setBase(u);
+                rnaSeqData.add(new RnaNucleotide(u));
             } else {
                 if (aNucleotide.getBase() == T) {
-                    aNucleotide.setBase(U);
+                    rnaSeqData.add(new RnaNucleotide(U));
+                } else {
+                    rnaSeqData.add(new RnaNucleotide(this.getSequenceData().get(i).getBase()));
                 }
             }
         }
-        return (List<RnaNucleotide>) (List<?>) rnaSeqData;
+        return rnaSeqData;
+    }
+
+    @Override
+    public List<ANucleotide> complementarySeq() {
+        List<ANucleotide> dnaNucleotidesComplementary = new ArrayList<ANucleotide>();
+        for (int i = 0; i < this.seqLength(); i++) {
+            ANucleotide aNucleotide = this.getSequenceData().get(i);
+            dnaNucleotidesComplementary.add(new DnaNucleotide(aNucleotide.complementary().getBase()));
+        }
+        return dnaNucleotidesComplementary;
     }
 }

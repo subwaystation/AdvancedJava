@@ -1,8 +1,9 @@
 package io;
 
-import lib.RnaNucleotideException;
-import seq.RnaNucleotide;
-import seq.Sequence;
+import seq.nucleotide.ANucleotide;
+import seq.sequence.ASequence;
+import seq.sequence.RnaNucleotide;
+import seq.nucleotide.RnaSequence;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -33,13 +34,13 @@ public class FastaReader {
         this.fastaFile = fastaFile;
     }
 
-    public List<Sequence> readFasta() {
+    public List<ASequence> readFasta() {
 
         BufferedReader bufferedFastaReader = null;
         String line;
         String seqId = "";
         StringBuffer sequenceBuffer = new StringBuffer();
-        List<Sequence> sequenceList = new ArrayList<Sequence>();
+        List<ASequence> sequenceList = new ArrayList<ASequence>();
         int totalLines = 0;
 
         try {
@@ -94,9 +95,9 @@ public class FastaReader {
     }
 
     private void addToSequenceList(String seqId, StringBuffer sequenceBuffer,
-                                   List<Sequence> sequenceList, int totalLines) {
+                                   List<ASequence> sequenceList, int totalLines) {
         if (sequenceBuffer.length() != 0) {
-            ArrayList<RnaNucleotide> sequenceData = new ArrayList<RnaNucleotide>();
+            ArrayList<ANucleotide> sequenceData = new ArrayList<ANucleotide>();
             for (int i = 0; i < sequenceBuffer.length(); i++) {
                 char base = sequenceBuffer.charAt(i);
                 if (base == 'T') {
@@ -105,13 +106,9 @@ public class FastaReader {
                     System.err.println("Error occured in line: " + totalLines);
                     System.exit(1);
                 }
-                try {
-                    sequenceData.add(new RnaNucleotide(base));
-                } catch (RnaNucleotideException e) {
-                    e.printStackTrace();
-                }
+                sequenceData.add(new RnaNucleotide(base));
             }
-            Sequence sequence = new Sequence(seqId, sequenceData);
+            RnaSequence sequence = new RnaSequence(seqId, sequenceData);
             sequenceList.add(sequence);
         }
     }

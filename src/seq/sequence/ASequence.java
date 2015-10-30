@@ -1,4 +1,6 @@
-package seq;
+package seq.sequence;
+
+import seq.nucleotide.ANucleotide;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,7 +65,7 @@ public abstract class ASequence {
         this.sequenceData = sequenceData;
     }
 
-    public double getGcContent() {
+    public double calcGcContent() {
         String gC = "GCcg";
         double gCCount = this.sequenceData
                 .stream()
@@ -72,19 +74,28 @@ public abstract class ASequence {
         return gCCount / (double) this.sequenceData.size();
     }
 
-    public int getSeqLength() {
+    public int seqLength() {
         return this.sequenceData.size();
     }
 
-    public List<ANucleotide> getReverseSeq() {
+    public List<ANucleotide> reverseSeq() {
         List<ANucleotide> sequenceDataReverse = new ArrayList<ANucleotide>(this.sequenceData);
         Collections.reverse(sequenceDataReverse);
         return sequenceDataReverse;
     }
 
-    protected abstract void getComplementarySeq();
+    public void reverseSeq(List<ANucleotide> sequenceData) {
+        Collections.reverse(sequenceData);
+        return;
+    }
 
-    protected abstract void getReverseComplementarySeq();
+    protected abstract List<ANucleotide> complementarySeq();
+
+    public List<ANucleotide> reverseComplementarySeq() {
+        List<ANucleotide> nucleotidesComplementary = complementarySeq();
+        reverseSeq(nucleotidesComplementary);
+        return nucleotidesComplementary;
+    }
 
     public List<ANucleotide> toUpperCase() {
         return this.sequenceData

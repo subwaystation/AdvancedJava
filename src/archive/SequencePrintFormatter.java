@@ -1,7 +1,7 @@
 package archive;
 
-import seq.RnaNucleotide;
-import seq.Sequence;
+import seq.nucleotide.ANucleotide;
+import seq.sequence.ASequence;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +15,17 @@ import java.util.List;
 public class SequencePrintFormatter {
 
     // the sequence list one wants to print out
-    private List<Sequence> sequences;
+    private List<ASequence> sequences;
 
-    public SequencePrintFormatter(List<Sequence> sequences) {
+    public SequencePrintFormatter(List<ASequence> sequences) {
         this.sequences = sequences;
     }
 
-    public List<Sequence> getSequences() {
+    public List<ASequence> getSequences() {
         return sequences;
     }
 
-    public void setSequences(List<Sequence> sequences) {
+    public void setSequences(List<ASequence> sequences) {
         this.sequences = sequences;
     }
 
@@ -49,7 +49,7 @@ public class SequencePrintFormatter {
             System.out.println(String.format("%-" + maxSeqIdLength + "s    %s",
                     blankSeqId,
                     createHeaderCounterString(seqStartIndex + 1, seqEndIndex, seqWidth)));
-            for (Sequence seq : this.sequences) {
+            for (ASequence seq : this.sequences) {
                 String nucleotides = fetchNucleotides(seq.getSequenceData(), seqStartIndex, seqEndIndex);
                 String printout = String.format("%-" + maxSeqIdLength + "s    %s",
                         seq.getSeqId(),
@@ -64,7 +64,7 @@ public class SequencePrintFormatter {
                 blankSeqId,
                 createHeaderCounterString(seqStartIndex + 1, seqLength + 1, residualPart)));
 
-        for (Sequence seq : this.sequences) {
+        for (ASequence seq : this.sequences) {
             String nucleotides = fetchNucleotides(seq.getSequenceData(), seqStartIndex, seqLength);
             String printout = String.format("%-" + maxSeqIdLength + "s    %s",
                     seq.getSeqId(),
@@ -79,7 +79,7 @@ public class SequencePrintFormatter {
      */
     private int calcMaxSeqIdLength() {
         List<String> seqIds = new ArrayList<String>();
-        for (Sequence seq : this.sequences) {
+        for (ASequence seq : this.sequences) {
             seqIds.add(seq.getSeqId());
         }
 
@@ -99,10 +99,10 @@ public class SequencePrintFormatter {
      * @param end the end index in the nucleotide list.
      * @return the fetched nucleotides as one String.
      */
-    private String fetchNucleotides(ArrayList<RnaNucleotide> rnaNucleotideList, int start, int end) {
-        List<RnaNucleotide> rnaNucleotideSubList = rnaNucleotideList.subList(start, end);
+    private String fetchNucleotides(List<ANucleotide> rnaNucleotideList, int start, int end) {
+        List<ANucleotide> rnaNucleotideSubList = rnaNucleotideList.subList(start, end);
         StringBuilder nucleotideBuilder = new StringBuilder();
-        for (RnaNucleotide rnaNucleotide : rnaNucleotideSubList) {
+        for (ANucleotide rnaNucleotide : rnaNucleotideSubList) {
             nucleotideBuilder.append(rnaNucleotide);
         }
         return nucleotideBuilder.toString();

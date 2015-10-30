@@ -1,4 +1,4 @@
-package seq;
+package seq.nucleotide;
 
 /**
  * Created by heumos on 14.10.15.
@@ -63,4 +63,6 @@ public abstract class ANucleotide {
         this.base = Character.toLowerCase(this.base);
         return this;
     }
+
+    protected abstract ANucleotide complementary();
 }
