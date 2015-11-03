@@ -1,5 +1,6 @@
 package seq.sequence;
 
+import lib.DnaNucleotideException;
 import seq.nucleotide.ANucleotide;
 import seq.nucleotide.DnaNucleotide;
 import seq.nucleotide.RnaNucleotide;
@@ -34,7 +35,7 @@ public class DnaSequence extends ASequence {
         char u = 'u';
         char U = 'U';
         for (int i = 0; i < this.seqLength(); i++) {
-            ANucleotide aNucleotide = rnaSeqData.get(i);
+            ANucleotide aNucleotide = getSequenceData().get(i);
             if (aNucleotide.getBase() == t) {
                 rnaSeqData.add(new RnaNucleotide(u));
             } else {
@@ -62,7 +63,7 @@ public class DnaSequence extends ASequence {
         List<ANucleotide> dnaNucleotides = new ArrayList<ANucleotide>();
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if (c != '\n') {
+            if (c != '\n' && DnaNucleotide.ALLOWED_DNA_NUCLEOTIDES.contains(String.valueOf(c))) {
                 dnaNucleotides.add(new DnaNucleotide(c));
             }
         }

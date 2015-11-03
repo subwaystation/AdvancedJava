@@ -11,7 +11,7 @@ import lib.DnaNucleotideException;
 public class DnaNucleotide extends ANucleotide {
 
     // allowed DNA nucleotides
-    private static final String ALLOWED_DNA_NUCLEOTIDES = "actg-ACTG";
+    public static final String ALLOWED_DNA_NUCLEOTIDES = "actg-ACTG";
 
     /**
      * A nucleotide consists of one base.

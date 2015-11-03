@@ -1,23 +1,22 @@
-import seq.nucleotide.ANucleotide;
-import seq.nucleotide.RnaNucleotide;
-import seq.sequence.RnaSequence;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import ui.StageManager;
+import ui.dna_manipulator.DnaManipulatorVC;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by heumos on 29.10.15.
  */
-public class StartDnaManipulator {
+public class StartDnaManipulator extends Application {
+    public static void main(String[] args) {
+        launch(args);
+    }
 
-    List<ANucleotide> rnaNucleotides = new ArrayList<ANucleotide>();
-    RnaNucleotide rnaNucleotide = new RnaNucleotide('A');
-    List<RnaNucleotide> blubb;
+    @Override
+    public void start(Stage primaryStage) {
+        StageManager.getInstance().setPrimaryStage(primaryStage);
 
-    RnaSequence rnaSequence = new RnaSequence("abc", rnaNucleotides);
-
-    public StartDnaManipulator() {
-        this.rnaNucleotides.add(rnaNucleotide);
-        this.blubb = (List<RnaNucleotide>) (List<?>) this.rnaSequence.getSequenceData();
+        DnaManipulatorVC dnaManipulatorVC = new DnaManipulatorVC();
+        dnaManipulatorVC.show();
     }
 }

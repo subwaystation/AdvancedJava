@@ -112,6 +112,18 @@ public abstract class ASequence {
                 .collect(Collectors.toList());
     }
 
+    public static String seqToString(List<ANucleotide> aNucleotideList) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (ANucleotide aNucleotide : aNucleotideList) {
+            stringBuilder.append(aNucleotide.toString());
+        }
+        return stringBuilder.toString();
+    }
+
+    public static String seqToString(List<ANucleotide> aNucleotideList, int lineWidth) {
+        return StringFormatter.formatStringSequence(seqToString(aNucleotideList), lineWidth);
+    }
+
     public String seqToString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (ANucleotide aNucleotide : this.getSequenceData()) {

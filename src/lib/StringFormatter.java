@@ -21,7 +21,9 @@ public class StringFormatter {
         if (rest != 0) {
             result.append(s.substring(len-rest, len));
         } else {
-            result.deleteCharAt(result.length()-1);
+            if (result.length() > 0) {
+                result.deleteCharAt(result.length()-1);
+            }
         }
         return result.toString();
     }
