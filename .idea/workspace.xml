@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de223f9e-d0e8-46f4-b3d3-1ac4f3afd1fe" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/cluster_viewer/ClusterViewerVC.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/cluster_viewer/ClusterViewerVP.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ui/cluster_viewer/ClusterViewerView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/StartClusterViewer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/stylesheet.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/lib/FastaIdStrandMap.java" afterPath="$PROJECT_DIR$/src/io/FastaIdStrandMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cd_hit/ClsrEntry.java" afterPath="$PROJECT_DIR$/src/cd_hit/ClsrEntry.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cd_hit/ClsrReader.java" afterPath="$PROJECT_DIR$/src/cd_hit/ClsrReader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/archive/Main.java" afterPath="$PROJECT_DIR$/src/archive/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/archive/Playground.java" afterPath="$PROJECT_DIR$/src/archive/Playground.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/stylesheet.css" afterPath="$PROJECT_DIR$/src/stylesheet.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="AdvancedJava.iws" />
@@ -67,8 +58,8 @@
       <file leaf-file-name="stylesheet.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/stylesheet.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.04488778">
+              <caret line="1" column="34" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -150,7 +141,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/lessons/HelloWorld2.java" />
         <option value="$PROJECT_DIR$/src/HelloWorld.java" />
         <option value="$PROJECT_DIR$/src/RnaSeqs.java" />
@@ -201,6 +191,7 @@
         <option value="$PROJECT_DIR$/src/cd_hit/ClsrReader.java" />
         <option value="$PROJECT_DIR$/src/ui/cluster_viewer/ClusterViewerVP.java" />
         <option value="$PROJECT_DIR$/src/ui/cluster_viewer/ClusterViewerView.java" />
+        <option value="$PROJECT_DIR$/src/stylesheet.css" />
       </list>
     </option>
   </component>
@@ -790,7 +781,7 @@
       <workItem from="1446194408981" duration="2243000" />
       <workItem from="1446543553571" duration="17023000" />
       <workItem from="1446639658099" duration="286000" />
-      <workItem from="1447055910996" duration="19542000" />
+      <workItem from="1447055910996" duration="19984000" />
     </task>
     <task id="LOCAL-00001" summary="Started 'Getting Started' &#10;">
       <created>1444828495688</created>
@@ -894,11 +885,17 @@
       <option name="project" value="LOCAL" />
       <updated>1447069332928</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Finished Task ClusterViewer">
+      <created>1447082344037</created>
+      <option name="number" value="00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1447082344037</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83975000" />
+    <option name="totallyTimeSpent" value="84417000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
@@ -985,7 +982,8 @@
     <MESSAGE value="DnaManipulatorModel ready" />
     <MESSAGE value="DnaManipulator ready. Entry point: StartDnaManipulator." />
     <MESSAGE value="Classes for Model of ClusterViewer ready" />
-    <option name="LAST_COMMIT_MESSAGE" value="Classes for Model of ClusterViewer ready" />
+    <MESSAGE value="Finished Task ClusterViewer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished Task ClusterViewer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1433,8 +1431,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/stylesheet.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.04488778">
+          <caret line="1" column="34" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
           <folding />
         </state>
       </provider>
