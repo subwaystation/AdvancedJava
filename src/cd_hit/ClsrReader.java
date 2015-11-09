@@ -61,7 +61,7 @@ public class ClsrReader {
                     } else {
                         lineSplit = line.split(" ");
                         interSplitS = lineSplit[1].substring(1, lineSplit[1].length() - 4);
-                        seqId = interSplitS.split("\\.")[0].substring(1);
+                        seqId = interSplitS.split("\\.")[0];
                         interSplit = lineSplit[0].split("\t");
                         interSplitS = interSplit[1];
                         seqLen = interSplitS.substring(0, interSplitS.length() - 3);

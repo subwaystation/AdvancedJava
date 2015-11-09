@@ -18,10 +18,21 @@ public class ClsrEntry {
     // the similarity of the sequence in the cluster
     private double seqSimilarity;
 
+    // the strain corresponding to the sequence identifier
+    private String strain;
+
     public ClsrEntry(int seqLength, String seqId, double seqSimilarity) {
         this.seqLength = seqLength;
         this.seqId = seqId;
         this.seqSimilarity = seqSimilarity;
+    }
+
+    public String getStrain() {
+        return strain;
+    }
+
+    public void setStrain(String strain) {
+        this.strain = strain;
     }
 
     public int getSeqLength() {

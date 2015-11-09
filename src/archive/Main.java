@@ -2,9 +2,8 @@ package archive;
 
 import cd_hit.ClsrCluster;
 import cd_hit.ClsrReader;
-import lib.FastaIdStrandMap;
+import io.FastaIdStrandMap;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

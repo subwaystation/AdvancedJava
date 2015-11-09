@@ -1,17 +1,19 @@
 package archive;
 
 import javafx.application.Application;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 
 /**
@@ -25,86 +27,72 @@ public class Playground extends Application{
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Dna Manipulator");
-        GridPane root = new GridPane();
-        root.setPadding(new Insets(0, 50, 0, 50));
-        root.setVgap(20);
-        TextArea textArea1 = new TextArea("Unmanipulated");
-        TextArea textArea2 = new TextArea("Manipulated");
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+        primaryStage.setTitle("Cluster Viewer");
 
+        BorderPane borderPane = new BorderPane();
+        //Creating tree items
+         TreeItem<String> childNode1 = new TreeItem<>("Child Node 1");
+         TreeItem<String> childNode2 = new TreeItem<>("Child Node 2");
+         TreeItem<String> childNode3 = new TreeItem<>("Child Node 3");
+
+         TreeItem<String> childNode4 = new TreeItem<>("Child Node 4");
+         TreeItem<String> childNode5 = new TreeItem<>("Child Node 5");
+         TreeItem<String> childNode6 = new TreeItem<>("Child Node 6");
+
+        //Creating the root element
+        TreeItem<String> fakeRoot = new TreeItem<>("Root node");
+        fakeRoot.setExpanded(false);
+
+        TreeItem<String> root1 = new TreeItem<>("Root 1 node");
+        root1.getChildren().addAll(childNode4, childNode5, childNode6);
+        //Adding tree items to the root
+        TreeItem<String> root2 = new TreeItem<>("Root 2 node");
+        root2.getChildren().addAll(childNode4, childNode5, childNode6);
+        //Adding tree items to the root
+        fakeRoot.getChildren().addAll(root1, root2);
+
+        //Creating a column
+        TreeTableColumn<String,String> column = new TreeTableColumn<>("Column");
+        column.setPrefWidth(150);
+        TreeTableColumn<String,String> column1 = new TreeTableColumn<>("Column1");
+
+        //Defining cell content
+        column.setCellValueFactory((TreeTableColumn.CellDataFeatures<String, String> p) ->
+                new ReadOnlyStringWrapper(p.getValue().getValue()));
+        column1.setCellValueFactory((TreeTableColumn.CellDataFeatures<String, String> p) ->
+                new ReadOnlyStringWrapper(p.getValue().getValue()));
+
+        //Creating a tree table view
+        TreeTableView<String> treeTableView = new TreeTableView<>(fakeRoot);
+        treeTableView.setShowRoot(false);
+        treeTableView.getColumns().add(column);
+        treeTableView.getColumns().add(column1);
+        treeTableView.setPrefWidth(Integer.MAX_VALUE);
+
+        Scene scene = new Scene(borderPane, 768, 640);
+        borderPane.setCenter(treeTableView);
+        MenuBar menuBar = new MenuBar();
+        menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
+        borderPane.setTop(menuBar);
+
+        Menu fileMenu = new Menu("File");
+        MenuItem openMenuItem = new MenuItem("Open");
+        openMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
+                String dir = System.getProperty("user.dir") + File.separator;
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Open CLSR file.");
+                File file = fileChooser.showOpenDialog(primaryStage);
+                if (file != null) {
+                    System.out.println(file);
+                }
             }
         });
-        FlowPane buttonFP = new FlowPane();
-        buttonFP.getChildren().add(btn);
-        buttonFP.setAlignment(Pos.CENTER);
-        root.add(textArea1, 0, 0);
-        root.setHgrow(textArea1, Priority.ALWAYS);
-        root.add(buttonFP, 0, 1);
-        root.add(textArea2, 0, 2);
+        fileMenu.getItems().add(openMenuItem);
+        menuBar.getMenus().addAll(fileMenu);
 
-        GridPane buttonsGP = new GridPane();
-        buttonsGP.setHgap(4);
-        Button filterB = new Button("filter");
-        filterB.setMaxWidth(Double.MAX_VALUE);
-        Button upperCaseB = new Button("upper case");
-        upperCaseB.setMaxWidth(Double.MAX_VALUE);
-        Button lowerCaseB = new Button("lower case");
-        lowerCaseB.setMaxWidth(Double.MAX_VALUE);
-        buttonsGP.getColumnConstraints().addAll(new ColumnConstraints());
-        buttonsGP.getColumnConstraints().get(0).setPercentWidth(100.0 / 3.0);
-        buttonsGP.getColumnConstraints().addAll(new ColumnConstraints());
-        buttonsGP.getColumnConstraints().get(1).setPercentWidth(100.0 / 3.0);
-        buttonsGP.getColumnConstraints().addAll(new ColumnConstraints());
-        buttonsGP.getColumnConstraints().get(2).setPercentWidth(100.0 / 3.0);
-        buttonsGP.add(filterB, 0, 0);
-        buttonsGP.add(upperCaseB, 1, 0);
-        buttonsGP.add(lowerCaseB, 2, 0);
-        Button toRnaB = new Button("to RNA");
-        toRnaB.setMaxWidth(Double.MAX_VALUE);
-        Button reverseB = new Button("reverse");
-        reverseB.setMaxWidth(Double.MAX_VALUE);
-        Button complementaryB = new Button("complementary");
-        complementaryB.setMaxWidth(Double.MAX_VALUE);
-
-        Button reverseComplementaryB = new Button("reverse-complementary");
-        reverseComplementaryB.setMaxWidth(Double.MAX_VALUE);
-        Button gCContentB = new Button("GC content");
-        gCContentB.setMaxWidth(Double.MAX_VALUE);
-        Button lengthB = new Button("length");
-        lengthB.setMaxWidth(Double.MAX_VALUE);
-
-        Button clearB = new Button("clear");
-        clearB.setMaxWidth(Double.MAX_VALUE);
-        buttonsGP.add(toRnaB, 0, 1);
-        buttonsGP.add(reverseB, 1, 1);
-        buttonsGP.add(complementaryB, 2, 1);
-        buttonsGP.add(reverseComplementaryB, 0, 2);
-        buttonsGP.add(gCContentB, 1, 2);
-        buttonsGP.add(lengthB, 2, 2);
-        buttonsGP.add(clearB, 0, 3);
-        root.add(buttonsGP, 0, 3);
-        Slider lineWidthS = new Slider();
-        lineWidthS.setMin(10);
-        lineWidthS.setMax(50);
-        lineWidthS.setShowTickLabels(true);
-        lineWidthS.setShowTickMarks(true);
-        lineWidthS.setBlockIncrement(10);
-        lineWidthS.setMinorTickCount(5);
-        lineWidthS.setValue(40);
-        lineWidthS.setMajorTickUnit(10);
-        lineWidthS.snapToTicksProperty().set(true);
-        lineWidthS.setPadding(new Insets(0, 60, 0, 60));
-        Label label = new Label("choose line width:");
-        label.setPadding(new Insets(0, 60, 0, 60));
-        root.add(label, 0, 4);
-        root.add(lineWidthS, 0, 5);
-        primaryStage.setScene(new Scene(root, 768, 640));
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
