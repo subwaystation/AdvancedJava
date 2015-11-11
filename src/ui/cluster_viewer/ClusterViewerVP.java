@@ -53,8 +53,9 @@ public class ClusterViewerVP {
         TreeTableColumn<ClsrEntry, String> seqSimilarityColumn = new TreeTableColumn<>("SeqSimilarity");
         seqSimilarityColumn.setCellValueFactory((TreeTableColumn.CellDataFeatures<ClsrEntry, String> p) ->
                 new ReadOnlyStringWrapper(String.valueOf(p.getValue().getValue().getSeqSimilarity())));
-        treeTableView.getColumns().addAll(seqIdColumn, strainColumn, seqLengthColumn, seqSimilarityColumn);
         seqSimilarityColumn.setPrefWidth(192);
+
+        treeTableView.getColumns().addAll(seqIdColumn, strainColumn, seqLengthColumn, seqSimilarityColumn);
 
         treeTableView.setTableMenuButtonVisible(true);
 

@@ -1,5 +1,6 @@
 package ui.dna_manipulator;
 
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.*;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -13,87 +14,89 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import lib.StringFormatter;
+import model.DnaManipulatorModel;
+import seq.nucleotide.ANucleotide;
+import seq.sequence.ASequence;
+import seq.sequence.DnaSequence;
 import sun.swing.FilePane;
+
+import java.util.List;
 
 /**
  * Created by heumos on 03.11.15.
  */
-public class DnaManipulatorView {
+public class DnaManipulatorView extends GridPane{
 
-    // the scene
-    private Scene scene;
-
-    // the grid pane
-    private GridPane gridPane;
+    private final DnaManipulatorModel dnaManipulatorModel;
 
     // the text area in which the user can enter a DNA sequence
-    private TextArea enterSeqTA;
+    public TextArea enterSeqTA;
 
     // the button which allows the user to flip the text between
     // enterSeqTA and resultSeqTA
-    private Button flipB;
+    public Button flipB;
 
     // the text area in which the results of a user interaction
     // is displayed
-    private TextArea resultSeqTA;
+    public TextArea resultSeqTA;
 
     // the grid pane in which all button options are placed
-    private GridPane optionsGB;
+    public GridPane optionsGB;
 
     // filter button
-    private Button filterB;
+    public Button filterB;
 
     // upper case button
-    private Button upperCaseB;
+    public Button upperCaseB;
 
     // lower case button
-    private Button lowerCaseB;
+    public Button lowerCaseB;
 
     // to RNA button
-    private Button toRnaB;
+    public Button toRnaB;
 
     // reverse seq button
-    private Button reverseB;
+    public Button reverseB;
 
     // complementary seq button
-    private Button complementaryB;
+    public Button complementaryB;
 
     // reverse complementary seq button
-    private Button reverseComplementaryB;
+    public Button reverseComplementaryB;
 
     // GC content button
-    private Button gCContentB;
+    public Button gCContentB;
 
     // seq length button
-    private Button lengthB;
+    public Button lengthB;
 
     // clear button
-    private Button clearB;
+    public Button clearB;
 
     // the slider
-    private Slider lineWidthS;
+    public Slider lineWidthS;
 
-    public DnaManipulatorView() {
-        initGridPane();
+    public DnaManipulatorView(DnaManipulatorModel dnaManipulatorModel) {
+        this.dnaManipulatorModel = dnaManipulatorModel;
+        initThis();
 
         this.enterSeqTA = new TextArea();
         this.enterSeqTA.setFont(Font.font("Monospaced", 13));
-        this.gridPane.add(this.enterSeqTA, 0, 0);
-        this.gridPane.setHgrow(this.enterSeqTA, Priority.ALWAYS);
+        this.add(this.enterSeqTA, 0, 0);
+        this.setHgrow(this.enterSeqTA, Priority.ALWAYS);
         this.flipB = new Button("flip");
         FlowPane flowPane = new FlowPane();
         flowPane.getChildren().addAll(this.flipB);
         flowPane.setAlignment(Pos.CENTER);
-        this.gridPane.add(flowPane, 0, 1);
+        this.add(flowPane, 0, 1);
         this.resultSeqTA = new TextArea();
         this.resultSeqTA.setFont(Font.font("Monospaced", 13));
-        this.gridPane.add(resultSeqTA, 0, 2);
+        this.add(resultSeqTA, 0, 2);
 
         initOptionsGB();
 
         initLineWidthS();
-
-        this.scene = new Scene(this.gridPane, 768, 640);
     }
 
     private void initLineWidthS() {
@@ -110,8 +113,8 @@ public class DnaManipulatorView {
         this.lineWidthS.setPadding(new Insets(0, 60, 0, 60));
         Label label = new Label("choose line width:");
         label.setPadding(new Insets(0, 60, 0, 60));
-        this.gridPane.add(label, 0, 4);
-        this.gridPane.add(this.lineWidthS, 0, 5);
+        this.add(label, 0, 4);
+        this.add(this.lineWidthS, 0, 5);
     }
 
     private void initOptionsGB() {
@@ -128,27 +131,44 @@ public class DnaManipulatorView {
 
         this.filterB = new Button("filter");
         this.filterB.setMaxWidth(Double.MAX_VALUE);
+        this.filterB.setDisable(true);
+
         this.upperCaseB = new Button("upper case");
         this.upperCaseB.setMaxWidth(Double.MAX_VALUE);
+        this.upperCaseB.setDisable(true);
+
         this.lowerCaseB = new Button("lower case");
         this.lowerCaseB.setMaxWidth(Double.MAX_VALUE);
+        this.lowerCaseB.setDisable(true);
 
         this.toRnaB = new Button("to RNA");
         this.toRnaB.setMaxWidth(Double.MAX_VALUE);
+        this.toRnaB.setDisable(true);
+
         this.reverseB = new Button("reverse");
         this.reverseB.setMaxWidth(Double.MAX_VALUE);
+        this.reverseB.setDisable(true);
+
         this.complementaryB = new Button("complementary");
         this.complementaryB.setMaxWidth(Double.MAX_VALUE);
+        this.complementaryB.setDisable(true);
 
         this.reverseComplementaryB = new Button("reverse-complementary");
         this.reverseComplementaryB.setMaxWidth(Double.MAX_VALUE);
+        this.reverseComplementaryB.setDisable(true);
+
         this.gCContentB = new Button("GC content");
         this.gCContentB.setMaxWidth(Double.MAX_VALUE);
+        this.gCContentB.setDisable(true);
+
         this.lengthB = new Button("length");
         this.lengthB.setMaxWidth(Double.MAX_VALUE);
+        this.lengthB.setDisable(true);
 
         this.clearB = new Button("clear");
         this.clearB.setMaxWidth(Double.MAX_VALUE);
+        this.clearB.setDisable(true);
+
         this.optionsGB.add(filterB, 0, 0);
         this.optionsGB.add(upperCaseB, 1, 0);
         this.optionsGB.add(lowerCaseB, 2, 0);
@@ -160,73 +180,105 @@ public class DnaManipulatorView {
         this.optionsGB.add(lengthB, 2, 2);
         this.optionsGB.add(clearB, 0, 3);
         
-        this.gridPane.add(this.optionsGB, 0, 3);
+        this.add(this.optionsGB, 0, 3);
     }
 
-    private void initGridPane() {
-        this.gridPane = new GridPane();
-        this.gridPane.setPadding(new Insets(0, 50, 0, 50));
-        this.gridPane.setVgap(20);
+    private void initThis() {
+        this.setPadding(new Insets(0, 50, 0, 50));
+        this.setVgap(20);
     }
 
-    public void show(Stage stage) {
-        stage.setTitle("Dna Manipulator");
-        stage.setScene(this.scene);
-        stage.show();
+    public void performFlip() {
+        String enteredSeq = new String(this.enterSeqTA.getText());
+        String resultedSeq = new String(this.resultSeqTA.getText());
+        this.enterSeqTA.setText(resultedSeq);
+        this.resultSeqTA.setText(enteredSeq);
     }
 
-    public TextArea getEnterSeqTA() {
-        return enterSeqTA;
+    public void performFilter() {
+        String enteredSeq = new String(this.enterSeqTA.getText());
+        DnaSequence dnaSequence = DnaSequence.parseStringToSequence(enteredSeq);
+        int lineWidth = (int) this.lineWidthS.getValue();
+        this.resultSeqTA.setText(dnaSequence.seqToString(lineWidth));
     }
 
-    public Button getFlipB() {
-        return flipB;
+    public void performUpperCase() {
+        String enteredSeq = new String(this.enterSeqTA.getText());
+        DnaSequence dnaSequence = DnaSequence.parseStringToSequence(enteredSeq);
+        int lineWidth = (int) this.lineWidthS.getValue();
+        List<ANucleotide> aNucleotideList = dnaSequence.toUpperCase();
+        System.out.println(ASequence.seqToString(aNucleotideList, lineWidth));
+        this.resultSeqTA.setText(ASequence.seqToString(aNucleotideList, lineWidth));
     }
 
-    public TextArea getResultSeqTA() {
-        return resultSeqTA;
+    public void performLowerCase() {
+        String enteredSeq = this.enterSeqTA.getText();
+        DnaSequence dnaSequence = DnaSequence.parseStringToSequence(enteredSeq);
+        int lineWidth = (int) this.lineWidthS.getValue();
+        List<ANucleotide> aNucleotideList = dnaSequence.toLowerCase();
+        this.resultSeqTA.setText(ASequence.seqToString(aNucleotideList, lineWidth));
     }
 
-    public Button getFilterB() {
-        return filterB;
+    public void performToRna() {
+        String enteredSeq = this.enterSeqTA.getText();
+        DnaSequence dnaSequence = DnaSequence.parseStringToSequence(enteredSeq);
+        int lineWidth = (int) this.lineWidthS.getValue();
+        this.resultSeqTA.setText(ASequence.
+                seqToString((List<ANucleotide>) (List<?>) dnaSequence.toRnaSequence(), lineWidth));
     }
 
-    public Button getUpperCaseB() {
-        return upperCaseB;
+    public void performReverse() {
+        String enteredSeq = this.enterSeqTA.getText();
+        DnaSequence dnaSequence = DnaSequence.parseStringToSequence(enteredSeq);
+        int lineWidth = (int) this.lineWidthS.getValue();
+        this.resultSeqTA.setText(ASequence.
+                seqToString(dnaSequence.reverseSeq(), lineWidth));
     }
 
-    public Button getLowerCaseB() {
-        return lowerCaseB;
+    public void performComplementary() {
+        String enteredSeq = this.enterSeqTA.getText();
+        DnaSequence dnaSequence = DnaSequence.parseStringToSequence(enteredSeq);
+        int lineWidth = (int) this.lineWidthS.getValue();
+        this.resultSeqTA.setText(ASequence.
+                seqToString(dnaSequence.complementarySeq(), lineWidth));
     }
 
-    public Button getReverseB() {
-        return reverseB;
+    public void performReverseComplementary() {
+        String enteredSeq = this.enterSeqTA.getText();
+        DnaSequence dnaSequence = DnaSequence.parseStringToSequence(enteredSeq);
+        int lineWidth = (int) this.lineWidthS.getValue();
+        this.resultSeqTA.setText(ASequence.
+                seqToString(dnaSequence.reverseComplementarySeq(), lineWidth));
     }
 
-    public Button getToRnaB() {
-        return toRnaB;
+    public void performGCContent() {
+        String enteredSeq = this.enterSeqTA.getText();
+        DnaSequence dnaSequence = DnaSequence.parseStringToSequence(enteredSeq);
+        int lineWidth = (int) this.lineWidthS.getValue();
+        this.resultSeqTA.setText(StringFormatter.
+                formatStringSequence(String.valueOf(dnaSequence.calcGcContent() * 100) + "%", lineWidth));
     }
 
-    public Button getComplementaryB() {
-        return complementaryB;
+    public void performSeqLength() {
+        String enteredSeq = this.enterSeqTA.getText();
+        DnaSequence dnaSequence = DnaSequence.parseStringToSequence(enteredSeq);
+        int lineWidth = (int) this.lineWidthS.getValue();
+        this.resultSeqTA.setText(StringFormatter.
+                formatStringSequence(String.valueOf(dnaSequence.seqLength()), lineWidth));
     }
 
-    public Button getReverseComplementaryB() {
-        return reverseComplementaryB;
+    public void performClearing() {
+        this.resultSeqTA.setText("");
+        this.enterSeqTA.setText("");
     }
 
-    public Button getgCContentB() {
-        return gCContentB;
+    public void updateResultSeqTaWidth(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+        String resultSeq = new String(this.resultSeqTA.getText());
+        String[] resultSeqSplit = resultSeq.split("\n");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String base : resultSeqSplit) {
+            stringBuilder.append(base);
+        }
+        this.resultSeqTA.setText(StringFormatter.formatStringSequence(stringBuilder.toString(), (int) Math.rint((double) newValue)));
     }
-
-    public Button getLengthB() {
-        return lengthB;
-    }
-
-    public Button getClearB() { return clearB; }
-
-    public Slider getLineWidthS() {
-        return lineWidthS;
-    }
-
 }

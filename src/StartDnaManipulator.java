@@ -1,7 +1,10 @@
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.DnaManipulatorModel;
 import ui.StageManager;
-import ui.dna_manipulator.DnaManipulatorVC;
+import ui.dna_manipulator.DnaManipulatorPresenter;
+import ui.dna_manipulator.DnaManipulatorView;
 
 
 /**
@@ -16,7 +19,12 @@ public class StartDnaManipulator extends Application {
     public void start(Stage primaryStage) {
         StageManager.getInstance().setPrimaryStage(primaryStage);
 
-        DnaManipulatorVC dnaManipulatorVC = new DnaManipulatorVC();
-        dnaManipulatorVC.show();
+        DnaManipulatorModel dnaManipulatorModel = new DnaManipulatorModel();
+        DnaManipulatorView dnaManipulatorView = new DnaManipulatorView(dnaManipulatorModel);
+        Scene scene = new Scene(dnaManipulatorView, 768, 640);
+        DnaManipulatorPresenter dnaManipulatorPresenter = new DnaManipulatorPresenter(dnaManipulatorModel, dnaManipulatorView);
+        StageManager.getInstance().getPrimaryStage().setScene(scene);
+        StageManager.getInstance().getPrimaryStage().setTitle("Dna Manipulator");
+        StageManager.getInstance().getPrimaryStage().show();
     }
 }
