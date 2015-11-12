@@ -22,6 +22,7 @@ public class StartDnaManipulator extends Application {
         DnaManipulatorModel dnaManipulatorModel = new DnaManipulatorModel();
         DnaManipulatorView dnaManipulatorView = new DnaManipulatorView(dnaManipulatorModel);
         Scene scene = new Scene(dnaManipulatorView, 768, 640);
+        scene.getStylesheets().addAll("stylesheet_dna_manipulator.css");
         DnaManipulatorPresenter dnaManipulatorPresenter = new DnaManipulatorPresenter(dnaManipulatorModel, dnaManipulatorView);
         StageManager.getInstance().getPrimaryStage().setScene(scene);
         StageManager.getInstance().getPrimaryStage().setTitle("Dna Manipulator");

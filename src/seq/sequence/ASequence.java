@@ -2,6 +2,7 @@ package seq.sequence;
 
 import lib.StringFormatter;
 import seq.nucleotide.ANucleotide;
+import seq.nucleotide.DnaNucleotide;
 
 import java.util.ArrayList;
 import java.util.Collections;

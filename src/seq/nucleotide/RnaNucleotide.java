@@ -11,7 +11,7 @@ import lib.RnaNucleotideException;
 public class RnaNucleotide extends ANucleotide {
 
     // allowed RNA nucleotides
-    private static final String ALLOWED_RNA_NUCLEOTIDES = "acug-ACUG";
+    public static final String ALLOWED_RNA_NUCLEOTIDES = "acug-ACUG";
 
     /**
      * A nucleotide consists of one base.

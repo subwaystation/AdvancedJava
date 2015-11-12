@@ -1,6 +1,7 @@
 package seq.sequence;
 
 import seq.nucleotide.ANucleotide;
+import seq.nucleotide.DnaNucleotide;
 import seq.nucleotide.RnaNucleotide;
 
 import java.util.ArrayList;
@@ -34,6 +35,38 @@ public class RnaSequence extends ASequence {
             rnaNucleotidesComplementary.add(new RnaNucleotide(aNucleotide.complementary().getBase()));
         }
         return rnaNucleotidesComplementary;
+    }
+
+    public List<DnaNucleotide> toDnaSeq() {
+        List<DnaNucleotide> dnaSeqData = new ArrayList<>();
+        char t = 't';
+        char T = 'T';
+        char u = 'u';
+        char U = 'U';
+        for (int i = 0; i < this.seqLength(); i++) {
+            ANucleotide aNucleotide = getSequenceData().get(i);
+            if (aNucleotide.getBase() == u) {
+                dnaSeqData.add(new DnaNucleotide(t));
+            } else {
+                if (aNucleotide.getBase() == U) {
+                    dnaSeqData.add(new DnaNucleotide(T));
+                } else {
+                    dnaSeqData.add(new DnaNucleotide(this.getSequenceData().get(i).getBase()));
+                }
+            }
+        }
+        return dnaSeqData;
+    }
+
+    public static RnaSequence parseStringToSequence(String s) {
+        List<ANucleotide> rnaNucleotides = new ArrayList<ANucleotide>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c != '\n' && RnaNucleotide.ALLOWED_RNA_NUCLEOTIDES.contains(String.valueOf(c))) {
+                rnaNucleotides.add(new RnaNucleotide(c));
+            }
+        }
+        return new RnaSequence(null, rnaNucleotides);
     }
 
 }
