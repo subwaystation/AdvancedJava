@@ -38,7 +38,7 @@ public class ClusterViewerView {
         this.menuBar.getMenus().add(fileMenu);
 
         this.scene = new Scene(this.borderPane, 1024, 640);
-        this.scene.getStylesheets().addAll("stylesheet.css");
+        this.scene.getStylesheets().addAll("stylesheet_cluster_viewer.css");
     }
 
     public void show(Stage stage) {

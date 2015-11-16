@@ -57,6 +57,7 @@ public class ClusterViewerVP {
 
         treeTableView.getColumns().addAll(seqIdColumn, strainColumn, seqLengthColumn, seqSimilarityColumn);
 
+        // set menu button as visible
         treeTableView.setTableMenuButtonVisible(true);
 
         return treeTableView;
@@ -86,6 +87,7 @@ public class ClusterViewerVP {
                 Map<String, String> idStrandMap = fastaIdStrandMap.parseFastaToMap();
                 ClsrReader clsrReader = new ClsrReader(file.toString());
                 List<ClsrCluster> clsrClusters = clsrReader.readClsr();
+                // map ids of clsr file to strands in fasta file
                 mapIdToStrand(idStrandMap, clsrClusters);
                 TreeTableView treeTableView = createTreeTableView(clsrClusters);
                 clusterViewerView.getBorderPane().setCenter(treeTableView);
