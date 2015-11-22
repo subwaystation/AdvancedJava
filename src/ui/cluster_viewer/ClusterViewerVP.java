@@ -23,7 +23,7 @@ public class ClusterViewerVP {
 
     private static TreeTableView<ClsrEntry> createTreeTableView(List<ClsrCluster> clsrClusters) {
         TreeItem<ClsrEntry> fakeRoot = new TreeItem<>(new ClsrEntry(0, null, 0.0));
-        TreeTableView<ClsrEntry> treeTableView = new TreeTableView<ClsrEntry>(fakeRoot);
+        TreeTableView<ClsrEntry> treeTableView = new TreeTableView<>(fakeRoot);
         treeTableView.setShowRoot(false);
 
         for (ClsrCluster clsrCluster : clsrClusters) {
