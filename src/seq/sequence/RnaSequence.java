@@ -69,4 +69,19 @@ public class RnaSequence extends ASequence {
         return new RnaSequence(null, rnaNucleotides);
     }
 
+    public static boolean validateRnaString(String seq) {
+        if (seq.length() < 1) {
+            return false;
+        }
+        for (int i = 0; i < seq.length(); i++) {
+            char base = seq.charAt(i);
+            if (RnaNucleotide.ALLOWED_RNA_NUCLEOTIDES.contains(String.valueOf(base))) {
+                continue;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

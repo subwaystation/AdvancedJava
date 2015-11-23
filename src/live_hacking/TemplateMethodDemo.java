@@ -8,10 +8,10 @@ public class TemplateMethodDemo {
     public static void main(String[] args) {
         System.out.println("TemplateMethodDemo!");
 
-        AAnimal animal = new Lion();
-        animal.dailyRoutine();
-        System.out.println();
-        animal = new Zebra();
-        animal.dailyRoutine();
+//        AAnimal animal = new Lion();
+//        animal.dailyRoutine();
+//        System.out.println();
+//        animal = new Zebra()
+//        animal.dailyRoutine();
     }
 }
