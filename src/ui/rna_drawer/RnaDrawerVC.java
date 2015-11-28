@@ -24,10 +24,15 @@ public class RnaDrawerVC {
         this.rnaDrawerView.getEnterSeqTA().textProperty().addListener(this::handleEnteredSeqTaChange);
         this.rnaDrawerView.getFoldB().setOnAction(this::handleFoldBEvent);
         this.rnaDrawerView.getSecStructTA().textProperty().addListener(this::handleSecStructTaChange);
+        this.rnaDrawerView.getDrawB().setOnAction(this::handleDrawBEvent);
+    }
+
+    private void handleDrawBEvent(ActionEvent actionEvent) {
+        RnaDrawerVP.handleDrawBEvent(this.rnaDrawerView, this.rnaDrawerModel);
     }
 
     private void handleFoldBEvent(ActionEvent actionEvent) {
-        RnaDrawerVP.handleFoldBEvent(this.rnaDrawerView);
+        RnaDrawerVP.handleFoldBEvent(this.rnaDrawerView, this.rnaDrawerModel);
     }
 
     private void handleEnteredSeqTaChange(ObservableValue<? extends String> observable, String oldValue, String newValue) {

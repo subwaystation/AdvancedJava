@@ -5,7 +5,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -34,6 +36,13 @@ public class RnaDrawerView {
     // the draw button
     private Button drawB;
 
+    // the group containing the drawing
+    private Pane drawingP;
+
+    public Pane getDrawingP() {
+        return drawingP;
+    }
+
     public RnaDrawerView() {
 
         this.rootNode = new VBox();
@@ -51,8 +60,10 @@ public class RnaDrawerView {
 
         initButtonHBox();
 
+        this.drawingP = new Pane();
+        this.rootNode.getChildren().add(this.drawingP);
 
-        this.scene = new Scene(this.rootNode, 1024, 640);
+        this.scene = new Scene(this.rootNode, 1024, 768);
     }
 
     private void initButtonHBox() {
