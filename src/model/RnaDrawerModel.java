@@ -1,7 +1,12 @@
 package model;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.ParallelTransition;
+import javafx.animation.Timeline;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 import javafx.util.Pair;
 import lib.sec_struct.Nussinov;
 
@@ -95,5 +100,17 @@ public class RnaDrawerModel {
                 circle.setStroke(Color.BLACK);
                 break;
         }
+    }
+
+    public static void addCircleToAnimation(ParallelTransition parallelTransition,
+                                            Circle circle, double[] coordinate) {
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(1);
+        timeline.setAutoReverse(false);
+        KeyValue xKeyVal = new KeyValue(circle.centerXProperty(), coordinate[0]);
+        KeyValue yKeyVal = new KeyValue(circle.centerYProperty(), coordinate[1]);
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(5000), xKeyVal, yKeyVal);
+        timeline.getKeyFrames().add(keyFrame);
+        parallelTransition.getChildren().add(timeline);
     }
 }

@@ -2,6 +2,8 @@ package ui.rna_drawer;
 
 import drawing.Graph;
 import drawing.SpringEmbedder;
+import javafx.animation.ParallelTransition;
+import javafx.animation.Timeline;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -10,6 +12,7 @@ import javafx.util.Pair;
 import lib.sec_struct.Nussinov;
 import model.RnaDrawerModel;
 import seq.sequence.RnaSequence;
+import util.ArrayUtils;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -54,6 +57,8 @@ public class RnaDrawerVP {
 
 
     public static void handleDrawBEvent(RnaDrawerView rnaDrawerView, RnaDrawerModel rnaDrawerModel) {
+        boolean animation = rnaDrawerView.getAnimationCB().isSelected();
+        ParallelTransition parallelTransition = new ParallelTransition();
         boolean seqPresent = !rnaDrawerView.getFoldB().isDisabled();
         String dotBracktes = rnaDrawerView.getSecStructTA().getText();
         Graph graph = new Graph();
@@ -63,10 +68,14 @@ public class RnaDrawerVP {
             e.printStackTrace();
         }
         int[][] edges = graph.getEdges();
-        double[][] coordinates = SpringEmbedder.computeSpringEmbedding(1000, graph.getNumberOfNodes(), edges, null);
-        SpringEmbedder.centerCoordinates(coordinates, 1, 600, 1, 600);
-        double xPointOld = 0.0;
-        double yPointOld = 0.0;
+        double[][] coordinatesOriginal = SpringEmbedder.computeSpringEmbedding(1000, graph.getNumberOfNodes(), edges, null);
+        double[][] coordinatesCentered = ArrayUtils.deepCopyDoubleMatrix(coordinatesOriginal);
+        SpringEmbedder.centerCoordinates(coordinatesCentered, 1, 600, 1, 600);
+        // is animation selected?
+        if (!animation) {
+            coordinatesOriginal = coordinatesCentered;
+        }
+        Circle circleOld = new Circle();
         List<Circle> circles = new ArrayList<>();
         // draw the circles
         String rnaSeq;
@@ -75,8 +84,8 @@ public class RnaDrawerVP {
         } else {
             rnaSeq = "";
         }
-        for (int i = 0; i < coordinates.length; i++) {
-            double[] coordinate = coordinates[i];
+        for (int i = 0; i < coordinatesOriginal.length; i++) {
+            double[] coordinate = coordinatesOriginal[i];
             double xPoint = coordinate[0];
             double yPoint = coordinate[1];
             Circle circle = new Circle();
@@ -93,19 +102,21 @@ public class RnaDrawerVP {
             }
             Tooltip tooltip = new Tooltip(tooltipS);
             Tooltip.install(circle, tooltip);
+            if (animation) {
+                RnaDrawerModel.addCircleToAnimation(parallelTransition, circle, coordinatesCentered[i]);
+            }
             rnaDrawerView.getDrawingP().getChildren().add(circle);
             // draw the edges to connect dots
             // no bridges drawn yet
             if (i > 0) {
                 Line line = new Line();
-                line.setStartX(xPointOld);
-                line.setStartY(yPointOld);
-                line.setEndX(xPoint);
-                line.setEndY(yPoint);
+                line.startXProperty().bind(circleOld.centerXProperty().add(circleOld.translateXProperty()));
+                line.startYProperty().bind(circleOld.centerYProperty().add(circleOld.translateYProperty()));
+                line.endXProperty().bind(circle.centerXProperty().add(circle.translateXProperty()));
+                line.endYProperty().bind(circle.centerYProperty().add(circle.translateYProperty()));
                 rnaDrawerView.getDrawingP().getChildren().add(line);
             }
-            xPointOld = xPoint;
-            yPointOld = yPoint;
+            circleOld = circle;
         }
         // draw bridges if necessary
         ArrayList<Pair<Integer,Integer>> secondaryStructure;
@@ -137,6 +148,9 @@ public class RnaDrawerVP {
             } else {
                 line.setStroke(Color.GREEN);
             }
+        }
+        if (animation) {
+            parallelTransition.play();
         }
     }
 }

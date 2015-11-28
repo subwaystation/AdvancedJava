@@ -3,6 +3,7 @@ package ui.rna_drawer;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -39,6 +40,9 @@ public class RnaDrawerView {
     // the group containing the drawing
     private Pane drawingP;
 
+    // the animation check box
+    private CheckBox animationCB;
+
     public Pane getDrawingP() {
         return drawingP;
     }
@@ -66,14 +70,20 @@ public class RnaDrawerView {
         this.scene = new Scene(this.rootNode, 1024, 768);
     }
 
+    public CheckBox getAnimationCB() {
+        return animationCB;
+    }
+
     private void initButtonHBox() {
         this.buttonHBox = new HBox();
         this.foldB = new Button("Fold RNA.");
         this.foldB.setDisable(true);
         this.drawB = new Button("Draw RNA.");
         this.drawB.setDisable(true);
-        this.buttonHBox.getChildren().addAll(this.foldB, this.drawB);
+        this.animationCB = new CheckBox("animation");
+        this.buttonHBox.getChildren().addAll(this.foldB, this.drawB, this.animationCB);
         this.rootNode.getChildren().add(this.buttonHBox);
+
     }
 
     public void show(Stage stage) {
