@@ -57,6 +57,7 @@ public class RnaDrawerVP {
 
 
     public static void handleDrawBEvent(RnaDrawerView rnaDrawerView, RnaDrawerModel rnaDrawerModel) {
+        rnaDrawerView.getDrawingP().getChildren().clear();
         boolean animation = rnaDrawerView.getAnimationCB().isSelected();
         ParallelTransition parallelTransition = new ParallelTransition();
         boolean seqPresent = !rnaDrawerView.getFoldB().isDisabled();
