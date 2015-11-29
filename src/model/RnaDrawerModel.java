@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -19,6 +20,10 @@ public class RnaDrawerModel {
 
     // nussinov
     private Nussinov nussinov;
+
+    // store the location of the last clicked node
+    private double xPoint;
+    private double yPoint;
 
     public RnaDrawerModel() {
 
@@ -112,5 +117,32 @@ public class RnaDrawerModel {
         KeyFrame keyFrame = new KeyFrame(Duration.millis(5000), xKeyVal, yKeyVal);
         timeline.getKeyFrames().add(keyFrame);
         parallelTransition.getChildren().add(timeline);
+    }
+
+    public double getxPoint() {
+        return xPoint;
+    }
+
+    public void setxPoint(double xPoint) {
+        this.xPoint = xPoint;
+    }
+
+    public double getyPoint() {
+        return yPoint;
+    }
+
+    public void setyPoint(double yPoint) {
+        this.yPoint = yPoint;
+    }
+
+    public static void animateCircle(Circle circle, MouseEvent event, RnaDrawerModel rnaDrawerModel) {
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(1);
+        timeline.setAutoReverse(false);
+        KeyValue xKeyVal = new KeyValue(circle.centerXProperty(), new Double(rnaDrawerModel.getxPoint()));
+        KeyValue yKeyVal = new KeyValue(circle.centerYProperty(), new Double(rnaDrawerModel.getyPoint()));
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(3000), xKeyVal, yKeyVal);
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.play();
     }
 }

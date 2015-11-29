@@ -3,8 +3,9 @@ package ui.rna_drawer;
 import drawing.Graph;
 import drawing.SpringEmbedder;
 import javafx.animation.ParallelTransition;
-import javafx.animation.Timeline;
+import javafx.event.EventHandler;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -14,7 +15,6 @@ import model.RnaDrawerModel;
 import seq.sequence.RnaSequence;
 import util.ArrayUtils;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +68,8 @@ public class RnaDrawerVP {
             e.printStackTrace();
         }
         int[][] edges = graph.getEdges();
-        double[][] coordinatesOriginal = SpringEmbedder.computeSpringEmbedding(1000, graph.getNumberOfNodes(), edges, null);
+        double[][] coordinatesOriginal = SpringEmbedder.
+                computeSpringEmbedding(1000, graph.getNumberOfNodes(), edges, null);
         double[][] coordinatesCentered = ArrayUtils.deepCopyDoubleMatrix(coordinatesOriginal);
         SpringEmbedder.centerCoordinates(coordinatesCentered, 1, 600, 1, 600);
         // is animation selected?
@@ -104,6 +105,29 @@ public class RnaDrawerVP {
             Tooltip.install(circle, tooltip);
             if (animation) {
                 RnaDrawerModel.addCircleToAnimation(parallelTransition, circle, coordinatesCentered[i]);
+                // register mouse even handler
+                circle.setOnMousePressed(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        circle.setFill(Color.ORANGE);
+                        rnaDrawerModel.setxPoint(circle.getCenterX());
+                        rnaDrawerModel.setyPoint(circle.getCenterY());
+                    }
+                });
+                circle.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        circle.setCenterY(event.getY());
+                        circle.setCenterX(event.getX());
+                    }
+                });
+                circle.setOnMouseReleased(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        circle.setFill(Color.BLACK);
+                        RnaDrawerModel.animateCircle(circle, event, rnaDrawerModel);
+                    }
+                });
             }
             rnaDrawerView.getDrawingP().getChildren().add(circle);
             // draw the edges to connect dots
