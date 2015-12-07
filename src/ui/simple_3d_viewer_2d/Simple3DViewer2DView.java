@@ -84,7 +84,7 @@ public class Simple3DViewer2DView {
         Rectangle rectangle = new Rectangle(200,200);
         rectangle.setFill(Color.GREENYELLOW);
         this.topPane.getChildren().add(rectangle);
-        this.topPane.getChildren().add(getBoundingBox2D(this.box1));
+    //    this.topPane.getChildren().add(getBoundingBox2D(this.box1));
      //   this.topPane.getChildren().add(getBoundingBox2D(this.box2));
        // this.topPane.getChildren().add(getBoundingBox2D(this.cylinder));
 
@@ -103,7 +103,7 @@ public class Simple3DViewer2DView {
     }
 
     public void show(Stage stage) {
-        stage.setTitle("Simple3DViewer");
+        stage.setTitle("Simple3DViewer2D");
         stage.setScene(this.scene);
         stage.show();
     }

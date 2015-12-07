@@ -1,5 +1,6 @@
 package ui.simple_3d_viewer_2d;
 
+import javafx.stage.Stage;
 import model.Simple3DViewer2DModel;
 import model.Simple3DViewerModel;
 import ui.StageManager;
@@ -16,9 +17,12 @@ public class Simple3DViewer2DVC {
     // view
     private Simple3DViewer2DView simple3DViewer2DView;
 
-    public Simple3DViewer2DVC(Simple3DViewer2DModel simple3DViewerModel) {
-        this.simple3DViewer2DModel = simple3DViewerModel;
+    // stage
+    private Stage primaryStage;
 
+    public Simple3DViewer2DVC(Simple3DViewer2DModel simple3DViewerModel, Stage primaryStage) {
+        this.simple3DViewer2DModel = simple3DViewerModel;
+        this.primaryStage = primaryStage;
         this.simple3DViewer2DView = new Simple3DViewer2DView();
 
         // register event handler
@@ -29,7 +33,7 @@ public class Simple3DViewer2DVC {
     }
 
     public void show() {
-        this.simple3DViewer2DView.show(StageManager.getInstance().getPrimaryStage());
+        this.simple3DViewer2DView.show(this.primaryStage);
     }
 
 }

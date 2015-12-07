@@ -14,11 +14,11 @@ public class StartSimple3DViewer2D extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        StageManager.getInstance().setPrimaryStage(primaryStage);
+        // StageManager.getInstance().setPrimaryStage(primaryStage);
 
         Simple3DViewer2DModel simple3DViewer2DModel = new Simple3DViewer2DModel();
 
-        Simple3DViewer2DVC simple3DViewerVC = new Simple3DViewer2DVC(simple3DViewer2DModel);
+        Simple3DViewer2DVC simple3DViewerVC = new Simple3DViewer2DVC(simple3DViewer2DModel, primaryStage);
         simple3DViewerVC.show();
     }
 }
