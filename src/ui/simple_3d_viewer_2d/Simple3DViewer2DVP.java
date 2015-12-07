@@ -37,8 +37,8 @@ public class Simple3DViewer2DVP {
             double mouseDeltaX = mouseEvent.getX() - this.simple3DViewerModel.getMouseX();
             if (mouseEvent.isPrimaryButtonDown() && mouseEvent.isShiftDown()) {
                 // move camera towards or away from objects
-                this.simple3DViewerView.getPerspectiveCamera().
-                        setTranslateZ(this.simple3DViewerView.getPerspectiveCamera().
+                this.simple3DViewerView.getThreeDG().
+                        setTranslateZ(this.simple3DViewerView.getThreeDG().
                                 getTranslateZ() + mouseDeltaY);
                 // rotate group around the y-axis
             } else {

@@ -1,6 +1,7 @@
 package ui.simple_3d_viewer_2d;
 
 import javafx.geometry.Bounds;
+import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
@@ -55,23 +56,31 @@ public class Simple3DViewer2DView {
 
         this.threeDG = new Group();
 
+        // build cylinder
         this.cylinder = new Cylinder(12, 100);
         final PhongMaterial greyMaterial = new PhongMaterial();
         greyMaterial.setDiffuseColor(Color.DARKGREY);
         greyMaterial.setSpecularColor(Color.GREY);
         this.cylinder.setMaterial(greyMaterial);
 
+        // box material
         final PhongMaterial redMaterial = new PhongMaterial();
         redMaterial.setDiffuseColor(Color.DARKRED);
         redMaterial.setSpecularColor(Color.RED);
+        // build box 1
         this.box1 = new Box(40,50,40);
         this.box1.setMaterial(redMaterial);
         this.box1.setTranslateY(55);
+        // build box 2
         this.box2 = new Box(40, 50, 40);
         this.box2.setMaterial(redMaterial);
         this.box2.setTranslateY(-55);
+        // add boxes to group
         this.threeDG.getChildren().addAll(this.cylinder, this.box1, this.box2);
+        // build box tooltips
         buildTooltips();
+
+        // add group to subscene
         this.subScene = new SubScene(this.threeDG, 1280, 640, true, SceneAntialiasing.DISABLED);
         this.subScene.setFill(Color.MIDNIGHTBLUE);
         this.subScene.setCamera(this.perspectiveCamera);
@@ -84,7 +93,9 @@ public class Simple3DViewer2DView {
         Rectangle rectangle = new Rectangle(200,200);
         rectangle.setFill(Color.GREENYELLOW);
         this.topPane.getChildren().add(rectangle);
-    //    this.topPane.getChildren().add(getBoundingBox2D(this.box1));
+        this.rootNodeP.setAlignment(topPane, Pos.CENTER);
+        this.rootNodeP.setAlignment(subScene, Pos.CENTER);
+        this.topPane.getChildren().add(getBoundingBox2D(this.box1));
      //   this.topPane.getChildren().add(getBoundingBox2D(this.box2));
        // this.topPane.getChildren().add(getBoundingBox2D(this.cylinder));
 
