@@ -78,13 +78,13 @@ public class Simple3DViewer2DView {
 
         this.rootNodeP = new StackPane();
         this.topPane = new Pane();
-        this.rootNodeP.getChildren().addAll(topPane, subScene);
+        this.rootNodeP.getChildren().addAll(subScene, topPane);
         this.scene = new Scene(this.rootNodeP, 1280, 640, true);
         this.topPane.setPickOnBounds(false);
         Rectangle rectangle = new Rectangle(200,200);
         rectangle.setFill(Color.GREENYELLOW);
         this.topPane.getChildren().add(rectangle);
-   //     this.topPane.getChildren().add(getBoundingBox2D(this.box1));
+        this.topPane.getChildren().add(getBoundingBox2D(this.box1));
      //   this.topPane.getChildren().add(getBoundingBox2D(this.box2));
        // this.topPane.getChildren().add(getBoundingBox2D(this.cylinder));
 
