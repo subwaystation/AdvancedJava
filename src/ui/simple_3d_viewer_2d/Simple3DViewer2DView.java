@@ -90,15 +90,14 @@ public class Simple3DViewer2DView {
         this.rootNodeP.getChildren().addAll(subScene, topPane);
         this.scene = new Scene(this.rootNodeP, 1280, 640, true);
         this.topPane.setPickOnBounds(false);
-        Rectangle rectangle = new Rectangle(200,200);
-        rectangle.setFill(Color.GREENYELLOW);
-        this.topPane.getChildren().add(rectangle);
+    }
+
+    public void initialize2DBoxes() {
         this.rootNodeP.setAlignment(topPane, Pos.CENTER);
         this.rootNodeP.setAlignment(subScene, Pos.CENTER);
         this.topPane.getChildren().add(getBoundingBox2D(this.box1));
-     //   this.topPane.getChildren().add(getBoundingBox2D(this.box2));
-       // this.topPane.getChildren().add(getBoundingBox2D(this.cylinder));
-
+        this.topPane.getChildren().add(getBoundingBox2D(this.box2));
+        this.topPane.getChildren().add(getBoundingBox2D(this.cylinder));
     }
 
     private void buildTooltips() {
@@ -117,6 +116,7 @@ public class Simple3DViewer2DView {
         stage.setTitle("Simple3DViewer2D");
         stage.setScene(this.scene);
         stage.show();
+        initialize2DBoxes();
     }
 
     public Scene getScene() {
@@ -151,7 +151,7 @@ public class Simple3DViewer2DView {
         javafx.scene.shape.Rectangle rectangle;
         rectangle = new javafx.scene.shape.Rectangle
                 ((int) Math.round(screenBounds.getMinX() - window.getX()),
-                        (int) Math.round(screenBounds.getMinY() - window.getY())-20,
+                        (int) Math.round(screenBounds.getMinY() - window.getY()),
                         (int) Math.round(screenBounds.getWidth()),
                         (int) Math.round(screenBounds.getHeight()));
         rectangle.setFill(Color.TRANSPARENT);

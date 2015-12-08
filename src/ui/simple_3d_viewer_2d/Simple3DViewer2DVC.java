@@ -2,9 +2,6 @@ package ui.simple_3d_viewer_2d;
 
 import javafx.stage.Stage;
 import model.Simple3DViewer2DModel;
-import model.Simple3DViewerModel;
-import ui.StageManager;
-import ui.simple_3d_viewer.Simple3DViewerView;
 
 /**
  * Created by heumos on 07.12.15.
