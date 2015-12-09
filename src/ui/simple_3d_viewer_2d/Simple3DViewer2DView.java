@@ -10,7 +10,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -45,6 +44,9 @@ public class Simple3DViewer2DView {
 
     // 2D Pane
     private Pane topPane;
+
+    // group for the 2D boxes
+    private Group box2DG;
 
     public Simple3DViewer2DView() {
         this.perspectiveCamera = new PerspectiveCamera(true);
@@ -90,14 +92,17 @@ public class Simple3DViewer2DView {
         this.rootNodeP.getChildren().addAll(subScene, topPane);
         this.scene = new Scene(this.rootNodeP, 1280, 640, true);
         this.topPane.setPickOnBounds(false);
-    }
-
-    public void initialize2DBoxes() {
+        this.box2DG = new Group();
+        this.topPane.getChildren().add(this.box2DG);
         this.rootNodeP.setAlignment(topPane, Pos.CENTER);
         this.rootNodeP.setAlignment(subScene, Pos.CENTER);
-        this.topPane.getChildren().add(getBoundingBox2D(this.box1));
-        this.topPane.getChildren().add(getBoundingBox2D(this.box2));
-        this.topPane.getChildren().add(getBoundingBox2D(this.cylinder));
+    }
+
+    public void set2DBoxes() {
+        this.box2DG.getChildren().clear();
+        this.box2DG.getChildren().add(getBoundingBox2D(this.box1));
+        this.box2DG.getChildren().add(getBoundingBox2D(this.box2));
+        this.box2DG.getChildren().add(getBoundingBox2D(this.cylinder));
     }
 
     private void buildTooltips() {
@@ -116,7 +121,13 @@ public class Simple3DViewer2DView {
         stage.setTitle("Simple3DViewer2D");
         stage.setScene(this.scene);
         stage.show();
-        initialize2DBoxes();
+        set2DBoxesStart();
+    }
+
+    private void set2DBoxesStart() {
+        this.box2DG.getChildren().add(getBoundingBox2DStart(this.box1));
+        this.box2DG.getChildren().add(getBoundingBox2DStart(this.box2));
+        this.box2DG.getChildren().add(getBoundingBox2DStart(this.cylinder));
     }
 
     public Scene getScene() {
@@ -145,7 +156,22 @@ public class Simple3DViewer2DView {
 
     public static javafx.scene.shape.Rectangle getBoundingBox2D(Node shape) {
         final Window window = shape.getScene().getWindow();
-        System.out.println(window);
+        final Bounds bounds = shape.getBoundsInLocal();
+        final Bounds screenBounds = shape.localToScreen(bounds);
+        javafx.scene.shape.Rectangle rectangle;
+        rectangle = new javafx.scene.shape.Rectangle
+                ((int) Math.round(screenBounds.getMinX() - window.getX()),
+                        (int) Math.round(screenBounds.getMinY() - window.getY()-40),
+                        (int) Math.round(screenBounds.getWidth()),
+                        (int) Math.round(screenBounds.getHeight()));
+        rectangle.setFill(Color.TRANSPARENT);
+        rectangle.setStroke(Color.LIGHTBLUE);
+        rectangle.setMouseTransparent(true);
+        return rectangle;
+    }
+
+    public static javafx.scene.shape.Rectangle getBoundingBox2DStart(Node shape) {
+        final Window window = shape.getScene().getWindow();
         final Bounds bounds = shape.getBoundsInLocal();
         final Bounds screenBounds = shape.localToScreen(bounds);
         javafx.scene.shape.Rectangle rectangle;

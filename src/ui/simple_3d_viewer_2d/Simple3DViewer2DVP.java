@@ -46,7 +46,7 @@ public class Simple3DViewer2DVP {
                 Rotate ry = new Rotate(mouseDeltaX/20, Rotate.Y_AXIS);
                 this.simple3DViewerView.getThreeDG().getTransforms().addAll(rz,ry);
             }
-
+            this.simple3DViewerView.set2DBoxes();
             simple3DViewerModel.setMouseY(mouseEvent.getY());
             simple3DViewerModel.setMouseX(mouseEvent.getX());
         }
