@@ -1,14 +1,10 @@
 package archive;
 
-import cd_hit.ClsrCluster;
-import cd_hit.ClsrReader;
-import io.FastaIdStrandMap;
 import io.PdbFileParser;
 import model.rna_3d_viewer.PdbAtom;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by heumos on 09.11.15.

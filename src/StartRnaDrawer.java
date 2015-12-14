@@ -20,4 +20,10 @@ public class StartRnaDrawer extends Application{
         RnaDrawerVC rnaDrawerVC = new RnaDrawerVC(rnaDrawerModel);
         rnaDrawerVC.show();
     }
+
+    /**
+     * Created by heumos on 14.12.15.
+     */
+    public static class StartRna3DViewer {
+    }
 }

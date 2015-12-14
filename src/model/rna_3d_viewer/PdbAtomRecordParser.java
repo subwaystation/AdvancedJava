@@ -22,7 +22,7 @@ public class PdbAtomRecordParser {
     public PdbAtom parseAtomRecord() {
         // String recordName = this.atomLine.substring(0,6);
         // Integer serial = Integer.valueOf(this.atomLine.substring(6, 11));
-        // String atomName = this.atomLine.substring(12, 16);
+        String atomName = this.atomLine.substring(12, 16).trim();
         String residueType = this.atomLine.substring(17, 20).trim();
         int residueIndex = Integer.valueOf(this.atomLine.substring(22, 26).trim());
         float x = Float.valueOf(this.atomLine.substring(30, 38).trim());
@@ -30,6 +30,6 @@ public class PdbAtomRecordParser {
         float z = Float.valueOf(this.atomLine.substring(46, 54).trim());
         float[] coordinates = {x,y,z};
         String atomType = this.atomLine.substring(76,78).trim();
-        return new PdbAtom(residueType, residueIndex, coordinates, atomType);
+        return new PdbAtom(atomName, residueType, residueIndex, coordinates, atomType);
     }
 }

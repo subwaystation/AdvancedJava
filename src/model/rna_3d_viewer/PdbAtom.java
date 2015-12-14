@@ -11,6 +11,9 @@ import java.util.Arrays;
  */
 public class PdbAtom {
 
+    // the atom name
+    private String atomName;
+
     // the residue type
     // can be A/C/T/G, ADE/GUA/CYT/URA is not allowed yet
     private String residueType;
@@ -24,7 +27,8 @@ public class PdbAtom {
     // the atom type
     private String atomType;
 
-    public PdbAtom(String residueType, int residueIndex, float[] coordinates, String atomType) {
+    public PdbAtom(String atomName,String residueType, int residueIndex, float[] coordinates, String atomType) {
+        this.atomName = atomName;
         this.residueType = residueType;
         this.residueIndex = residueIndex;
         this.coordinates = coordinates;
@@ -63,10 +67,15 @@ public class PdbAtom {
         this.coordinates = coordinates;
     }
 
+    public String getAtomName() {
+        return atomName;
+    }
+
     @Override
     public String toString() {
         String tab = "\t";
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(this.atomName).append(tab);
         stringBuilder.append(this.residueType).append(tab);
         stringBuilder.append(this.residueIndex).append(tab);
         stringBuilder.append(Arrays.toString(this.coordinates)).append(tab);
