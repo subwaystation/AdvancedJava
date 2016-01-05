@@ -33,15 +33,27 @@ public class Rna3DViewerModel {
         fillAtomHashMap(pdbFileParser);
         // TODO validate atom integrity for every sugar/base combination
         SugarMoleculeBuilder sugarMoleculeBuilder = new SugarMoleculeBuilder();
+        PurinMoleculeBuilder purinMoleculeBuilder = new PurinMoleculeBuilder();
+        PyrimidinMoleculeBuilder pyrimidinMoleculeBuilder = new PyrimidinMoleculeBuilder();
         for (Map.Entry<Integer, List<PdbAtom>> listEntry : this.atomHashMap.entrySet()) {
             sugarMoleculeBuilder.setCoordinates(SugarCoordinateExtractor.extractSugarCoordinates(listEntry.getValue()));
             this.meshViewList.add(sugarMoleculeBuilder.generateMeshView());
+            String residueType = listEntry.getValue().get(0).getResidueType();
+            if (residueType.equals("A") || residueType.equals("G")) {
+                purinMoleculeBuilder.setCoordinates(PurinCoordinateExtractor.extractPurinCoordinates(listEntry.getValue()));
+                this.meshViewList.add(purinMoleculeBuilder.generateMeshView());
+            } else {
+                pyrimidinMoleculeBuilder.setCoordinates(PyrimidinCoordinateExtractor.
+                        extractPyrimidinCoordinates(listEntry.getValue()));
+                this.meshViewList.add(pyrimidinMoleculeBuilder.generateMeshView());
+            }
         }
 
     }
 
     private void fillAtomHashMap(PdbFileParser pdbFileParser) throws IOException {
         List<PdbAtom> atoms = pdbFileParser.parsePdb();
+        // TODO center all atom positions
         HashMap<Integer, List<PdbAtom>> atomHashMap = new HashMap<>();
         for (PdbAtom atom : atoms) {
             Integer residueIndex = atom.getResidueIndex();

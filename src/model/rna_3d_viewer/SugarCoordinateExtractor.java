@@ -7,45 +7,27 @@ import java.util.*;
  */
 public class SugarCoordinateExtractor {
 
-    public static Set<String> SUGAR_ATOMS = new HashSet<>();
+    public static Map<String, Integer> SUGAR_ATOMS = new HashMap<>();
     static {
-        SUGAR_ATOMS.add("C1'");
-        SUGAR_ATOMS.add("C2'");
-        SUGAR_ATOMS.add("C3'");
-        SUGAR_ATOMS.add("C4'");
-        SUGAR_ATOMS.add("O4'");
+        SUGAR_ATOMS.put("C1'", 0);
+        SUGAR_ATOMS.put("C2'", 3);
+        SUGAR_ATOMS.put("C3'", 6);
+        SUGAR_ATOMS.put("C4'", 9);
+        SUGAR_ATOMS.put("O4'", 12);
     }
 
     public static float[] extractSugarCoordinates(List<PdbAtom> pdbAtomList) {
         HashMap<String, float[]> coordinatesMap = new HashMap<>();
         for (PdbAtom atom : pdbAtomList) {
             String atomName = atom.getAtomName();
-            if (SUGAR_ATOMS.contains(atomName)) {
+            if (SUGAR_ATOMS.containsKey(atomName)) {
                 coordinatesMap.put(atomName, atom.getCoordinates());
             }
         }
         float[] coordinates = new float[15];
         for (Map.Entry<String, float[]> entry: coordinatesMap.entrySet()) {
             String key = entry.getKey();
-            switch(key) {
-                case "C1'":
-                    System.arraycopy(entry.getValue(), 0, coordinates, 0, 3);
-                    break;
-                case "C2'":
-                    System.arraycopy(entry.getValue(), 0, coordinates, 3, 3);
-                    break;
-                case "C3'":
-                    System.arraycopy(entry.getValue(), 0, coordinates, 6, 3);
-                    break;
-                case "C4'":
-                    System.arraycopy(entry.getValue(), 0, coordinates, 9, 3);
-                    break;
-                case "O4'":
-                    System.arraycopy(entry.getValue(), 0, coordinates, 12, 3);
-                    break;
-                default:
-                    break;
-            }
+            System.arraycopy(entry.getValue(), 0, coordinates, SUGAR_ATOMS.get(key), 3);
         }
         return coordinates;
     }
