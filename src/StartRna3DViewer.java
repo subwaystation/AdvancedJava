@@ -26,8 +26,6 @@ public class StartRna3DViewer extends Application{
         List<String> args = getParameters().getRaw();
         Rna3DViewerModel rna3DViewerModel = new Rna3DViewerModel(args.get(0));
 
-        // TODO parse pdb into mashs
-
         Rna3DViewerVC rna3DViewerVC = new Rna3DViewerVC(rna3DViewerModel, primaryStage);
         rna3DViewerVC.show();
     }

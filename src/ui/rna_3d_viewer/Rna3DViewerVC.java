@@ -23,6 +23,7 @@ public class Rna3DViewerVC {
         this.primaryStage = primaryStage;
 
         this.rna3DViewerView.getRnaMoleculesG().getChildren().addAll(this.rna3DViewerModel.getMeshViewList());
+        this.rna3DViewerView.getRnaMoleculesG().getChildren().addAll(this.rna3DViewerModel.getConnectionList());
 
         // register event handler
         this.rna3DViewerView.getScene().setOnMousePressed(new Rna3DViewerVP.HandleMousePressed(rna3DViewerModel));
