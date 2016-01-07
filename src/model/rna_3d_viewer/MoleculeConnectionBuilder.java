@@ -10,7 +10,7 @@ import javafx.scene.transform.Translate;
 /**
  * Created by heumos on 06.01.16.
  */
-public class SugarBaseConnectionBuilder {
+public class MoleculeConnectionBuilder {
 
     // the radius of the resulting cylinder
     private double radius;
@@ -21,7 +21,7 @@ public class SugarBaseConnectionBuilder {
     // the end point of the cylinder
     private Point3D endPoint;
 
-    public SugarBaseConnectionBuilder(double radius) {
+    public MoleculeConnectionBuilder(double radius) {
         this.radius = radius;
     }
 

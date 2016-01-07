@@ -1,5 +1,6 @@
 package model.rna_3d_viewer;
 
+import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.MeshView;
@@ -48,7 +49,7 @@ public class PyrimidinMoleculeBuilder {
         this.coordinates = coordinates;
     }
 
-    public MeshView generateMeshView() {
+    public MeshView generateMeshView(String residueType, Integer residueNumber) {
         MeshView meshView = new MeshView();
         TriangleMesh triangleMesh = new TriangleMesh();
         triangleMesh.getPoints().addAll(this.coordinates);
@@ -56,6 +57,9 @@ public class PyrimidinMoleculeBuilder {
         triangleMesh.getFaces().addAll(this.faces);
         meshView.setMesh(triangleMesh);
         meshView.setMaterial(this.material);
+        String tooltipS = residueType + Integer.toString(residueNumber);
+        Tooltip tooltip = new Tooltip(tooltipS);
+        Tooltip.install(meshView, tooltip);
         return meshView;
     }
 }

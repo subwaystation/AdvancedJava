@@ -33,10 +33,15 @@ public class Rna3DViewerModel {
         PdbFileParser pdbFileParser = new PdbFileParser(this.pdbFile);
         fillAtomHashMap(pdbFileParser);
         // TODO validate atom integrity for every sugar/base combination
+        createMolecules();
+
+    }
+
+    private void createMolecules() {
         SugarMoleculeBuilder sugarMoleculeBuilder = new SugarMoleculeBuilder();
         PurinMoleculeBuilder purinMoleculeBuilder = new PurinMoleculeBuilder();
         PyrimidinMoleculeBuilder pyrimidinMoleculeBuilder = new PyrimidinMoleculeBuilder();
-        SugarBaseConnectionBuilder sugarBaseConnectionBuilder = new SugarBaseConnectionBuilder(0.05);
+        MoleculeConnectionBuilder moleculeConnectionBuilder = new MoleculeConnectionBuilder(0.05);
 
         for (Map.Entry<Integer, List<PdbAtom>> listEntry : this.atomHashMap.entrySet()) {
             // build sugar molecules
@@ -48,21 +53,18 @@ public class Rna3DViewerModel {
             if (residueType.startsWith("A") || residueType.startsWith("G")) {
                 // build purine
                 purinMoleculeBuilder.setCoordinates(PurinCoordinateExtractor.extractPurinCoordinates(listEntry.getValue()));
-                this.meshViewList.add(purinMoleculeBuilder.generateMeshView());
+                this.meshViewList.add(purinMoleculeBuilder.generateMeshView(residueType, listEntry.getKey()));
                 bondCoordinates = CovalentBondCoordinateExtractor.extractCovalentBondCoordinates(listEntry.getValue(), true);
-                System.out.println(Arrays.toString(bondCoordinates));
             } else {
                 // build pyrimidin
                 pyrimidinMoleculeBuilder.setCoordinates(PyrimidinCoordinateExtractor.
                         extractPyrimidinCoordinates(listEntry.getValue()));
-                this.meshViewList.add(pyrimidinMoleculeBuilder.generateMeshView());
+                this.meshViewList.add(pyrimidinMoleculeBuilder.generateMeshView(residueType, listEntry.getKey()));
                 bondCoordinates = CovalentBondCoordinateExtractor.extractCovalentBondCoordinates(listEntry.getValue(), false);
-                System.out.println(bondCoordinates);
             }
-            sugarBaseConnectionBuilder.setPoints(bondCoordinates);
-            connectionList.add(sugarBaseConnectionBuilder.createBond());
+            moleculeConnectionBuilder.setPoints(bondCoordinates);
+            connectionList.add(moleculeConnectionBuilder.createBond());
         }
-
     }
 
     public List<Cylinder> getConnectionList() {

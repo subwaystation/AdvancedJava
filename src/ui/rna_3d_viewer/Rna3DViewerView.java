@@ -16,6 +16,7 @@ public class Rna3DViewerView {
     // the group to which all rna 3d structure will be added
     private Group rnaMoleculesG;
 
+    // the perspective camera
     private PerspectiveCamera perspectiveCamera;
 
     public Rna3DViewerView() {
