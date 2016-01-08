@@ -22,12 +22,10 @@ public class Rna3DViewerVC {
         this.rna3DViewerView = new Rna3DViewerView();
         this.primaryStage = primaryStage;
 
-        this.rna3DViewerView.getRnaMoleculesG().getChildren().addAll(this.rna3DViewerModel.getMeshViewList());
-        this.rna3DViewerView.getRnaMoleculesG().getChildren().addAll(this.rna3DViewerModel.getConnectionList());
-
         // register event handler
         this.rna3DViewerView.getScene().setOnMousePressed(new Rna3DViewerVP.HandleMousePressed(rna3DViewerModel));
         this.rna3DViewerView.getScene().setOnMouseDragged(new Rna3DViewerVP.HandleMouseDragged(this.rna3DViewerView, this.rna3DViewerModel));
+        this.rna3DViewerView.getOpenPDB().setOnAction((actionEvent) -> Rna3DViewerVP.handleFileOpener(rna3DViewerView, rna3DViewerModel, primaryStage));
     }
 
     public void show() {

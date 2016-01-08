@@ -3,8 +3,13 @@ package ui.rna_3d_viewer;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.transform.Rotate;
-import model.RnaDrawerModel;
+import javafx.stage.FileChooser;
+
+import javafx.stage.Stage;
 import model.rna_3d_viewer.Rna3DViewerModel;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by heumos on 14.12.15.
@@ -49,6 +54,29 @@ public class Rna3DViewerVP {
             }
             rna3DViewerModel.setMouseY(mouseEvent.getY());
             rna3DViewerModel.setMouseX(mouseEvent.getX());
+        }
+    }
+
+    public static void handleFileOpener(Rna3DViewerView rna3DViewerView, Rna3DViewerModel rna3DViewerModel,
+                                      Stage primaryStage) {
+        String dir = System.getProperty("user.dir") + File.separator;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open .pdb file.");
+        FileChooser.ExtensionFilter clsrExtensionFilter = new FileChooser.ExtensionFilter("PDB Files", "*.pdb");
+        fileChooser.getExtensionFilters().addAll(clsrExtensionFilter);
+        File file = fileChooser.showOpenDialog(primaryStage);
+        if (file != null) {
+            rna3DViewerView.getLabel().setText(file.toString());
+            try {
+                rna3DViewerModel.parsePDB(file.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            rna3DViewerModel.createMolecules();
+
+            rna3DViewerView.getRnaMoleculesG().getChildren().addAll(rna3DViewerModel.getMeshViewList());
+            rna3DViewerView.getRnaMoleculesG().getChildren().addAll(rna3DViewerModel.getConnectionList());
         }
     }
 }

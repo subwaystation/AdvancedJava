@@ -28,16 +28,17 @@ public class Rna3DViewerModel {
     // the resulting list of connections
     private List<Cylinder> connectionList = new ArrayList<>();
 
-    public Rna3DViewerModel(String pdbFile) throws IOException {
-        this.pdbFile = pdbFile;
-        PdbFileParser pdbFileParser = new PdbFileParser(this.pdbFile);
-        fillAtomHashMap(pdbFileParser);
-        // TODO validate atom integrity for every sugar/base combination
-        createMolecules();
+    public Rna3DViewerModel() throws IOException {
 
     }
 
-    private void createMolecules() {
+    public void parsePDB(String pdbFile) throws IOException {
+        this.pdbFile = pdbFile;
+        PdbFileParser pdbFileParser = new PdbFileParser(this.pdbFile);
+        fillAtomHashMap(pdbFileParser);
+    }
+
+    public void createMolecules() {
         SugarMoleculeBuilder sugarMoleculeBuilder = new SugarMoleculeBuilder();
         PurinMoleculeBuilder purinMoleculeBuilder = new PurinMoleculeBuilder();
         PyrimidinMoleculeBuilder pyrimidinMoleculeBuilder = new PyrimidinMoleculeBuilder();
