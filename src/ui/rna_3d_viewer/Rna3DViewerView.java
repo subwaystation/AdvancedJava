@@ -44,10 +44,10 @@ public class Rna3DViewerView {
         perspectiveCamera = new PerspectiveCamera(false);
         perspectiveCamera.setTranslateX(-scene.getWidth() / 2);
         perspectiveCamera.setTranslateY(-scene.getHeight() / 2);
-        perspectiveCamera.setTranslateZ(50);
+        perspectiveCamera.setTranslateZ(20);
         perspectiveCamera.setFarClip(10000);
         perspectiveCamera.setNearClip(0.001);
-        perspectiveCamera.setFieldOfView(45);
+        perspectiveCamera.setFieldOfView(40);
         SubScene subScene = new SubScene(this.rnaMoleculesG, 300, 300, true, SceneAntialiasing.BALANCED);
         subScene.setFill(Color.WHITE);
         subScene.setCamera(this.perspectiveCamera);

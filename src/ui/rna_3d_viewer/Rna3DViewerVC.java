@@ -26,6 +26,8 @@ public class Rna3DViewerVC {
         this.rna3DViewerView.getScene().setOnMousePressed(new Rna3DViewerVP.HandleMousePressed(rna3DViewerModel));
         this.rna3DViewerView.getScene().setOnMouseDragged(new Rna3DViewerVP.HandleMouseDragged(this.rna3DViewerView, this.rna3DViewerModel));
         this.rna3DViewerView.getOpenPDB().setOnAction((actionEvent) -> Rna3DViewerVP.handleFileOpener(rna3DViewerView, rna3DViewerModel, primaryStage));
+        this.rna3DViewerView.getScene().widthProperty().addListener(new Rna3DViewerVP.HandleSceneWidth(this.rna3DViewerView));
+        this.rna3DViewerView.getScene().heightProperty().addListener(new Rna3DViewerVP.HandleSceneHeight(this.rna3DViewerView));
     }
 
     public void show() {

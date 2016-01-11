@@ -91,8 +91,6 @@ public class Rna3DViewerModel {
             moleculeConnectionBuilder.setPoints(phosSugarConnCoords);
             connectionList.add(moleculeConnectionBuilder.createBond());
 
-            System.out.println(residueNumberOld);
-            System.out.println(listEntry.getKey());
             // connect phosphorus atoms
             if (residueNumberOld == 0) {
                 residueNumberOld = listEntry.getKey();
@@ -144,7 +142,8 @@ public class Rna3DViewerModel {
     private void fillAtomHashMap(PdbFileParser pdbFileParser) throws IOException {
         this.atomHashMap.clear();
         List<PdbAtom> atoms = pdbFileParser.parsePdb();
-        // TODO center all atom positions
+        // center all atom positions
+        centerAtomPositions(atoms);
         HashMap<Integer, List<PdbAtom>> atomHashMap = new HashMap<>();
         for (PdbAtom atom : atoms) {
             Integer residueIndex = atom.getResidueIndex();
@@ -157,7 +156,37 @@ public class Rna3DViewerModel {
                 atomHashMap.put(residueIndex, atomList);
             }
         }
+
         this.atomHashMap = atomHashMap;
+    }
+
+    private void centerAtomPositions(List<PdbAtom> atoms) {
+        int atomCount = 0;
+
+        float Xcoords = 0f;
+        float Ycoords = 0f;
+        float Zcoords = 0f;
+
+        for (PdbAtom atom : atoms) {
+            float[] coords = atom.getCoordinates();
+            Xcoords += coords[0];
+            Ycoords += coords[1];
+            Zcoords += coords[2];
+            atomCount++;
+        }
+        Xcoords = Xcoords / atomCount;
+        Ycoords = Ycoords / atomCount;
+        Zcoords = Zcoords / atomCount;
+
+        System.out.println(Xcoords);
+        System.out.println(Ycoords);
+        System.out.println(Zcoords);
+        for (PdbAtom atom : atoms) {
+            float[] coords = atom.getCoordinates();
+            coords[0] = coords[0] - Xcoords;
+            coords[1] = coords[1] - Ycoords;
+            coords[2] = coords[2] - Zcoords;
+        }
     }
 
     public HashMap<Integer, List<PdbAtom>> getAtomHashMap() {

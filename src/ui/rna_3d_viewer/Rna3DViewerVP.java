@@ -1,5 +1,7 @@
 package ui.rna_3d_viewer;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.transform.Rotate;
@@ -15,6 +17,32 @@ import java.io.IOException;
  * Created by heumos on 14.12.15.
  */
 public class Rna3DViewerVP {
+
+    protected static class HandleSceneWidth implements ChangeListener<Number> {
+        private Rna3DViewerView rna3DViewerView;
+        public HandleSceneWidth(Rna3DViewerView rna3DViewerView) {
+            this.rna3DViewerView = rna3DViewerView;
+        }
+
+        @Override
+        public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+            this.rna3DViewerView.getPerspectiveCamera().
+                    setTranslateX(-this.rna3DViewerView.getScene().getWidth() / 2);
+        }
+    }
+
+    protected static class HandleSceneHeight implements ChangeListener<Number> {
+        private Rna3DViewerView rna3DViewerView;
+        public HandleSceneHeight(Rna3DViewerView rna3DViewerView) {
+            this.rna3DViewerView = rna3DViewerView;
+        }
+
+        @Override
+        public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+            this.rna3DViewerView.getPerspectiveCamera().
+                    setTranslateY(-this.rna3DViewerView.getScene().getHeight() / 2);
+        }
+    }
 
     protected static class HandleMousePressed implements EventHandler<MouseEvent> {
         private Rna3DViewerModel rna3DViewerModel;
@@ -48,9 +76,9 @@ public class Rna3DViewerVP {
                                 getTranslateZ() + mouseDeltaY);
                 // rotate group around the y-axis
             } else {
-                Rotate rz = new Rotate(mouseDeltaY/20, Rotate.Z_AXIS);
+                Rotate rx = new Rotate(mouseDeltaY/20, Rotate.X_AXIS);
                 Rotate ry = new Rotate(mouseDeltaX/20, Rotate.Y_AXIS);
-                this.rna3DViewerView.getRnaMoleculesG().getTransforms().addAll(rz,ry);
+                this.rna3DViewerView.getRnaMoleculesG().getTransforms().addAll(rx,ry);
             }
             rna3DViewerModel.setMouseY(mouseEvent.getY());
             rna3DViewerModel.setMouseX(mouseEvent.getX());
