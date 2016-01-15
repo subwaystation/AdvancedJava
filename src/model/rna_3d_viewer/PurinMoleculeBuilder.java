@@ -1,5 +1,6 @@
 package model.rna_3d_viewer;
 
+import javafx.geometry.Point3D;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
@@ -16,6 +17,8 @@ public class PurinMoleculeBuilder {
 
     // the mesh material
     protected PhongMaterial material = new PhongMaterial(Color.GREEN);
+
+    //
 
     private float[] texCoords = new float[]
             {
@@ -53,6 +56,19 @@ public class PurinMoleculeBuilder {
 
     public PurinMoleculeBuilder() {
 
+    }
+
+    /**
+     * The centre of the molecule is defined as the centre point
+     * being N1.
+     * @return
+     */
+    public Point3D getMoleculeCentre() {
+        if (this.coordinates != null) {
+            return new Point3D(this.coordinates[0], this.coordinates[1], this.coordinates[2]);
+        } else {
+            return null;
+        }
     }
 
     public void setCoordinates(float[] coordinates) {

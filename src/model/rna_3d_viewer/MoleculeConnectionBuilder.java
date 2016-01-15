@@ -21,8 +21,36 @@ public class MoleculeConnectionBuilder {
     // the end point of the cylinder
     private Point3D endPoint;
 
+    // the color of the cylinder
+    private Color color;
+
     public MoleculeConnectionBuilder(double radius) {
         this.radius = radius;
+        this.color = Color.BLACK;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    public Point3D getInitPoint() {
+        return initPoint;
+    }
+
+    public Point3D getEndPoint() {
+        return endPoint;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public void setInitPoint(Point3D initPoint) {
@@ -62,7 +90,7 @@ public class MoleculeConnectionBuilder {
             Cylinder cylinder = new Cylinder(this.radius, height);
 
             cylinder.getTransforms().addAll(moveToMidpoint, rotateAroundCenter);
-            cylinder.setMaterial(new PhongMaterial(Color.BLACK));
+            cylinder.setMaterial(new PhongMaterial(this.color));
 
             return cylinder;
         } else{

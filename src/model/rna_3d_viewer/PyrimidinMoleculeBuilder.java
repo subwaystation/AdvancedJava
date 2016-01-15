@@ -1,5 +1,6 @@
 package model.rna_3d_viewer;
 
+import javafx.geometry.Point3D;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
@@ -43,6 +44,19 @@ public class PyrimidinMoleculeBuilder {
 
     public PyrimidinMoleculeBuilder() {
 
+    }
+
+    /**
+     * The centre of the molecule is defined as the centre point
+     * N3.
+     * @return
+     */
+    public Point3D getMoleculeCentre() {
+        if (this.coordinates != null) {
+            return new Point3D(this.coordinates[6], this.coordinates[7], this.coordinates[8]);
+        } else {
+            return null;
+        }
     }
 
     public void setCoordinates(float[] coordinates) {
