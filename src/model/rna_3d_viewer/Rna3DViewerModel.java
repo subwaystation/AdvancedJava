@@ -125,7 +125,7 @@ public class Rna3DViewerModel {
             // FIXME no knew object generating?!
             // moleculeConnectionBuilder = new MoleculeConnectionBuilder(0.1);
             // moleculeConnectionBuilder.setColor(Color.BLUE);
-            connectBasePairs(moleculeConnectionBuilder, residueCentreList);
+            // connectBasePairs(moleculeConnectionBuilder, residueCentreList);
         }
     }
 
