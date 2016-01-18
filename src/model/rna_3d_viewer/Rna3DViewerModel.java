@@ -118,44 +118,49 @@ public class Rna3DViewerModel {
             }
 
             // connect purine with pyrimidine if distance of molecules is within 10 Ângström range
-            moleculeConnectionBuilder = new MoleculeConnectionBuilder(0.1);
+            // FIXME no knew object generating?!
+            // moleculeConnectionBuilder = new MoleculeConnectionBuilder(0.1);
             // moleculeConnectionBuilder.setColor(Color.BLUE);
-            for (int i = 0; i < residueCentreList.size(); i++) {
-                for (int j = 0; j < residueCentreList.size(); j++) {
-                    if (i == j) {
-                        continue;
-                    } else {
-                        ResidueCentre res1 = residueCentreList.get(i);
-                        Integer res1Number = res1.getResidueNumber();
-                        String base1 = this.atomHashMap.get(res1Number).get(0).getResidueType();
-                        ResidueCentre res2 = residueCentreList.get(j);
-                        Integer res2Number =res2.getResidueNumber();
-                        String base2 = this.atomHashMap.get(res2Number).get(0).getResidueType();
+            // connectBasePairs(moleculeConnectionBuilder, residueCentreList);
+        }
+    }
 
-                        switch (base1) {
-                            case "U":
-                                if (base2.equals("A")) {
-                                    basePairRange(moleculeConnectionBuilder, res1, res2);
-                                }
-                                break;
-                            case "C":
-                                if (base2.equals("G")) {
-                                    basePairRange(moleculeConnectionBuilder, res1, res2);
-                                }
-                                break;
-                            case "A":
-                                if (base2.equals("U")) {
-                                    basePairRange(moleculeConnectionBuilder, res1, res2);
-                                }
-                                break;
-                            case "G":
-                                if (base2.equals("C")) {
-                                    basePairRange(moleculeConnectionBuilder, res1, res2);
-                                }
-                                break;
-                            default:
-                                break;
-                        }
+    private void connectBasePairs(MoleculeConnectionBuilder moleculeConnectionBuilder, List<ResidueCentre> residueCentreList) {
+        for (int i = 0; i < residueCentreList.size(); i++) {
+            for (int j = 0; j < residueCentreList.size(); j++) {
+                if (i == j) {
+                    continue;
+                } else {
+                    ResidueCentre res1 = residueCentreList.get(i);
+                    Integer res1Number = res1.getResidueNumber();
+                    String base1 = this.atomHashMap.get(res1Number).get(0).getResidueType();
+                    ResidueCentre res2 = residueCentreList.get(j);
+                    Integer res2Number =res2.getResidueNumber();
+                    String base2 = this.atomHashMap.get(res2Number).get(0).getResidueType();
+
+                    switch (base1) {
+                        case "U":
+                            if (base2.equals("A")) {
+                                basePairRange(moleculeConnectionBuilder, res1, res2);
+                            }
+                            break;
+                        case "C":
+                            if (base2.equals("G")) {
+                                basePairRange(moleculeConnectionBuilder, res1, res2);
+                            }
+                            break;
+                        case "A":
+                            if (base2.equals("U")) {
+                                basePairRange(moleculeConnectionBuilder, res1, res2);
+                            }
+                            break;
+                        case "G":
+                            if (base2.equals("C")) {
+                                basePairRange(moleculeConnectionBuilder, res1, res2);
+                            }
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
