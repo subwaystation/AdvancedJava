@@ -95,6 +95,10 @@ public class Rna3DViewerModel {
             connectionList.add(moleculeConnectionBuilder.createBond());
             // build phosphorus spheres
             float[] phosphorusCoordinates = PhosphorusMoleculeExtractor.extractPhosphorusCoordinates(listEntry.getValue());
+            // was there a phosphorus atom?
+            if (phosphorusCoordinates[0] == 0.0 && phosphorusCoordinates[1] == 0.0 && phosphorusCoordinates[2] == 0.0) {
+                continue;
+            }
             phosphorusMoleculeBuilder.setCoordinates(phosphorusCoordinates);
             this.phosphorusList.add(phosphorusMoleculeBuilder.generatePhosphate());
 
@@ -121,7 +125,7 @@ public class Rna3DViewerModel {
             // FIXME no knew object generating?!
             // moleculeConnectionBuilder = new MoleculeConnectionBuilder(0.1);
             // moleculeConnectionBuilder.setColor(Color.BLUE);
-            // connectBasePairs(moleculeConnectionBuilder, residueCentreList);
+            connectBasePairs(moleculeConnectionBuilder, residueCentreList);
         }
     }
 
