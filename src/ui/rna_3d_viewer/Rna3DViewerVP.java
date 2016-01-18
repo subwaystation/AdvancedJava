@@ -27,7 +27,7 @@ public class Rna3DViewerVP {
         @Override
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
             this.rna3DViewerView.getPerspectiveCamera().
-                    setTranslateX(-this.rna3DViewerView.getScene().getWidth() / 2);
+                    setTranslateX(-newValue.doubleValue() / 2);
         }
     }
 
@@ -40,7 +40,7 @@ public class Rna3DViewerVP {
         @Override
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
             this.rna3DViewerView.getPerspectiveCamera().
-                    setTranslateY(-this.rna3DViewerView.getScene().getHeight() / 2);
+                    setTranslateY(-newValue.doubleValue() / 2);
         }
     }
 
