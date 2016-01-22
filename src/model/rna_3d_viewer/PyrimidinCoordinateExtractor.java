@@ -1,5 +1,7 @@
 package model.rna_3d_viewer;
 
+import javafx.geometry.Point3D;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +11,7 @@ import java.util.Map;
  */
 public class PyrimidinCoordinateExtractor {
 
-    public static Map<String, Integer> PYRIMIDIN_ATOMS = new HashMap<>();
+    public final static Map<String, Integer> PYRIMIDIN_ATOMS = new HashMap<>();
     static {
         PYRIMIDIN_ATOMS.put("N1", 0);
         PYRIMIDIN_ATOMS.put("C2", 3);

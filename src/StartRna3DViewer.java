@@ -10,14 +10,6 @@ import java.util.List;
  */
 public class StartRna3DViewer extends Application{
     public static void main(String[] args) {
-/*        if (args.length != 1){
-            System.err.println("ERROR: Wrong number of arguments. Please enter a valid RNA PDB file.");
-            System.exit(1);
-        }
-        if (!args[0].endsWith(".pdb")) {
-            System.err.println("ERROR: The file you entered is not a valid RNA PDB file. The file must end with" +
-                    "'.pdb'!");
-        }*/
         launch(args);
     }
 

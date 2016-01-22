@@ -74,7 +74,7 @@ public class MoleculeConnectionBuilder {
         setEndPoint(new Point3D(atoms[3], atoms[4], atoms[5]));
     }
 
-    public Cylinder createBond() {
+    public Cylinder createConnection() {
         if(this.initPoint != null && this.endPoint != null){
             Point3D yAxis = new Point3D(0, 1, 0);
             Point3D diff = this.endPoint.subtract(this.initPoint);

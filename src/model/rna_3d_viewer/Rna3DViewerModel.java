@@ -1,8 +1,6 @@
 package model.rna_3d_viewer;
 
 import io.PdbFileParser;
-import javafx.geometry.Point3D;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.MeshView;
 import javafx.scene.shape.Sphere;
@@ -50,8 +48,8 @@ public class Rna3DViewerModel {
         this.phosphorusList.clear();
 
         SugarMoleculeBuilder sugarMoleculeBuilder = new SugarMoleculeBuilder();
-        PurinMoleculeBuilder purinMoleculeBuilder = new PurinMoleculeBuilder();
-        PyrimidinMoleculeBuilder pyrimidinMoleculeBuilder = new PyrimidinMoleculeBuilder();
+        PurineMoleculeBuilder purineMoleculeBuilder = new PurineMoleculeBuilder();
+        PyrimidineMoleculeBuilder pyrimidineMoleculeBuilder = new PyrimidineMoleculeBuilder();
         MoleculeConnectionBuilder moleculeConnectionBuilder = new MoleculeConnectionBuilder(0.05);
         PhosphorusMoleculeBuilder phosphorusMoleculeBuilder = new PhosphorusMoleculeBuilder();
 
@@ -73,26 +71,18 @@ public class Rna3DViewerModel {
             // build base molecules
             if (residueType.startsWith("A") || residueType.startsWith("G")) {
                 // build purine
-                purinMoleculeBuilder.setCoordinates(PurinCoordinateExtractor.extractPurinCoordinates(listEntry.getValue()));
-                this.meshViewList.add(purinMoleculeBuilder.generateMeshView(residueType, listEntry.getKey()));
-                Point3D centrePoint;
-                if ((centrePoint = purinMoleculeBuilder.getMoleculeCentre()) != null) {
-                    residueCentreList.add(new ResidueCentre(listEntry.getKey(), centrePoint));
-                }
+                purineMoleculeBuilder.setCoordinates(PurinCoordinateExtractor.extractPurinCoordinates(listEntry.getValue()));
+                this.meshViewList.add(purineMoleculeBuilder.generateMeshView(residueType, listEntry.getKey()));
                 bondCoordinates = CovalentBondCoordinateExtractor.extractCovalentBondCoordinates(listEntry.getValue(), true);
             } else {
                 // build pyrimidin
-                pyrimidinMoleculeBuilder.setCoordinates(PyrimidinCoordinateExtractor.
+                pyrimidineMoleculeBuilder.setCoordinates(PyrimidinCoordinateExtractor.
                         extractPyrimidinCoordinates(listEntry.getValue()));
-                this.meshViewList.add(pyrimidinMoleculeBuilder.generateMeshView(residueType, listEntry.getKey()));
-                Point3D centrePoint;
-                if ((centrePoint = pyrimidinMoleculeBuilder.getMoleculeCentre()) != null) {
-                    residueCentreList.add(new ResidueCentre(listEntry.getKey(), centrePoint));
-                }
+                this.meshViewList.add(pyrimidineMoleculeBuilder.generateMeshView(residueType, listEntry.getKey()));
                 bondCoordinates = CovalentBondCoordinateExtractor.extractCovalentBondCoordinates(listEntry.getValue(), false);
             }
             moleculeConnectionBuilder.setPoints(bondCoordinates);
-            connectionList.add(moleculeConnectionBuilder.createBond());
+            connectionList.add(moleculeConnectionBuilder.createConnection());
             // build phosphorus spheres
             float[] phosphorusCoordinates = PhosphorusMoleculeExtractor.extractPhosphorusCoordinates(listEntry.getValue());
             // was there a phosphorus atom?
@@ -105,7 +95,7 @@ public class Rna3DViewerModel {
             // build connections between phosphorus and sugars
             float[] phosSugarConnCoords = buildPhosphorusSugarCoords(c4DashCoordinates, phosphorusCoordinates);
             moleculeConnectionBuilder.setPoints(phosSugarConnCoords);
-            connectionList.add(moleculeConnectionBuilder.createBond());
+            connectionList.add(moleculeConnectionBuilder.createConnection());
 
             // connect phosphorus atoms
             if (residueNumberOld == 0) {
@@ -115,18 +105,18 @@ public class Rna3DViewerModel {
                 if (residueNumberOld - listEntry.getKey() == -1) {
                     moleculeConnectionBuilder.setInitPoint(phosphorusCoordinates);
                     moleculeConnectionBuilder.setEndPoint(oldPhosphorusCoords);
-                    connectionList.add(moleculeConnectionBuilder.createBond());
+                    connectionList.add(moleculeConnectionBuilder.createConnection());
                 }
                 residueNumberOld = listEntry.getKey();
                 oldPhosphorusCoords = phosphorusCoordinates;
             }
 
-            // connect purine with pyrimidine if distance of molecules is within 10 Ângström range
-            // FIXME no knew object generating?!
-            // moleculeConnectionBuilder = new MoleculeConnectionBuilder(0.1);
-            // moleculeConnectionBuilder.setColor(Color.BLUE);
-            // connectBasePairs(moleculeConnectionBuilder, residueCentreList);
         }
+        // connect purine with pyrimidine if distance of molecules is within 10 Ângström range
+        // FIXME no knew object generating?!
+        // moleculeConnectionBuilder = new MoleculeConnectionBuilder(0.1);
+        // moleculeConnectionBuilder.setColor(Color.BLUE);
+        connectBasePairs(moleculeConnectionBuilder, residueCentreList);
     }
 
     private void connectBasePairs(MoleculeConnectionBuilder moleculeConnectionBuilder, List<ResidueCentre> residueCentreList) {
@@ -141,7 +131,7 @@ public class Rna3DViewerModel {
                     ResidueCentre res2 = residueCentreList.get(j);
                     Integer res2Number =res2.getResidueNumber();
                     String base2 = this.atomHashMap.get(res2Number).get(0).getResidueType();
-
+                    // TODO cases ADE/GUA/CYT/URA
                     switch (base1) {
                         case "U":
                             if (base2.equals("A")) {
@@ -174,10 +164,11 @@ public class Rna3DViewerModel {
     private void basePairRange(MoleculeConnectionBuilder moleculeConnectionBuilder, ResidueCentre res1, ResidueCentre res2) {
         Double dist = res1.getCentre().distance(res2.getCentre());
         // we are within the required range
-        if (dist <= 10) {
+        // TODO take angle into account
+        if (dist <= 5) {
             moleculeConnectionBuilder.setInitPoint(res1.getCentre());
             moleculeConnectionBuilder.setEndPoint(res2.getCentre());
-            connectionList.add(moleculeConnectionBuilder.createBond());
+            connectionList.add(moleculeConnectionBuilder.createConnection());
         }
     }
 
