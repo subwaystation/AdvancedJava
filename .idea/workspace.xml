@@ -5,14 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="de223f9e-d0e8-46f4-b3d3-1ac4f3afd1fe" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/rna_3d_viewer/BaseMoleculeBuilder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/rna_3d_viewer/Residue.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/rna_3d_viewer/PurinMoleculeBuilder.java" afterPath="$PROJECT_DIR$/src/model/rna_3d_viewer/PurineMoleculeBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/model/rna_3d_viewer/PyrimidinMoleculeBuilder.java" afterPath="$PROJECT_DIR$/src/model/rna_3d_viewer/PyrimidineMoleculeBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/rna_3d_viewer/MoleculeConnectionBuilder.java" afterPath="$PROJECT_DIR$/src/model/rna_3d_viewer/MoleculeConnectionBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/rna_3d_viewer/PyrimidinCoordinateExtractor.java" afterPath="$PROJECT_DIR$/src/model/rna_3d_viewer/PyrimidinCoordinateExtractor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/rna_3d_viewer/Rna3DViewerModel.java" afterPath="$PROJECT_DIR$/src/model/rna_3d_viewer/Rna3DViewerModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/StartRna3DViewer.java" afterPath="$PROJECT_DIR$/src/StartRna3DViewer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="AdvancedJava.iws" />
@@ -940,7 +932,7 @@
       <workItem from="1453117473081" duration="2386000" />
       <workItem from="1453235621780" duration="182000" />
       <workItem from="1453284870748" duration="1038000" />
-      <workItem from="1453471467870" duration="4280000" />
+      <workItem from="1453471467870" duration="4326000" />
     </task>
     <task id="LOCAL-00001" summary="Started 'Getting Started' &#10;">
       <created>1444828495688</created>
@@ -1218,11 +1210,17 @@
       <option name="project" value="LOCAL" />
       <updated>1453128331628</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="BP not working, disabled. Beautified some code, some new Classes.">
+      <created>1453475786639</created>
+      <option name="number" value="00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1453475786639</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="208878000" />
+    <option name="totallyTimeSpent" value="208924000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
@@ -1236,7 +1234,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16855088" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16855088" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15729167" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1296,7 +1294,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Finished MVP with DnaManipulator" />
     <MESSAGE value="added comments" />
     <MESSAGE value="added base classes for template method demo" />
     <MESSAGE value="started RnaDrawer" />
@@ -1321,7 +1318,8 @@
     <MESSAGE value="BasePairConnection not allowed." />
     <MESSAGE value="BP Working" />
     <MESSAGE value="BP not working, disabled." />
-    <option name="LAST_COMMIT_MESSAGE" value="BP not working, disabled." />
+    <MESSAGE value="BP not working, disabled. Beautified some code, some new Classes." />
+    <option name="LAST_COMMIT_MESSAGE" value="BP not working, disabled. Beautified some code, some new Classes." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
