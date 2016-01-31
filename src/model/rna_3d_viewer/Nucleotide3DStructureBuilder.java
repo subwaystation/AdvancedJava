@@ -9,7 +9,7 @@ import javafx.scene.shape.TriangleMesh;
 /**
  * Created by heumos on 22.01.16.
  */
-public abstract class BaseMoleculeBuilder {
+public abstract class Nucleotide3DStructureBuilder {
 
     // the coordinates for the whole molecule
     private float[] coordinates;
@@ -17,7 +17,7 @@ public abstract class BaseMoleculeBuilder {
     // the color for the resulting molecule
     private Color color;
 
-    public BaseMoleculeBuilder(Color color) {
+    public Nucleotide3DStructureBuilder(Color color) {
         this.color = color;
     }
 

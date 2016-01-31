@@ -10,7 +10,7 @@ import javafx.scene.transform.Translate;
 /**
  * Created by heumos on 06.01.16.
  */
-public class MoleculeConnectionBuilder {
+public class Molecule3DConnectionBuilder {
 
     // the radius of the resulting cylinder
     private double radius;
@@ -24,7 +24,7 @@ public class MoleculeConnectionBuilder {
     // the color of the cylinder
     private Color color;
 
-    public MoleculeConnectionBuilder(double radius) {
+    public Molecule3DConnectionBuilder(double radius) {
         this.radius = radius;
         this.color = Color.BLACK;
     }

@@ -19,11 +19,11 @@ public class CovalentBondCoordinateExtractor {
         PURIN_BOND.put("C1'", 3);
     }
 
-    public static float[] extractCovalentBondCoordinates(List<PdbAtom> pdbAtomList, boolean isPurin) {
+    public static float[] extractCovalentBondCoordinates(List<PdbAtom> pdbAtomList, boolean isPurine) {
         HashMap<String, float[]> coordinatesMap = new HashMap<>();
         HashMap<String, Integer> bondSet;
         float[] coordinates = new float[6];
-        if (isPurin) {
+        if (isPurine) {
             bondSet = PURIN_BOND;
         } else {
             bondSet = PYRIMIDIN_BOND;
@@ -37,6 +37,22 @@ public class CovalentBondCoordinateExtractor {
         for (Map.Entry<String, float[]> entry: coordinatesMap.entrySet()) {
             String key = entry.getKey();
             System.arraycopy(entry.getValue(), 0, coordinates, bondSet.get(key), 3);
+        }
+        return coordinates;
+    }
+
+    public static float[] extractCovalentBondCoordinates(Map<String, float[]> atomNameCoordinatesMap, boolean isPurine) {
+        float[] coordinates = new float[6];
+        HashMap<String, Integer> bondSet;
+        if (isPurine) {
+            bondSet = PURIN_BOND;
+        } else {
+            bondSet = PYRIMIDIN_BOND;
+        }
+        for (Map.Entry<String, Integer> entry : bondSet.entrySet()) {
+            String atomName = entry.getKey();
+            float[] atomCoords = atomNameCoordinatesMap.get(atomName);
+            System.arraycopy(atomCoords, 0, coordinates, bondSet.get(atomName), 3);
         }
         return coordinates;
     }

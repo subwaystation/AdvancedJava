@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 /**
  * Created by heumos on 05.01.16.
  */
-public class PurineMoleculeBuilder extends BaseMoleculeBuilder {
+public class Purine3DStructureBuilder extends Nucleotide3DStructureBuilder {
 
     private float[] texCoords = new float[]
             {
@@ -41,11 +41,11 @@ public class PurineMoleculeBuilder extends BaseMoleculeBuilder {
             };
 
 
-    public PurineMoleculeBuilder(Color color) {
+    public Purine3DStructureBuilder(Color color) {
         super(color);
     }
 
-    public PurineMoleculeBuilder() {
+    public Purine3DStructureBuilder() {
         this(Color.GREEN);
     }
 

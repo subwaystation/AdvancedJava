@@ -8,7 +8,7 @@ import javafx.scene.shape.Sphere;
 /**
  * Created by heumos on 08.01.16.
  */
-public class PhosphorusMoleculeBuilder {
+public class Phosphorus3DStructureBuilder {
 
     // the coordinates
     private float[] coordinates;
@@ -16,7 +16,7 @@ public class PhosphorusMoleculeBuilder {
     // the mesh material
     protected PhongMaterial material = new PhongMaterial(Color.DARKGRAY);
 
-    public PhosphorusMoleculeBuilder() {
+    public Phosphorus3DStructureBuilder() {
 
     }
 
@@ -26,6 +26,7 @@ public class PhosphorusMoleculeBuilder {
 
     public Sphere generatePhosphate() {
         Sphere sphere = new Sphere(1.0);
+        sphere.setMaterial(this.material);
         sphere.setTranslateX(this.coordinates[0]);
         sphere.setTranslateY(this.coordinates[1]);
         sphere.setTranslateZ(this.coordinates[2]);

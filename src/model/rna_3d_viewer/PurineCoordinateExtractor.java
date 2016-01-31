@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Created by heumos on 05.01.16.
  */
-public class PurinCoordinateExtractor {
+public class PurineCoordinateExtractor {
 
     public static Map<String, Integer> PURIN_ATOMS = new HashMap<>();
     static {
@@ -22,7 +22,7 @@ public class PurinCoordinateExtractor {
         PURIN_ATOMS.put("N9", 24);
     }
 
-    public static float[] extractPurinCoordinates(List<PdbAtom> pdbAtomList) {
+    public static float[] extractPurineCoordinates(List<PdbAtom> pdbAtomList) {
         HashMap<String, float[]> coordinatesMap = new HashMap<>();
         for (PdbAtom atom : pdbAtomList) {
             String atomName = atom.getAtomName();
@@ -37,4 +37,15 @@ public class PurinCoordinateExtractor {
         }
         return coordinates;
     }
+
+    public static float[] extractPyrimidineCoordinates(Map<String, float[]> atomNameCoordinatesMap) {
+        float[] coordinates = new float[27];
+        for (Map.Entry<String, Integer> entry : PURIN_ATOMS.entrySet()) {
+            String atomName = entry.getKey();
+            float[] atomCoords = atomNameCoordinatesMap.get(atomName);
+            System.arraycopy(atomCoords, 0, coordinates, PURIN_ATOMS.get(atomName), 3);
+        }
+        return coordinates;
+    }
+
 }

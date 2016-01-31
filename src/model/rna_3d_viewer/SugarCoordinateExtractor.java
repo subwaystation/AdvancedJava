@@ -31,4 +31,14 @@ public class SugarCoordinateExtractor {
         }
         return coordinates;
     }
+
+    public static float[] extractSugarCoordinates(Map<String, float[]> atomNameCoordinatesMap) {
+        float[] coordinates = new float[15];
+        for (Map.Entry<String, Integer> entry : SUGAR_ATOMS.entrySet()) {
+            String atomName = entry.getKey();
+            float[] atomCoords = atomNameCoordinatesMap.get(atomName);
+            System.arraycopy(atomCoords, 0, coordinates, SUGAR_ATOMS.get(atomName), 3);
+        }
+        return coordinates;
+    }
 }

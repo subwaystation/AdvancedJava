@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 /**
  * Created by heumos on 05.01.16.
  */
-public class PyrimidineMoleculeBuilder extends BaseMoleculeBuilder {
+public class Pyrimidine3DStructureBuilder extends Nucleotide3DStructureBuilder {
 
     private float[] texCoords = new float[]
             {
@@ -30,11 +30,11 @@ public class PyrimidineMoleculeBuilder extends BaseMoleculeBuilder {
                     0,0,5,1,4,1
             };
 
-    public PyrimidineMoleculeBuilder(Color color) {
+    public Pyrimidine3DStructureBuilder(Color color) {
         super(color);
     }
 
-    public PyrimidineMoleculeBuilder() {
+    public Pyrimidine3DStructureBuilder() {
         this(Color.RED);
     }
 

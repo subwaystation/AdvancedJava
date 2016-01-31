@@ -100,7 +100,7 @@ public class Rna3DViewerVP {
                 e.printStackTrace();
             }
 
-            rna3DViewerModel.createMolecules();
+            rna3DViewerModel.build3DStructures();
             rna3DViewerView.getRnaMoleculesG().getChildren().clear();
 
             rna3DViewerView.getRnaMoleculesG().getChildren().addAll(rna3DViewerModel.getMeshViewList());

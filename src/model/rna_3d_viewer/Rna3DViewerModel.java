@@ -42,16 +42,16 @@ public class Rna3DViewerModel {
         fillAtomHashMap(pdbFileParser);
     }
 
-    public void createMolecules() {
+    public void build3DStructures() {
         this.meshViewList.clear();
         this.connectionList.clear();
         this.phosphorusList.clear();
 
-        SugarMoleculeBuilder sugarMoleculeBuilder = new SugarMoleculeBuilder();
-        PurineMoleculeBuilder purineMoleculeBuilder = new PurineMoleculeBuilder();
-        PyrimidineMoleculeBuilder pyrimidineMoleculeBuilder = new PyrimidineMoleculeBuilder();
-        MoleculeConnectionBuilder moleculeConnectionBuilder = new MoleculeConnectionBuilder(0.05);
-        PhosphorusMoleculeBuilder phosphorusMoleculeBuilder = new PhosphorusMoleculeBuilder();
+        Sugar3DStructureBuilder sugar3DStructureBuilder = new Sugar3DStructureBuilder();
+        Purine3DStructureBuilder purine3DStructureBuilder = new Purine3DStructureBuilder();
+        Pyrimidine3DStructureBuilder pyrimidine3DStructureBuilder = new Pyrimidine3DStructureBuilder();
+        Molecule3DConnectionBuilder molecule3DConnectionBuilder = new Molecule3DConnectionBuilder(0.05);
+        Phosphorus3DStructureBuilder phosphorus3DStructureBuilder = new Phosphorus3DStructureBuilder();
 
         TreeMap<Integer, List<PdbAtom>> sortedAtomHashMap = new TreeMap<>(this.atomHashMap);
 
@@ -62,8 +62,8 @@ public class Rna3DViewerModel {
         for (Map.Entry<Integer, List<PdbAtom>> listEntry : sortedAtomHashMap.entrySet()) {
             // build sugar molecules
             float[] sugarCoordinates = SugarCoordinateExtractor.extractSugarCoordinates(listEntry.getValue());
-            sugarMoleculeBuilder.setCoordinates(sugarCoordinates);
-            this.meshViewList.add(sugarMoleculeBuilder.generateMeshView());
+            sugar3DStructureBuilder.setCoordinates(sugarCoordinates);
+            this.meshViewList.add(sugar3DStructureBuilder.generateMeshView());
             float[] c4DashCoordinates = extractC4Coodinates(sugarCoordinates);
 
             String residueType = listEntry.getValue().get(0).getResidueType();
@@ -71,31 +71,31 @@ public class Rna3DViewerModel {
             // build base molecules
             if (residueType.startsWith("A") || residueType.startsWith("G")) {
                 // build purine
-                purineMoleculeBuilder.setCoordinates(PurinCoordinateExtractor.extractPurinCoordinates(listEntry.getValue()));
-                this.meshViewList.add(purineMoleculeBuilder.generateMeshView(residueType, listEntry.getKey()));
+                purine3DStructureBuilder.setCoordinates(PurineCoordinateExtractor.extractPurineCoordinates(listEntry.getValue()));
+                this.meshViewList.add(purine3DStructureBuilder.generateMeshView(residueType, listEntry.getKey()));
                 bondCoordinates = CovalentBondCoordinateExtractor.extractCovalentBondCoordinates(listEntry.getValue(), true);
             } else {
                 // build pyrimidin
-                pyrimidineMoleculeBuilder.setCoordinates(PyrimidinCoordinateExtractor.
-                        extractPyrimidinCoordinates(listEntry.getValue()));
-                this.meshViewList.add(pyrimidineMoleculeBuilder.generateMeshView(residueType, listEntry.getKey()));
+                pyrimidine3DStructureBuilder.setCoordinates(PyrimidineCoordinateExtractor.
+                        extractPyrimidineCoordinates(listEntry.getValue()));
+                this.meshViewList.add(pyrimidine3DStructureBuilder.generateMeshView(residueType, listEntry.getKey()));
                 bondCoordinates = CovalentBondCoordinateExtractor.extractCovalentBondCoordinates(listEntry.getValue(), false);
             }
-            moleculeConnectionBuilder.setPoints(bondCoordinates);
-            connectionList.add(moleculeConnectionBuilder.createConnection());
+            molecule3DConnectionBuilder.setPoints(bondCoordinates);
+            connectionList.add(molecule3DConnectionBuilder.createConnection());
             // build phosphorus spheres
             float[] phosphorusCoordinates = PhosphorusMoleculeExtractor.extractPhosphorusCoordinates(listEntry.getValue());
             // was there a phosphorus atom?
             if (phosphorusCoordinates[0] == 0.0 && phosphorusCoordinates[1] == 0.0 && phosphorusCoordinates[2] == 0.0) {
                 continue;
             }
-            phosphorusMoleculeBuilder.setCoordinates(phosphorusCoordinates);
-            this.phosphorusList.add(phosphorusMoleculeBuilder.generatePhosphate());
+            phosphorus3DStructureBuilder.setCoordinates(phosphorusCoordinates);
+            this.phosphorusList.add(phosphorus3DStructureBuilder.generatePhosphate());
 
             // build connections between phosphorus and sugars
             float[] phosSugarConnCoords = buildPhosphorusSugarCoords(c4DashCoordinates, phosphorusCoordinates);
-            moleculeConnectionBuilder.setPoints(phosSugarConnCoords);
-            connectionList.add(moleculeConnectionBuilder.createConnection());
+            molecule3DConnectionBuilder.setPoints(phosSugarConnCoords);
+            connectionList.add(molecule3DConnectionBuilder.createConnection());
 
             // connect phosphorus atoms
             if (residueNumberOld == 0) {
@@ -103,9 +103,9 @@ public class Rna3DViewerModel {
                 oldPhosphorusCoords = phosphorusCoordinates;
             } else {
                 if (residueNumberOld - listEntry.getKey() == -1) {
-                    moleculeConnectionBuilder.setInitPoint(phosphorusCoordinates);
-                    moleculeConnectionBuilder.setEndPoint(oldPhosphorusCoords);
-                    connectionList.add(moleculeConnectionBuilder.createConnection());
+                    molecule3DConnectionBuilder.setInitPoint(phosphorusCoordinates);
+                    molecule3DConnectionBuilder.setEndPoint(oldPhosphorusCoords);
+                    connectionList.add(molecule3DConnectionBuilder.createConnection());
                 }
                 residueNumberOld = listEntry.getKey();
                 oldPhosphorusCoords = phosphorusCoordinates;
@@ -114,12 +114,12 @@ public class Rna3DViewerModel {
         }
         // connect purine with pyrimidine if distance of molecules is within 10 Ângström range
         // FIXME no knew object generating?!
-        // moleculeConnectionBuilder = new MoleculeConnectionBuilder(0.1);
-        // moleculeConnectionBuilder.setColor(Color.BLUE);
-        connectBasePairs(moleculeConnectionBuilder, residueCentreList);
+        // molecule3DConnectionBuilder = new Molecule3DConnectionBuilder(0.1);
+        // molecule3DConnectionBuilder.setColor(Color.BLUE);
+        connectBasePairs(molecule3DConnectionBuilder, residueCentreList);
     }
 
-    private void connectBasePairs(MoleculeConnectionBuilder moleculeConnectionBuilder, List<ResidueCentre> residueCentreList) {
+    private void connectBasePairs(Molecule3DConnectionBuilder molecule3DConnectionBuilder, List<ResidueCentre> residueCentreList) {
         for (int i = 0; i < residueCentreList.size(); i++) {
             for (int j = 0; j < residueCentreList.size(); j++) {
                 if (i == j) {
@@ -135,22 +135,22 @@ public class Rna3DViewerModel {
                     switch (base1) {
                         case "U":
                             if (base2.equals("A")) {
-                                basePairRange(moleculeConnectionBuilder, res1, res2);
+                                basePairRange(molecule3DConnectionBuilder, res1, res2);
                             }
                             break;
                         case "C":
                             if (base2.equals("G")) {
-                                basePairRange(moleculeConnectionBuilder, res1, res2);
+                                basePairRange(molecule3DConnectionBuilder, res1, res2);
                             }
                             break;
                         case "A":
                             if (base2.equals("U")) {
-                                basePairRange(moleculeConnectionBuilder, res1, res2);
+                                basePairRange(molecule3DConnectionBuilder, res1, res2);
                             }
                             break;
                         case "G":
                             if (base2.equals("C")) {
-                                basePairRange(moleculeConnectionBuilder, res1, res2);
+                                basePairRange(molecule3DConnectionBuilder, res1, res2);
                             }
                             break;
                         default:
@@ -161,14 +161,14 @@ public class Rna3DViewerModel {
         }
     }
 
-    private void basePairRange(MoleculeConnectionBuilder moleculeConnectionBuilder, ResidueCentre res1, ResidueCentre res2) {
+    private void basePairRange(Molecule3DConnectionBuilder molecule3DConnectionBuilder, ResidueCentre res1, ResidueCentre res2) {
         Double dist = res1.getCentre().distance(res2.getCentre());
         // we are within the required range
         // TODO take angle into account
         if (dist <= 5) {
-            moleculeConnectionBuilder.setInitPoint(res1.getCentre());
-            moleculeConnectionBuilder.setEndPoint(res2.getCentre());
-            connectionList.add(moleculeConnectionBuilder.createConnection());
+            molecule3DConnectionBuilder.setInitPoint(res1.getCentre());
+            molecule3DConnectionBuilder.setEndPoint(res2.getCentre());
+            connectionList.add(molecule3DConnectionBuilder.createConnection());
         }
     }
 

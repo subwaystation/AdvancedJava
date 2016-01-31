@@ -8,7 +8,7 @@ import javafx.scene.shape.TriangleMesh;
 /**
  * Created by heumos on 14.12.15.
  */
-public class SugarMoleculeBuilder {
+public class Sugar3DStructureBuilder {
 
     // the coordinates
     private float[] coordinates;
@@ -37,7 +37,7 @@ public class SugarMoleculeBuilder {
             };
 
 
-    public SugarMoleculeBuilder() {
+    public Sugar3DStructureBuilder() {
 
     }
 

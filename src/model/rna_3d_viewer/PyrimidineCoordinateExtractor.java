@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by heumos on 05.01.16.
  */
-public class PyrimidinCoordinateExtractor {
+public class PyrimidineCoordinateExtractor {
 
     public final static Map<String, Integer> PYRIMIDIN_ATOMS = new HashMap<>();
     static {
@@ -21,7 +21,7 @@ public class PyrimidinCoordinateExtractor {
         PYRIMIDIN_ATOMS.put("C6", 15);
     }
 
-    public static float[] extractPyrimidinCoordinates(List<PdbAtom> pdbAtomList) {
+    public static float[] extractPyrimidineCoordinates(List<PdbAtom> pdbAtomList) {
         HashMap<String, float[]> coordinatesMap = new HashMap<>();
         for (PdbAtom atom : pdbAtomList) {
             String atomName = atom.getAtomName();
@@ -33,6 +33,16 @@ public class PyrimidinCoordinateExtractor {
         for (Map.Entry<String, float[]> entry: coordinatesMap.entrySet()) {
             String key = entry.getKey();
             System.arraycopy(entry.getValue(), 0, coordinates, PYRIMIDIN_ATOMS.get(key), 3);
+        }
+        return coordinates;
+    }
+
+    public static float[] extractPyrimidineCoordinates(Map<String, float[]> atomNameCoordinatesMap) {
+        float[] coordinates = new float[18];
+        for (Map.Entry<String, Integer> entry : PYRIMIDIN_ATOMS.entrySet()) {
+            String atomName = entry.getKey();
+            float[] atomCoords = atomNameCoordinatesMap.get(atomName);
+            System.arraycopy(atomCoords, 0, coordinates, PYRIMIDIN_ATOMS.get(atomName), 3);
         }
         return coordinates;
     }
