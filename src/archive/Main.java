@@ -1,7 +1,7 @@
 package archive;
 
 import io.PdbFileParser;
-import model.rna_3d_viewer.PdbAtom;
+import _rna_3d_viewer.model.PdbAtom;
 
 import java.io.IOException;
 import java.util.List;

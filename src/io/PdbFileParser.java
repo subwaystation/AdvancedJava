@@ -1,7 +1,7 @@
 package io;
 
-import model.rna_3d_viewer.PdbAtom;
-import model.rna_3d_viewer.PdbAtomRecordParser;
+import _rna_3d_viewer.model.PdbAtom;
+import _rna_3d_viewer.model.PdbAtomRecordParser;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
