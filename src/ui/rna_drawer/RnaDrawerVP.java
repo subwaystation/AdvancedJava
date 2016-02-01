@@ -12,7 +12,7 @@ import javafx.scene.shape.Line;
 import javafx.util.Pair;
 import lib.sec_struct.Nussinov;
 import model.RnaDrawerModel;
-import seq.sequence.RnaSequence;
+import _rna_3d_viewer.seq.sequence.RnaSequence;
 import util.ArrayUtils;
 
 import java.io.IOException;

@@ -15,11 +15,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import lib.StringFormatter;
 import model.DnaManipulatorModel;
-import seq.nucleotide.ANucleotide;
-import seq.sequence.ASequence;
-import seq.sequence.DnaSequence;
-import seq.sequence.RnaSequence;
-import seq.sequence.SeqUtils;
+import _rna_3d_viewer.seq.nucleotide.ANucleotide;
+import _rna_3d_viewer.seq.sequence.ASequence;
+import _rna_3d_viewer.seq.sequence.DnaSequence;
+import _rna_3d_viewer.seq.sequence.RnaSequence;
+import _rna_3d_viewer.seq.sequence.SeqUtils;
 
 import java.util.List;
 

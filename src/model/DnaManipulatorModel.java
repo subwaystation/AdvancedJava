@@ -1,7 +1,7 @@
 package model;
 
-import seq.nucleotide.ANucleotide;
-import seq.sequence.DnaSequence;
+import _rna_3d_viewer.seq.nucleotide.ANucleotide;
+import _rna_3d_viewer.seq.sequence.DnaSequence;
 
 import java.util.ArrayList;
 

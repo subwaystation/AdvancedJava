@@ -1,7 +1,8 @@
 package _rna_3d_viewer.model;
 
+import _rna_3d_viewer.seq.nucleotide.RnaNucleotide;
 import javafx.geometry.Point3D;
-import seq.nucleotide.ANucleotide;
+import _rna_3d_viewer.seq.nucleotide.ANucleotide;
 
 import java.util.*;
 
@@ -116,8 +117,9 @@ public class Residue {
         return this.getAtomCoords("P");
     }
 
-    public ANucleotide getNucleotide() {
-        // TODO
-        return null;
+    public RnaNucleotide getNucleotide() {
+        RnaNucleotide rnaNucleotide = new RnaNucleotide(this.getResidueType().charAt(0));
+        rnaNucleotide.setResidueIndex(this.getResidueIndex());
+        return rnaNucleotide;
     }
 }

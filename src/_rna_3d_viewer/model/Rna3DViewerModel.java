@@ -98,8 +98,8 @@ public class Rna3DViewerModel {
             } else {
                 if (residueNumberOld - residue.getResidueIndex() == -1) {
                     if (phosphorusCoordinates != null &&
-                            (phosphorusCoordinates[0] == 0.0 && phosphorusCoordinates[1] == 0.0 &&
-                                    phosphorusCoordinates[2] == 0.0)) {
+                            (!(phosphorusCoordinates[0] == 0.0) && !(phosphorusCoordinates[1] == 0.0) &&
+                                    !(phosphorusCoordinates[2] == 0.0))) {
                         molecule3DConnectionBuilder.setInitPoint(phosphorusCoordinates);
                         molecule3DConnectionBuilder.setEndPoint(oldPhosphorusCoords);
                         this.phosphorusConnections.add(molecule3DConnectionBuilder.createConnection());

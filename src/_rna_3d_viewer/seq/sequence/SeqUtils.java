@@ -1,7 +1,7 @@
-package seq.sequence;
+package _rna_3d_viewer.seq.sequence;
 
-import seq.nucleotide.DnaNucleotide;
-import seq.nucleotide.RnaNucleotide;
+import _rna_3d_viewer.seq.nucleotide.DnaNucleotide;
+import _rna_3d_viewer.seq.nucleotide.RnaNucleotide;
 
 /**
  * Created by heumos on 12.11.15.

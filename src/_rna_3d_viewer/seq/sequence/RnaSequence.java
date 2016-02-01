@@ -1,8 +1,8 @@
-package seq.sequence;
+package _rna_3d_viewer.seq.sequence;
 
-import seq.nucleotide.ANucleotide;
-import seq.nucleotide.DnaNucleotide;
-import seq.nucleotide.RnaNucleotide;
+import _rna_3d_viewer.seq.nucleotide.ANucleotide;
+import _rna_3d_viewer.seq.nucleotide.DnaNucleotide;
+import _rna_3d_viewer.seq.nucleotide.RnaNucleotide;
 
 import java.util.ArrayList;
 import java.util.List;

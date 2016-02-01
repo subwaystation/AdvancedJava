@@ -1,9 +1,9 @@
 package io;
 
-import seq.nucleotide.ANucleotide;
-import seq.sequence.ASequence;
-import seq.nucleotide.RnaNucleotide;
-import seq.sequence.RnaSequence;
+import _rna_3d_viewer.seq.nucleotide.ANucleotide;
+import _rna_3d_viewer.seq.sequence.ASequence;
+import _rna_3d_viewer.seq.nucleotide.RnaNucleotide;
+import _rna_3d_viewer.seq.sequence.RnaSequence;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

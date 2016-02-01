@@ -1,7 +1,7 @@
 package archive;
 
-import seq.nucleotide.ANucleotide;
-import seq.sequence.ASequence;
+import _rna_3d_viewer.seq.nucleotide.ANucleotide;
+import _rna_3d_viewer.seq.sequence.ASequence;
 
 import java.util.ArrayList;
 import java.util.List;

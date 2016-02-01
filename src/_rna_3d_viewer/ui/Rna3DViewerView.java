@@ -6,8 +6,10 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
 /**
@@ -25,7 +27,7 @@ public class Rna3DViewerView {
     private PerspectiveCamera perspectiveCamera;
 
     // the border pane as root
-    private BorderPane rootBP;
+    private StackPane rootBP;
 
     // the label at the bottom
     private Label label;
@@ -34,7 +36,9 @@ public class Rna3DViewerView {
     MenuItem openPDB;
 
     public Rna3DViewerView() {
-        this.rootBP = new BorderPane();
+        this.rootBP = new StackPane();
+
+        BorderPane borderPane = new BorderPane();
 
         this.rnaMoleculesG = new Group();
         this.scene = new Scene(this.rootBP, 1280, 640, true);
@@ -44,16 +48,15 @@ public class Rna3DViewerView {
         perspectiveCamera = new PerspectiveCamera(false);
         perspectiveCamera.setTranslateX(-scene.getWidth() / 2);
         perspectiveCamera.setTranslateY(-scene.getHeight() / 2);
-        perspectiveCamera.setTranslateZ(20);
+        perspectiveCamera.setTranslateZ(50);
         perspectiveCamera.setFarClip(10000);
         perspectiveCamera.setNearClip(0.001);
-        perspectiveCamera.setFieldOfView(40);
-        SubScene subScene = new SubScene(this.rnaMoleculesG, 300, 300, true, SceneAntialiasing.BALANCED);
+        perspectiveCamera.setFieldOfView(45);
+        SubScene subScene = new SubScene(this.rnaMoleculesG, 1280, 640, true, SceneAntialiasing.BALANCED);
         subScene.setFill(Color.WHITE);
         subScene.setCamera(this.perspectiveCamera);
-        subScene.heightProperty().bind(vBox.heightProperty());
-        subScene.widthProperty().bind(vBox.widthProperty());
-        vBox.getChildren().add(subScene);
+        subScene.heightProperty().bind(this.scene.heightProperty());
+        subScene.widthProperty().bind(this.scene.widthProperty());
 
         MenuBar menuBar = new MenuBar();
         // menu file
@@ -62,10 +65,19 @@ public class Rna3DViewerView {
         menuFile.getItems().add(openPDB);
         menuBar.getMenus().add(menuFile);
 
-        this.rootBP.setTop(menuBar);
+        borderPane.setTop(menuBar);
         this.label = new Label("No PDB file selected.");
-        this.rootBP.setCenter(vBox);
-        this.rootBP.setBottom(this.label);
+        borderPane.setBottom(this.label);
+
+        this.rootBP.getChildren().addAll(subScene, borderPane);
+
+        Rotate ry = new Rotate(0, Rotate.Y_AXIS);
+        Rotate rx = new Rotate(0, Rotate.X_AXIS);
+        Rotate rz = new Rotate(0, Rotate.Z_AXIS);
+
+        this.rnaMoleculesG.getTransforms().addAll(ry, rx, rz);
+        ry.setAngle(10);
+        rx.setAngle(10);
     }
 
 

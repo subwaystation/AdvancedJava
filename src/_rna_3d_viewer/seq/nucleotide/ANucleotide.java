@@ -1,4 +1,4 @@
-package seq.nucleotide;
+package _rna_3d_viewer.seq.nucleotide;
 
 /**
  * Created by heumos on 14.10.15.
@@ -10,6 +10,9 @@ public abstract class ANucleotide {
 
     // the nucleotide given as a base
     private char base;
+
+    // the residue index
+    private  int residueIndex;
 
     /**
      * A nucleotide consists of one base.
@@ -65,4 +68,12 @@ public abstract class ANucleotide {
     }
 
     public abstract ANucleotide complementary();
+
+    public int getResidueIndex() {
+        return this.residueIndex;
+    }
+
+    public void setResidueIndex(int residueIndex) {
+        this.residueIndex = residueIndex;
+    }
 }

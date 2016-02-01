@@ -1,49 +1,49 @@
-package seq.nucleotide;
+package _rna_3d_viewer.seq.nucleotide;
 
-import lib.DnaNucleotideException;
+import lib.RnaNucleotideException;
 
 /**
- * Created by heumos on 29.10.15.
+ * Created by heumos on 14.10.15.
  *
  * Java class representing an RNA nucleotide.
  *
  */
-public class DnaNucleotide extends ANucleotide {
+public class RnaNucleotide extends ANucleotide {
 
-    // allowed DNA nucleotides
-    public static final String ALLOWED_DNA_NUCLEOTIDES = "actg-ACTG";
+    // allowed RNA nucleotides
+    public static final String ALLOWED_RNA_NUCLEOTIDES = "acug-ACUG";
 
     /**
      * A nucleotide consists of one base.
      * @param base the nucleotide given as a char.
      */
-    public DnaNucleotide(char base) {
+    public RnaNucleotide(char base) {
         super(base);
     }
 
     @Override
     public boolean validateNucleotide(char base) {
-        return ALLOWED_DNA_NUCLEOTIDES.contains(String.valueOf(base));
+        return ALLOWED_RNA_NUCLEOTIDES.contains(String.valueOf(base));
     }
 
     @Override
     public void throwIllegalNucleotideException(char base) {
         try {
-            throw  new DnaNucleotideException("ERROR: Illegal character for DnaNucleotide: "
+            throw  new RnaNucleotideException("ERROR: Illegal character for RnaNucleotide: "
                     + String.valueOf(base));
-        } catch (DnaNucleotideException e) {
+        } catch (RnaNucleotideException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public DnaNucleotide complementary() {
+    public RnaNucleotide complementary() {
         switch (this.getBase()) {
             case 'a':
-                this.setBase('t');
+                this.setBase('u');
                 break;
             case 'A':
-                this.setBase('T');
+                this.setBase('U');
                 break;
             case 'c':
                 this.setBase('g');
@@ -51,10 +51,10 @@ public class DnaNucleotide extends ANucleotide {
             case 'C':
                 this.setBase('G');
                 break;
-            case 't':
+            case 'u':
                 this.setBase('a');
                 break;
-            case 'T':
+            case 'U':
                 this.setBase('A');
                 break;
             case 'g':
