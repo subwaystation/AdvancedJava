@@ -1,5 +1,6 @@
-package _rna_3d_viewer.model;
+package _rna_3d_viewer.model.structure_builder;
 
+import _rna_3d_viewer.model.structure_builder.Nucleotide3DStructureBuilder;
 import javafx.scene.paint.Color;
 
 /**

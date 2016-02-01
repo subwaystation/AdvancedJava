@@ -1,4 +1,6 @@
-package _rna_3d_viewer.model;
+package _rna_3d_viewer.model.coordinate_extractor;
+
+import _rna_3d_viewer.io.PdbAtom;
 
 import java.util.List;
 

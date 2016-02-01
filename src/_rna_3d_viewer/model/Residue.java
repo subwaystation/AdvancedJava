@@ -1,8 +1,12 @@
 package _rna_3d_viewer.model;
 
+import _rna_3d_viewer.io.PdbAtom;
+import _rna_3d_viewer.model.coordinate_extractor.CovalentBondCoordinateExtractor;
+import _rna_3d_viewer.model.coordinate_extractor.PurineCoordinateExtractor;
+import _rna_3d_viewer.model.coordinate_extractor.PyrimidineCoordinateExtractor;
+import _rna_3d_viewer.model.coordinate_extractor.SugarCoordinateExtractor;
 import _rna_3d_viewer.seq.nucleotide.RnaNucleotide;
 import javafx.geometry.Point3D;
-import _rna_3d_viewer.seq.nucleotide.ANucleotide;
 
 import java.util.*;
 

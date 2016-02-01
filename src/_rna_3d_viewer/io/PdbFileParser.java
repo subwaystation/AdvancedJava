@@ -1,7 +1,5 @@
 package _rna_3d_viewer.io;
 
-import _rna_3d_viewer.model.PdbAtom;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

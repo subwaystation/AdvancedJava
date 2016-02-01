@@ -1,4 +1,4 @@
-package _rna_3d_viewer.model;
+package _rna_3d_viewer.model.structure_builder;
 
 import javafx.geometry.Point3D;
 import javafx.scene.paint.Color;

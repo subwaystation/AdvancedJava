@@ -1,4 +1,4 @@
-package _rna_3d_viewer.model;
+package _rna_3d_viewer.io;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package _rna_3d_viewer.model;
+package _rna_3d_viewer.model.structure_builder;
 
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;

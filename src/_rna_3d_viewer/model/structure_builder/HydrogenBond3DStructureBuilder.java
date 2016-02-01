@@ -1,5 +1,6 @@
-package _rna_3d_viewer.model;
+package _rna_3d_viewer.model.structure_builder;
 
+import _rna_3d_viewer.model.Residue;
 import javafx.geometry.Point3D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Cylinder;

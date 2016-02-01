@@ -1,5 +1,6 @@
-package _rna_3d_viewer.model;
+package _rna_3d_viewer.model.structure_builder;
 
+import _rna_3d_viewer.model.Residue;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.MeshView;
 import javafx.scene.shape.Sphere;

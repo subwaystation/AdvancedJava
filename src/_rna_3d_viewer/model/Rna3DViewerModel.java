@@ -1,6 +1,10 @@
 package _rna_3d_viewer.model;
 
+import _rna_3d_viewer.io.PdbAtom;
 import _rna_3d_viewer.io.PdbFileParser;
+import _rna_3d_viewer.model.structure_builder.HydrogenBond3DStructureBuilder;
+import _rna_3d_viewer.model.structure_builder.Molecule3DConnectionBuilder;
+import _rna_3d_viewer.model.structure_builder.Residue3DStructureBuilder;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.MeshView;
 import javafx.scene.shape.Sphere;
@@ -57,7 +61,6 @@ public class Rna3DViewerModel {
 
         Integer residueNumberOld = 0;
         float[] oldPhosphorusCoords = new float[0];
-        List<ResidueCentre> residueCentreList = new ArrayList<>();
 
         for (Residue residue : this.residues) {
             residue3DStructureBuilder.setResidue(residue);
