@@ -1,5 +1,6 @@
 package _rna_3d_viewer.model;
 
+import _rna_3d_viewer.PseudoknotUtils;
 import _rna_3d_viewer.io.PdbAtom;
 import _rna_3d_viewer.io.PdbFileParser;
 import _rna_3d_viewer.model.structure_builder.HydrogenBond3DStructureBuilder;
@@ -8,6 +9,7 @@ import _rna_3d_viewer.model.structure_builder.Residue3DStructureBuilder;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.MeshView;
 import javafx.scene.shape.Sphere;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.util.*;
@@ -41,11 +43,19 @@ public class Rna3DViewerModel {
     // the resulting list of hydrogen bonds
     private List<Cylinder> hydrogenBonds = new ArrayList<>();
 
+    // the list of nucleotide pairs that pair together in the secondary structure
+    private List<Pair<Integer, Integer>> nucleotidePairs = new ArrayList<>();
+
+    private StringBuilder sequenceBuilder = new StringBuilder();
+
+    private StringBuilder dotBracketNotationBuilder = new StringBuilder();
+
     public Rna3DViewerModel() throws IOException {
 
     }
 
     public void parsePDB(String pdbFile) throws IOException {
+        this.residues.clear();
         this.pdbFile = pdbFile;
         PdbFileParser pdbFileParser = new PdbFileParser(this.pdbFile);
         buildResidueList(pdbFileParser);
@@ -55,6 +65,11 @@ public class Rna3DViewerModel {
         this.meshViewList.clear();
         this.sugarConnectionList.clear();
         this.phosphorusList.clear();
+        this.getPhosphorusConnections().clear();
+        this.hydrogenBonds.clear();
+        this.nucleotidePairs.clear();
+        this.sequenceBuilder.setLength(0);
+        this.dotBracketNotationBuilder.setLength(0);
 
         Residue3DStructureBuilder residue3DStructureBuilder = new Residue3DStructureBuilder();
         Molecule3DConnectionBuilder molecule3DConnectionBuilder = new Molecule3DConnectionBuilder(0.1);
@@ -122,6 +137,7 @@ public class Rna3DViewerModel {
         HydrogenBond3DStructureBuilder hydrogenBond3DStructureBuilder = new HydrogenBond3DStructureBuilder();
         for (int i = 0; i < this.residues.size(); i++) {
             Residue res1 = this.residues.get(i);
+            this.sequenceBuilder.append(res1.getResidueType().charAt(0));
             if (encounteredResidues.contains(res1.getResidueIndex())) {
                 continue;
             }
@@ -153,6 +169,7 @@ public class Rna3DViewerModel {
                                 this.hydrogenBonds.addAll(hydrogenBond3DStructureBuilder.getHydrogenBonds3DStructure());
                                 encounteredResidues.add(res1.getResidueIndex());
                                 encounteredResidues.add(res2.getResidueIndex());
+                                this.nucleotidePairs.add(new Pair<>(i + 1, j + 1));
                             }
                         }
                         break;
@@ -165,6 +182,7 @@ public class Rna3DViewerModel {
                                 this.hydrogenBonds.addAll(hydrogenBond3DStructureBuilder.getHydrogenBonds3DStructure());
                                 encounteredResidues.add(res1.getResidueIndex());
                                 encounteredResidues.add(res2.getResidueIndex());
+                                this.nucleotidePairs.add(new Pair<>(i + 1, j + 1));
                             }
                         }
                         break;
@@ -177,6 +195,7 @@ public class Rna3DViewerModel {
                                 this.hydrogenBonds.addAll(hydrogenBond3DStructureBuilder.getHydrogenBonds3DStructure());
                                 encounteredResidues.add(res1.getResidueIndex());
                                 encounteredResidues.add(res2.getResidueIndex());
+                                this.nucleotidePairs.add(new Pair<>(i + 1, j + 1));
                             }
                         }
                         break;
@@ -189,6 +208,7 @@ public class Rna3DViewerModel {
                                 this.hydrogenBonds.addAll(hydrogenBond3DStructureBuilder.getHydrogenBonds3DStructure());
                                 encounteredResidues.add(res1.getResidueIndex());
                                 encounteredResidues.add(res2.getResidueIndex());
+                                this.nucleotidePairs.add(new Pair<>(i + 1, j + 1));
                             }
                         }
                         break;
@@ -198,7 +218,34 @@ public class Rna3DViewerModel {
             }
 
         }
+        buildSecondaryStructure();
+    }
 
+    private void buildSecondaryStructure() {
+        HashSet<Pair<Integer, Integer>> adjustedNucleotidePairs =
+                new HashSet<>(PseudoknotUtils.adjustPseudoknots(new ArrayList<>(this.nucleotidePairs)));
+
+        for (int i = 0; i < this.residues.size(); i++) {
+            dotBracketNotationBuilder.append(".");
+        }
+
+        // add nucleotide pairs
+        for(Pair<Integer, Integer> entry : adjustedNucleotidePairs){
+            dotBracketNotationBuilder.setCharAt(entry.getKey() - 1, '(');
+            dotBracketNotationBuilder.setCharAt(entry.getValue() - 1, ')');
+        }
+
+        HashSet<Pair> pseudoKnots = new HashSet<>(this.nucleotidePairs);
+        pseudoKnots.removeAll(adjustedNucleotidePairs);
+
+        // add adjusted pseudoknots
+        for(Pair<Integer, Integer> entry : pseudoKnots){
+            dotBracketNotationBuilder.setCharAt(entry.getKey() - 1, '[');
+            dotBracketNotationBuilder.setCharAt(entry.getValue() - 1, ']');
+        }
+        // FIXME
+        System.out.println(this.sequenceBuilder.toString());
+        System.out.println(this.dotBracketNotationBuilder.toString());
     }
 
     public List<Cylinder> getSugarConnectionList() {
