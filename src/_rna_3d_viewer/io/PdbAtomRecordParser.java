@@ -1,4 +1,6 @@
-package _rna_3d_viewer.model;
+package _rna_3d_viewer.io;
+
+import _rna_3d_viewer.model.PdbAtom;
 
 /**
  * Created by heumos on 14.12.15.

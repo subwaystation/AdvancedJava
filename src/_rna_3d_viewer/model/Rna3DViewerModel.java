@@ -1,6 +1,6 @@
 package _rna_3d_viewer.model;
 
-import io.PdbFileParser;
+import _rna_3d_viewer.io.PdbFileParser;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.MeshView;
 import javafx.scene.shape.Sphere;
@@ -19,10 +19,6 @@ public class Rna3DViewerModel {
 
     // the path to the PDB file
     private String pdbFile;
-
-    // the list of atoms stored in a HashMap!
-    // TODO delete
-    // private HashMap<Integer, List<PdbAtom>> atomHashMap = new HashMap<>();
 
     private List<Residue> residues = new ArrayList<>();
 
@@ -101,7 +97,9 @@ public class Rna3DViewerModel {
                 oldPhosphorusCoords = phosphorusCoordinates;
             } else {
                 if (residueNumberOld - residue.getResidueIndex() == -1) {
-                    if (phosphorusCoordinates != null) {
+                    if (phosphorusCoordinates != null &&
+                            (phosphorusCoordinates[0] == 0.0 && phosphorusCoordinates[1] == 0.0 &&
+                                    phosphorusCoordinates[2] == 0.0)) {
                         molecule3DConnectionBuilder.setInitPoint(phosphorusCoordinates);
                         molecule3DConnectionBuilder.setEndPoint(oldPhosphorusCoords);
                         this.phosphorusConnections.add(molecule3DConnectionBuilder.createConnection());
@@ -117,39 +115,78 @@ public class Rna3DViewerModel {
     }
 
     private void buildHydrogenBonds() {
-        Set<Residue> encounteredResidues = new HashSet<>();
+        Set<Integer> encounteredResidues = new HashSet<>();
         HydrogenBond3DStructureBuilder hydrogenBond3DStructureBuilder = new HydrogenBond3DStructureBuilder();
         for (int i = 0; i < this.residues.size(); i++) {
+            Residue res1 = this.residues.get(i);
+            if (encounteredResidues.contains(res1.getResidueIndex())) {
+                continue;
+            }
             for (int j = 0; j < this.residues.size(); j++) {
                 if (i == j) {
                     continue;
                 }
+                Residue res2 = this.residues.get(j);
 
-                String nucleotide1 = this.residues.get(i).getResidueType();
-                String nucleotide2 = this.residues.get(j).getResidueType();
+                if (encounteredResidues.contains(res2.getResidueIndex())) {
+                    continue;
+                }
+                if (encounteredResidues.contains(res1.getResidueIndex())) {
+                    continue;
+                }
+                if (res1.getResidueIndex() - res2.getResidueIndex() == 1) {
+                    continue;
+                }
+
+                String nucleotide1 = res1.getResidueType();
+                String nucleotide2 = res2.getResidueType();
                 switch (nucleotide1) {
                     case "U":
                     case "URA":
                         if (nucleotide2.startsWith("A")) {
-                            // TODO
+                            hydrogenBond3DStructureBuilder.setResidue1(res2);
+                            hydrogenBond3DStructureBuilder.setResidue2(res1);
+                            if (hydrogenBond3DStructureBuilder.buildAdeUraHydrogenBond()) {
+                                this.hydrogenBonds.addAll(hydrogenBond3DStructureBuilder.getHydrogenBonds3DStructure());
+                                encounteredResidues.add(res1.getResidueIndex());
+                                encounteredResidues.add(res2.getResidueIndex());
+                            }
                         }
                         break;
                     case "A":
                     case "ADE":
                         if (nucleotide2.startsWith("U")) {
-                            // TODO
+                            hydrogenBond3DStructureBuilder.setResidue2(res2);
+                            hydrogenBond3DStructureBuilder.setResidue1(res1);
+                            if (hydrogenBond3DStructureBuilder.buildAdeUraHydrogenBond()) {
+                                this.hydrogenBonds.addAll(hydrogenBond3DStructureBuilder.getHydrogenBonds3DStructure());
+                                encounteredResidues.add(res1.getResidueIndex());
+                                encounteredResidues.add(res2.getResidueIndex());
+                            }
                         }
                         break;
                     case "G":
                     case "GUA":
                         if (nucleotide2.startsWith("C")) {
-                            // TODO
+                            hydrogenBond3DStructureBuilder.setResidue1(res1);
+                            hydrogenBond3DStructureBuilder.setResidue2(res2);
+                            if (hydrogenBond3DStructureBuilder.buildGuaCytHydrogenBond()) {
+                                this.hydrogenBonds.addAll(hydrogenBond3DStructureBuilder.getHydrogenBonds3DStructure());
+                                encounteredResidues.add(res1.getResidueIndex());
+                                encounteredResidues.add(res2.getResidueIndex());
+                            }
                         }
                         break;
                     case "C":
                     case "CYT":
                         if (nucleotide2.startsWith("G")) {
-                            // TODO
+                            hydrogenBond3DStructureBuilder.setResidue1(res2);
+                            hydrogenBond3DStructureBuilder.setResidue2(res1);
+                            if (hydrogenBond3DStructureBuilder.buildGuaCytHydrogenBond()) {
+                                this.hydrogenBonds.addAll(hydrogenBond3DStructureBuilder.getHydrogenBonds3DStructure());
+                                encounteredResidues.add(res1.getResidueIndex());
+                                encounteredResidues.add(res2.getResidueIndex());
+                            }
                         }
                         break;
                     default:
@@ -159,78 +196,6 @@ public class Rna3DViewerModel {
 
         }
 
-    }
-/*
-    private void connectBasePairs(Molecule3DConnectionBuilder molecule3DConnectionBuilder, List<ResidueCentre> residueCentreList) {
-        for (int i = 0; i < residueCentreList.size(); i++) {
-            for (int j = 0; j < residueCentreList.size(); j++) {
-                if (i == j) {
-                    continue;
-                } else {
-                    ResidueCentre res1 = residueCentreList.get(i);
-                    Integer res1Number = res1.getResidueNumber();
-                    String base1 = this.atomHashMap.get(res1Number).get(0).getResidueType();
-                    ResidueCentre res2 = residueCentreList.get(j);
-                    Integer res2Number =res2.getResidueNumber();
-                    String base2 = this.atomHashMap.get(res2Number).get(0).getResidueType();
-                    // TODO cases ADE/GUA/CYT/URA
-                    switch (base1) {
-                        case "U":
-                            if (base2.equals("A")) {
-                                basePairRange(molecule3DConnectionBuilder, res1, res2);
-                            }
-                            break;
-                        case "C":
-                            if (base2.equals("G")) {
-                                basePairRange(molecule3DConnectionBuilder, res1, res2);
-                            }
-                            break;
-                        case "A":
-                            if (base2.equals("U")) {
-                                basePairRange(molecule3DConnectionBuilder, res1, res2);
-                            }
-                            break;
-                        case "G":
-                            if (base2.equals("C")) {
-                                basePairRange(molecule3DConnectionBuilder, res1, res2);
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-        }
-    }*/
-
-    private void basePairRange(Molecule3DConnectionBuilder molecule3DConnectionBuilder, ResidueCentre res1, ResidueCentre res2) {
-        Double dist = res1.getCentre().distance(res2.getCentre());
-        // we are within the required range
-        // TODO take angle into account
-        if (dist <= 5) {
-            molecule3DConnectionBuilder.setInitPoint(res1.getCentre());
-            molecule3DConnectionBuilder.setEndPoint(res2.getCentre());
-            sugarConnectionList.add(molecule3DConnectionBuilder.createConnection());
-        }
-    }
-
-    private float[] buildPhosphorusSugarCoords(float[] c4DashCoordinates, float[] phosphorusCoordinates) {
-        float[] coords = new float[6];
-        coords[0] = c4DashCoordinates[0];
-        coords[1] = c4DashCoordinates[1];
-        coords[2] = c4DashCoordinates[2];
-        coords[3] = phosphorusCoordinates[0];
-        coords[4] = phosphorusCoordinates[1];
-        coords[5] = phosphorusCoordinates[2];
-        return coords;
-    }
-
-    private float[] extractC4Coodinates(float[] sugarCoordinates) {
-        float[] c4DashCoordinates = new float[3];
-        c4DashCoordinates[0] = sugarCoordinates[9];
-        c4DashCoordinates[1] = sugarCoordinates[10];
-        c4DashCoordinates[2] = sugarCoordinates[11];
-        return c4DashCoordinates;
     }
 
     public List<Cylinder> getSugarConnectionList() {

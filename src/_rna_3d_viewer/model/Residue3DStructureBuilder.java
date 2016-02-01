@@ -61,7 +61,9 @@ public class Residue3DStructureBuilder {
     }
 
     public Cylinder buildSugarPhosphorusConnection3DStructure() {
-        if (this.residue.getPhosphorusCoords() == null) {
+        float[] phosphorusCoordinates = this.residue.getPhosphorusCoords();
+        if (this.residue.getPhosphorusCoords() == null ||
+                (phosphorusCoordinates[0] == 0.0 && phosphorusCoordinates[1] == 0.0 && phosphorusCoordinates[2] == 0.0)) {
             return null;
         } else {
             this.molecule3DConnectionBuilder.setEndPoint(this.residue.getPhosphorusCoords());

@@ -1,7 +1,6 @@
-package io;
+package _rna_3d_viewer.io;
 
 import _rna_3d_viewer.model.PdbAtom;
-import _rna_3d_viewer.model.PdbAtomRecordParser;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -26,7 +25,7 @@ public class PdbFileParser {
         PdbAtomRecordParser pdbAtomRecordParser = new PdbAtomRecordParser(line);
         List<PdbAtom> pdbAtoms = new ArrayList<>();
         while((line = pdbReader.readLine()) != null) {
-            if (line.startsWith("ATOM")) {
+            if (line.startsWith("ATOM") && !line.isEmpty()) {
                 pdbAtomRecordParser.setAtomLine(line);
                 pdbAtoms.add(pdbAtomRecordParser.parseAtomRecord());
             }

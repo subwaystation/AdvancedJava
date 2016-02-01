@@ -74,6 +74,11 @@ public class Molecule3DConnectionBuilder {
         setEndPoint(new Point3D(atoms[3], atoms[4], atoms[5]));
     }
 
+    public void setPoints(Point3D point1, Point3D point2) {
+        setInitPoint(point1);
+        setEndPoint(point2);
+    }
+
     public Cylinder createConnection() {
         if(this.initPoint != null && this.endPoint != null){
             Point3D yAxis = new Point3D(0, 1, 0);
