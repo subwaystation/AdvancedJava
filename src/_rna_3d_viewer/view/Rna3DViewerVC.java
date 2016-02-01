@@ -1,4 +1,4 @@
-package _rna_3d_viewer.ui;
+package _rna_3d_viewer.view;
 
 import javafx.stage.Stage;
 import _rna_3d_viewer.model.Rna3DViewerModel;

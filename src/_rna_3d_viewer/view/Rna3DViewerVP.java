@@ -1,4 +1,4 @@
-package _rna_3d_viewer.ui;
+package _rna_3d_viewer.view;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

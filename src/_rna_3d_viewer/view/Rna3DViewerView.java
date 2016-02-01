@@ -1,4 +1,4 @@
-package _rna_3d_viewer.ui;
+package _rna_3d_viewer.view;
 
 import javafx.scene.*;
 import javafx.scene.control.Label;
@@ -68,6 +68,7 @@ public class Rna3DViewerView {
         borderPane.setTop(menuBar);
         this.label = new Label("No PDB file selected.");
         borderPane.setBottom(this.label);
+        borderPane.setPickOnBounds(false);
 
         this.rootBP.getChildren().addAll(subScene, borderPane);
 

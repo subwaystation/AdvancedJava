@@ -54,7 +54,7 @@ public class HydrogenBond3DStructureBuilder {
         this.hydrogenBonds3DStructure.clear();
         // adenine coordinates
         Point3D n6points = residue1.getAtomPoint3D("N6");
-        Point3D h6points = residue1.getAtomPoint3D("H62");
+        Point3D h6points = residue1.getAtomPoint3D("H61");
         Point3D n1points = residue1.getAtomPoint3D("N1");
 
         // uracil coordinates
@@ -92,13 +92,13 @@ public class HydrogenBond3DStructureBuilder {
 
     public boolean buildGuaCytHydrogenBond() {
         this.hydrogenBonds3DStructure.clear();
-        // guanine coordinates
+        // cytosine coordinates
         Point3D n4points = residue2.getAtomPoint3D("N4");
         Point3D h4points = residue2.getAtomPoint3D("H41");
         Point3D n3points = residue2.getAtomPoint3D("N3");
         Point3D o2points = residue2.getAtomPoint3D("O2");
 
-        // cytosine coordinates
+        // guanine coordinates
         Point3D o6points = residue1.getAtomPoint3D("O6");
         Point3D n1points = residue1.getAtomPoint3D("N1");
         Point3D h1points = residue1.getAtomPoint3D("H1");
@@ -138,11 +138,11 @@ public class HydrogenBond3DStructureBuilder {
     }
 
     private boolean isRightDist(double dist) {
-        return (dist <= 6.0 && dist >= 1.5);
+        return (dist <= 3.0f && dist >= 1.5f);
     }
 
     private boolean isRightAngle(double angle) {
-        return (angle <= 160.0 && angle >= 130.0);
+        return (angle <= 180.0f && angle >= 150.0);
     }
 
     public List<Cylinder> getHydrogenBonds3DStructure() {

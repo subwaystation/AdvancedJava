@@ -3,7 +3,7 @@ package _rna_3d_viewer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import _rna_3d_viewer.model.Rna3DViewerModel;
-import _rna_3d_viewer.ui.Rna3DViewerVC;
+import _rna_3d_viewer.view.Rna3DViewerVC;
 
 /**
  * Created by heumos on 14.12.15.
