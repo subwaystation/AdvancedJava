@@ -1,6 +1,9 @@
 package _rna_3d_viewer.model.structure_builder;
 
 import _rna_3d_viewer.model.Residue;
+import _rna_3d_viewer.model.structure.Nucleotide3DStructure;
+import _rna_3d_viewer.model.structure.Purine3DStructure;
+import _rna_3d_viewer.model.structure.Pyrimidine3DStructure;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.MeshView;
 import javafx.scene.shape.Sphere;
@@ -34,15 +37,33 @@ public class Residue3DStructureBuilder {
         this.residue = residue;
     }
 
-    public MeshView buildNucleotide3DStructure() {
+    public Nucleotide3DStructure buildNucleotide3DStructure() {
+        MeshView meshView;
         if (this.residue.isPurine()) {
             this.purine3DStructureBuilder.setCoordinates(this.residue.getNucleotideCoordinates());
-            return this.purine3DStructureBuilder.
+            meshView = this.purine3DStructureBuilder.
                     generateMeshView(this.residue.getResidueType(), this.residue.getResidueIndex());
+            return new Purine3DStructure(meshView, this.residue.getResidueIndex(), this.residue.getResidueIndex());
         } else {
             this.pyrimidine3DStructureBuilder.setCoordinates(this.residue.getNucleotideCoordinates());
-            return this.pyrimidine3DStructureBuilder.
+            meshView = this.pyrimidine3DStructureBuilder.
                     generateMeshView(this.residue.getResidueType(), this.residue.getResidueIndex());
+            return new Pyrimidine3DStructure(meshView, this.residue.getResidueIndex(), this.residue.getResidueIndex());
+        }
+    }
+
+    public MeshView buildMeshNucleotide3DStructure() {
+        MeshView meshView;
+        if (this.residue.isPurine()) {
+            this.purine3DStructureBuilder.setCoordinates(this.residue.getNucleotideCoordinates());
+            meshView = this.purine3DStructureBuilder.
+                    generateMeshView(this.residue.getResidueType(), this.residue.getResidueIndex());
+            return meshView;
+        } else {
+            this.pyrimidine3DStructureBuilder.setCoordinates(this.residue.getNucleotideCoordinates());
+            meshView = this.pyrimidine3DStructureBuilder.
+                    generateMeshView(this.residue.getResidueType(), this.residue.getResidueIndex());
+            return meshView;
         }
     }
 

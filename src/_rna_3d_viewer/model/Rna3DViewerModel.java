@@ -3,12 +3,11 @@ package _rna_3d_viewer.model;
 import _rna_3d_viewer.PseudoknotUtils;
 import _rna_3d_viewer.io.PdbAtom;
 import _rna_3d_viewer.io.PdbFileParser;
+import _rna_3d_viewer.model.structure.Nucleotide3DStructures;
 import _rna_3d_viewer.model.structure_builder.HydrogenBond3DStructureBuilder;
 import _rna_3d_viewer.model.structure_builder.Molecule3DConnectionBuilder;
 import _rna_3d_viewer.model.structure_builder.Residue3DStructureBuilder;
-import javafx.scene.shape.Cylinder;
-import javafx.scene.shape.MeshView;
-import javafx.scene.shape.Sphere;
+import javafx.scene.shape.*;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -29,7 +28,10 @@ public class Rna3DViewerModel {
     private List<Residue> residues = new ArrayList<>();
 
     // the resulting list of meshes
-    private List<MeshView> meshViewList = new ArrayList<>();
+    private List<MeshView> meshStructures = new ArrayList<>();
+
+    // the resulting Nucleotide 3D Structures
+    private Nucleotide3DStructures nucleotide3DStructures = new Nucleotide3DStructures();
 
     // the resulting list of connections to/from the sugar molecule
     private List<Cylinder> sugarConnectionList = new ArrayList<>();
@@ -58,11 +60,12 @@ public class Rna3DViewerModel {
         this.residues.clear();
         this.pdbFile = pdbFile;
         PdbFileParser pdbFileParser = new PdbFileParser(this.pdbFile);
-        buildResidueList(pdbFileParser);
+        createResidueList(pdbFileParser);
     }
 
     public void build3DStructures() {
-        this.meshViewList.clear();
+        this.meshStructures.clear();
+        this.nucleotide3DStructures.clear();
         this.sugarConnectionList.clear();
         this.phosphorusList.clear();
         this.getPhosphorusConnections().clear();
@@ -81,10 +84,10 @@ public class Rna3DViewerModel {
             residue3DStructureBuilder.setResidue(residue);
 
             // build sugar molecule
-            this.meshViewList.add(residue3DStructureBuilder.buildSugar3DStructure());
+            this.meshStructures.add(residue3DStructureBuilder.buildSugar3DStructure());
 
             // build nucleotide
-            this.meshViewList.add(residue3DStructureBuilder.buildNucleotide3DStructure());
+            this.nucleotide3DStructures.addStructure(residue3DStructureBuilder.buildNucleotide3DStructure());
 
             // connect nucleotide with its sugar
             this.sugarConnectionList.add(residue3DStructureBuilder.buildNucleotideSugarConnection3DStructure());
@@ -260,7 +263,7 @@ public class Rna3DViewerModel {
         return phosphorusList;
     }
 
-    private void buildResidueList(PdbFileParser pdbFileParser) throws IOException {
+    private void createResidueList(PdbFileParser pdbFileParser) throws IOException {
         List<PdbAtom> atoms = pdbFileParser.parsePdb();
         // center all atom positions
         centerAtomPositions(atoms);
@@ -308,8 +311,8 @@ public class Rna3DViewerModel {
         }
     }
 
-    public List<MeshView> getMeshViewList() {
-        return meshViewList;
+    public List<MeshView> getMeshStructures() {
+        return meshStructures;
     }
 
     public double getMouseX() {
@@ -334,5 +337,9 @@ public class Rna3DViewerModel {
 
     public List<Cylinder> getHydrogenBonds() {
         return hydrogenBonds;
+    }
+
+    public Nucleotide3DStructures getNucleotide3DStructures() {
+        return this.nucleotide3DStructures;
     }
 }

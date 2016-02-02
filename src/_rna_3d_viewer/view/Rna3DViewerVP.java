@@ -1,9 +1,14 @@
 package _rna_3d_viewer.view;
 
+import _rna_3d_viewer.model.structure.Nucleotide3DStructure;
+import _rna_3d_viewer.model.SelectionModel;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
 import javafx.scene.transform.Rotate;
 import javafx.stage.FileChooser;
 
@@ -17,6 +22,8 @@ import java.io.IOException;
  * Created by heumos on 14.12.15.
  */
 public class Rna3DViewerVP {
+
+    private static int lastIndex = -1;
 
     protected static class HandleSceneWidth implements ChangeListener<Number> {
         private Rna3DViewerView rna3DViewerView;
@@ -103,11 +110,86 @@ public class Rna3DViewerVP {
             rna3DViewerModel.build3DStructures();
             rna3DViewerView.getRnaMoleculesG().getChildren().clear();
 
-            rna3DViewerView.getRnaMoleculesG().getChildren().addAll(rna3DViewerModel.getMeshViewList());
+            rna3DViewerView.getRnaMoleculesG().getChildren().addAll(rna3DViewerModel.getMeshStructures());
+            rna3DViewerView.getRnaMoleculesG().getChildren().addAll(rna3DViewerModel.getNucleotide3DStructures().getMeshList());
             rna3DViewerView.getRnaMoleculesG().getChildren().addAll(rna3DViewerModel.getSugarConnectionList());
             rna3DViewerView.getRnaMoleculesG().getChildren().addAll(rna3DViewerModel.getPhosphorusList());
             rna3DViewerView.getRnaMoleculesG().getChildren().addAll(rna3DViewerModel.getPhosphorusConnections());
             rna3DViewerView.getRnaMoleculesG().getChildren().addAll(rna3DViewerModel.getHydrogenBonds());
+
+            initSelectionModel(rna3DViewerModel);
         }
+    }
+
+    private static void initSelectionModel(Rna3DViewerModel rna3DViewerModel) {
+
+        Nucleotide3DStructure[] shapes = rna3DViewerModel.getNucleotide3DStructures().getNucleotide3DStructuresAsArray();
+        for (int i = 0; i < shapes.length; i++) {
+            shapes[i] = rna3DViewerModel.getNucleotide3DStructures().get(i);
+        }
+        SelectionModel<Nucleotide3DStructure> mySelectionModel=new SelectionModel<>(shapes);
+
+        // setup selection capture in view:
+        for (int i = 0; i < shapes.length; i++) {
+            final int index=i;
+            System.out.println(index);
+            Nucleotide3DStructure shape = shapes[i];
+
+            // TODO
+            shape.getStructure().setOnMouseClicked((e) ->
+                    selectAndColorStructure(mySelectionModel, index, true, shape, rna3DViewerModel));
+
+            BooleanBinding binding = new BooleanBinding() {
+                {
+                    bind(mySelectionModel.getSelectedItems());
+                }
+
+                @Override
+                protected boolean computeValue() {
+                    return mySelectionModel.getSelectedIndices().contains(index);
+                }
+            };
+
+            shape.isSelectedProperty().bind(binding);
+
+/*            shape.getStructure().setOnMouseClicked((e) -> {
+                if (!e.isShiftDown())
+                    mySelectionModel.clearSelection();
+                if (mySelectionModel.isSelected(index)) {
+                    mySelectionModel.clearSelection(index);
+                } else {
+                    mySelectionModel.select(index);
+                }
+            });*/
+        }
+
+    }
+
+    /**
+     * @param index select the specified index in the selection model
+     * @param clear boolean if the clear the current selection should be cleared or not
+     */
+    public static void selectAndColorStructure(SelectionModel<Nucleotide3DStructure> selectionModel,
+                                        int index, boolean clear, Nucleotide3DStructure shape, Rna3DViewerModel rna3DViewerModel) {
+        if (clear) {
+            selectionModel.clearAndSelect(index);
+            shape.getStructure().setMaterial(new PhongMaterial(Color.ORANGE));
+        } else {
+            // TODO
+            // selectionModel.select(index);
+            // shape.getStructure().setMaterial(new PhongMaterial(Color.ORANGE));
+        }
+        Update3DColoring(rna3DViewerModel, index);
+    }
+
+    private static void Update3DColoring(Rna3DViewerModel rna3DViewerModel, int index) {
+        if (lastIndex == -1) {
+            lastIndex = index;
+        } else {
+            rna3DViewerModel.getNucleotide3DStructures().get(lastIndex).resetColor();
+            lastIndex = index;
+        }
+        // TODO
+        // rna3DViewerModel.getNucleotide3DStructure().get(lastIndex).resetColor();
     }
 }

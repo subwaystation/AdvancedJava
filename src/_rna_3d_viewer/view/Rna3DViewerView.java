@@ -1,5 +1,6 @@
 package _rna_3d_viewer.view;
 
+import javafx.geometry.Point3D;
 import javafx.scene.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -10,6 +11,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
 
 /**
@@ -26,11 +28,21 @@ public class Rna3DViewerView {
     // the perspective camera
     private PerspectiveCamera perspectiveCamera;
 
-    // the border pane as root
+    // the stack pane as root
     private StackPane rootBP;
 
     // the label at the bottom
     private Label label;
+
+    private Rotate rx;
+
+    private Rotate ry;
+
+    private Translate cameraTranslate;
+
+    // the border pane
+
+    private BorderPane borderPane;
 
     // the openPDB menu item
     MenuItem openPDB;
@@ -38,7 +50,7 @@ public class Rna3DViewerView {
     public Rna3DViewerView() {
         this.rootBP = new StackPane();
 
-        BorderPane borderPane = new BorderPane();
+        this.borderPane = new BorderPane();
 
         this.rnaMoleculesG = new Group();
         this.scene = new Scene(this.rootBP, 1280, 640, true);
@@ -72,11 +84,13 @@ public class Rna3DViewerView {
 
         this.rootBP.getChildren().addAll(subScene, borderPane);
 
-        Rotate ry = new Rotate(0, Rotate.Y_AXIS);
-        Rotate rx = new Rotate(0, Rotate.X_AXIS);
+        this.ry = new Rotate(0, new Point3D(1,0,0));
+        this.rx = new Rotate(0, new Point3D(0,1,0));
         Rotate rz = new Rotate(0, Rotate.Z_AXIS);
 
-        this.rnaMoleculesG.getTransforms().addAll(ry, rx, rz);
+        this.cameraTranslate = new Translate(0, 0, 0);
+
+        this.rnaMoleculesG.getTransforms().addAll(ry, rx, rz, this.cameraTranslate);
         ry.setAngle(10);
         rx.setAngle(10);
     }
@@ -106,5 +120,25 @@ public class Rna3DViewerView {
 
     public MenuItem getOpenPDB() {
         return openPDB;
+    }
+
+    public StackPane getRootBP() {
+        return rootBP;
+    }
+
+    public Rotate getRx() {
+        return rx;
+    }
+
+    public Rotate getRy() {
+        return ry;
+    }
+
+    public Translate getCameraTranslate() {
+        return cameraTranslate;
+    }
+
+    public BorderPane getBorderPane() {
+        return this.borderPane;
     }
 }
