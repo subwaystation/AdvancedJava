@@ -17,13 +17,15 @@ import _rna_3d_viewer.model.Rna3DViewerModel;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by heumos on 14.12.15.
  */
 public class Rna3DViewerVP {
 
-    private static int lastIndex = -1;
+    private static List<Integer> lastIndices = new ArrayList<>();
 
     protected static class HandleSceneWidth implements ChangeListener<Number> {
         private Rna3DViewerView rna3DViewerView;
@@ -132,12 +134,7 @@ public class Rna3DViewerVP {
         // setup selection capture in view:
         for (int i = 0; i < shapes.length; i++) {
             final int index=i;
-            System.out.println(index);
             Nucleotide3DStructure shape = shapes[i];
-
-            // TODO
-            shape.getStructure().setOnMouseClicked((e) ->
-                    selectAndColorStructure(mySelectionModel, index, true, shape, rna3DViewerModel));
 
             BooleanBinding binding = new BooleanBinding() {
                 {
@@ -152,44 +149,35 @@ public class Rna3DViewerVP {
 
             shape.isSelectedProperty().bind(binding);
 
-/*            shape.getStructure().setOnMouseClicked((e) -> {
+            shape.getStructure().setOnMouseClicked((e) -> {
                 if (!e.isShiftDown())
                     mySelectionModel.clearSelection();
+                    update3DColoring(rna3DViewerModel);
+                    lastIndices.clear();
                 if (mySelectionModel.isSelected(index)) {
                     mySelectionModel.clearSelection(index);
+                    lastIndices.remove(new Integer(index));
+                    update3DColoring(rna3DViewerModel);
                 } else {
                     mySelectionModel.select(index);
+                    if (!lastIndices.isEmpty()) {
+                        lastIndices.remove(new Integer(index));
+                    }
+                    lastIndices.add(index);
+                    selectAndColorStructure(shape);
                 }
-            });*/
+            });
         }
 
     }
 
-    /**
-     * @param index select the specified index in the selection model
-     * @param clear boolean if the clear the current selection should be cleared or not
-     */
-    public static void selectAndColorStructure(SelectionModel<Nucleotide3DStructure> selectionModel,
-                                        int index, boolean clear, Nucleotide3DStructure shape, Rna3DViewerModel rna3DViewerModel) {
-        if (clear) {
-            selectionModel.clearAndSelect(index);
-            shape.getStructure().setMaterial(new PhongMaterial(Color.ORANGE));
-        } else {
-            // TODO
-            // selectionModel.select(index);
-            // shape.getStructure().setMaterial(new PhongMaterial(Color.ORANGE));
-        }
-        Update3DColoring(rna3DViewerModel, index);
+     public static void selectAndColorStructure(Nucleotide3DStructure shape) {
+        shape.getStructure().setMaterial(new PhongMaterial(Color.ORANGE));
     }
 
-    private static void Update3DColoring(Rna3DViewerModel rna3DViewerModel, int index) {
-        if (lastIndex == -1) {
-            lastIndex = index;
-        } else {
+    private static void update3DColoring(Rna3DViewerModel rna3DViewerModel) {
+        for (int lastIndex : lastIndices) {
             rna3DViewerModel.getNucleotide3DStructures().get(lastIndex).resetColor();
-            lastIndex = index;
         }
-        // TODO
-        // rna3DViewerModel.getNucleotide3DStructure().get(lastIndex).resetColor();
     }
 }

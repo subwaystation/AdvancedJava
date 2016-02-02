@@ -97,12 +97,8 @@ public class SelectionModel<T> extends MultipleSelectionModel<T> {
 
     @Override
     public void clearAndSelect(int index) {
-        if (!selectedIndices.contains(index)) {
-            clearSelection();
-            select(index);
-        } else {
-            clearSelection();
-        }
+        clearSelection();
+        select(index);
     }
 
     @Override

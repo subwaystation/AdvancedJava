@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="de223f9e-d0e8-46f4-b3d3-1ac4f3afd1fe" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SelectionModel/src/MouseHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SelectionModel/src/MySelectionModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/Nucleotide3DStructure.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/Nucleotide3DStructures.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/Purine3DStructure.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/Pyrimidine3DStructure.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SelectionModel/SelectionModel.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/model/SelectionModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SelectionModel/src/Simple3DViewerWithSelection.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SelectionModel/src/Utilities.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure_builder/Residue3DStructureBuilder.java" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure_builder/Residue3DStructureBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_rna_3d_viewer/model/Rna3DViewerModel.java" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/model/Rna3DViewerModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerVP.java" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerVP.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerView.java" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_rna_3d_viewer/model/SelectionModel.java" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/model/SelectionModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="AdvancedJava.iws" />
@@ -112,11 +99,23 @@
       <file leaf-file-name="Rna3DViewerVP.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerVP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7424893">
-              <caret line="185" column="21" selection-start-line="185" selection-start-column="21" selection-end-line="185" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.61659515">
+              <caret line="166" column="42" selection-start-line="166" selection-start-column="42" selection-end-line="166" selection-end-column="42" />
               <folding>
-                <element signature="e#6403#6404#0" expanded="true" />
-                <element signature="e#6503#6504#0" expanded="true" />
+                <element signature="e#6261#6262#0" expanded="true" />
+                <element signature="e#6361#6362#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SelectionModel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/model/SelectionModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="125" column="42" selection-start-line="125" selection-start-column="42" selection-end-line="125" selection-end-column="42" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -246,7 +245,6 @@
         <option value="$PROJECT_DIR$/SelectionModel/src/Utilities.java" />
         <option value="$PROJECT_DIR$/SelectionModel/src/Simple3DViewerWithSelection.java" />
         <option value="$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerView.java" />
-        <option value="$PROJECT_DIR$/src/_rna_3d_viewer/model/SelectionModel.java" />
         <option value="$PROJECT_DIR$/src/_rna_3d_viewer/model/Nucleotide3DStructures.java" />
         <option value="$PROJECT_DIR$/src/_rna_3d_viewer/model/Nucleotide3DStructure.java" />
         <option value="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/Pyrimidin3DStructure.java" />
@@ -257,6 +255,7 @@
         <option value="$PROJECT_DIR$/src/_rna_3d_viewer/model/Rna3DViewerModel.java" />
         <option value="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/Nucleotide3DStructures.java" />
         <option value="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/Purine3DStructure.java" />
+        <option value="$PROJECT_DIR$/src/_rna_3d_viewer/model/SelectionModel.java" />
         <option value="$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerVP.java" />
       </list>
     </option>
@@ -1031,13 +1030,7 @@
       <workItem from="1454335684746" duration="3041000" />
       <workItem from="1454343154469" duration="181000" />
       <workItem from="1454355243658" duration="2119000" />
-      <workItem from="1454401025737" duration="20285000" />
-    </task>
-    <task id="LOCAL-00006" summary="StageManager Ready&#10;&#10;StageManager holds the only instance available of the primary stage.">
-      <created>1445593944310</created>
-      <option name="number" value="00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1445593944310</updated>
+      <workItem from="1454401025737" duration="22829000" />
     </task>
     <task id="LOCAL-00007" summary="AligmentModel half ready.">
       <created>1445596713755</created>
@@ -1327,11 +1320,17 @@
       <option name="project" value="LOCAL" />
       <updated>1454357280250</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="SelectionModel for 3D structure is now working!">
+      <created>1454427756143</created>
+      <option name="number" value="00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1454427756145</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="252774000" />
+    <option name="totallyTimeSpent" value="255318000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -1360,6 +1359,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26015624" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32715377" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1371,7 +1371,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296875" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.327852" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1386,7 +1385,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Assignment 8, Part 3" />
     <MESSAGE value="Fixed Drawing Rectangle" />
     <MESSAGE value="Drawing Rect around 3D still not working." />
     <MESSAGE value="added alignments, nicer commenting" />
@@ -1411,7 +1409,8 @@
     <MESSAGE value="Improved code structure." />
     <MESSAGE value="HydrogenBonds Working!" />
     <MESSAGE value="Pseudoknots and SecondaryStructure building is working!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pseudoknots and SecondaryStructure building is working!" />
+    <MESSAGE value="SelectionModel for 3D structure is now working!" />
+    <option name="LAST_COMMIT_MESSAGE" value="SelectionModel for 3D structure is now working!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1680,14 +1679,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SelectionModel/src/MySelectionModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14173229">
-          <caret line="43" column="55" selection-start-line="43" selection-start-column="55" selection-end-line="43" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SelectionModel/src/MouseHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33295837">
@@ -1738,16 +1729,6 @@
         <state vertical-scroll-proportion="-0.31330472">
           <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/model/SelectionModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5522174">
-          <caret line="103" column="19" selection-start-line="103" selection-start-column="19" selection-end-line="103" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1824,20 +1805,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/Pyrimidine3DStructure.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="42" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#300#301#0" expanded="true" />
-            <element signature="e#351#352#0" expanded="true" />
-            <element signature="e#406#407#0" expanded="true" />
-            <element signature="e#438#439#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/Purine3DStructure.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1867,13 +1834,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SelectionModel/src/MySelectionModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6074241">
+          <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="100" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/model/SelectionModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="125" column="42" selection-start-line="125" selection-start-column="42" selection-end-line="125" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/Pyrimidine3DStructure.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="42" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#300#301#0" expanded="true" />
+            <element signature="e#351#352#0" expanded="true" />
+            <element signature="e#406#407#0" expanded="true" />
+            <element signature="e#438#439#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerVP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7424893">
-          <caret line="185" column="21" selection-start-line="185" selection-start-column="21" selection-end-line="185" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.61659515">
+          <caret line="166" column="42" selection-start-line="166" selection-start-column="42" selection-end-line="166" selection-end-column="42" />
           <folding>
-            <element signature="e#6403#6404#0" expanded="true" />
-            <element signature="e#6503#6504#0" expanded="true" />
+            <element signature="e#6261#6262#0" expanded="true" />
+            <element signature="e#6361#6362#0" expanded="true" />
           </folding>
         </state>
       </provider>
