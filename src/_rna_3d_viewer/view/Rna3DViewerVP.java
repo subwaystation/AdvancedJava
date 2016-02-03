@@ -2,11 +2,18 @@ package _rna_3d_viewer.view;
 
 import _rna_3d_viewer.model.structure.Nucleotide3DStructure;
 import _rna_3d_viewer.model.SelectionModel;
+import _rna_3d_viewer.rna_drawer.RnaDrawerModel;
+import _rna_3d_viewer.rna_drawer.RnaDrawerVC;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.transform.Rotate;
@@ -121,6 +128,21 @@ public class Rna3DViewerVP {
 
             initSelectionModel(rna3DViewerModel);
         }
+    }
+
+    protected static void handleSecStruct(Rna3DViewerView rna3DViewerView, Rna3DViewerModel rna3DViewerModel,
+                                          Stage primaryStage, Stage secondaryStage) {
+        RnaDrawerModel rnaDrawerModel = new RnaDrawerModel(rna3DViewerModel.getSecondaryStructure());
+
+        RnaDrawerVC rnaDrawerVC = new RnaDrawerVC(rnaDrawerModel, secondaryStage);
+        rnaDrawerVC.show();
+        /*System.out.println("Hello World!");
+
+        Stage secondStage = new Stage();
+        Button button = new Button("Click M2");
+        button.setOnAction((e) -> System.out.println("Yeah"));
+        secondStage.setScene(new Scene(new HBox(4, button)));
+        secondStage.show();*/
     }
 
     private static void initSelectionModel(Rna3DViewerModel rna3DViewerModel) {

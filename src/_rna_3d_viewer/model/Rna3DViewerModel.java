@@ -4,6 +4,7 @@ import _rna_3d_viewer.PseudoknotUtils;
 import _rna_3d_viewer.io.PdbAtom;
 import _rna_3d_viewer.io.PdbFileParser;
 import _rna_3d_viewer.model.structure.Nucleotide3DStructures;
+import _rna_3d_viewer.model.structure.SecondaryStructure;
 import _rna_3d_viewer.model.structure_builder.HydrogenBond3DStructureBuilder;
 import _rna_3d_viewer.model.structure_builder.Molecule3DConnectionBuilder;
 import _rna_3d_viewer.model.structure_builder.Residue3DStructureBuilder;
@@ -341,5 +342,13 @@ public class Rna3DViewerModel {
 
     public Nucleotide3DStructures getNucleotide3DStructures() {
         return this.nucleotide3DStructures;
+    }
+
+    public String getDotBracketNotation() {
+        return this.dotBracketNotationBuilder.toString();
+    }
+
+    public SecondaryStructure getSecondaryStructure() {
+        return new SecondaryStructure(this.sequenceBuilder.toString(), this.nucleotidePairs, this.getDotBracketNotation());
     }
 }

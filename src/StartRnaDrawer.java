@@ -12,9 +12,6 @@ public class StartRnaDrawer extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        StageManager.getInstance().setPrimaryStage(primaryStage);
-
-        // read in the FASTA file
         RnaDrawerModel rnaDrawerModel = new RnaDrawerModel();
 
         RnaDrawerVC rnaDrawerVC = new RnaDrawerVC(rnaDrawerModel);

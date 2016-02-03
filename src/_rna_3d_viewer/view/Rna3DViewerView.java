@@ -41,11 +41,13 @@ public class Rna3DViewerView {
     private Translate cameraTranslate;
 
     // the border pane
-
     private BorderPane borderPane;
 
     // the openPDB menu item
-    MenuItem openPDB;
+    private MenuItem openPDB;
+
+    // the open sec struct menu item
+    private MenuItem openSecStruct;
 
     public Rna3DViewerView() {
         this.rootBP = new StackPane();
@@ -76,6 +78,10 @@ public class Rna3DViewerView {
         openPDB = new MenuItem("Open PDB");
         menuFile.getItems().add(openPDB);
         menuBar.getMenus().add(menuFile);
+        Menu menuSecStruct = new Menu("SecStruct");
+        this.openSecStruct = new MenuItem("Open SecStruct");
+        menuSecStruct.getItems().add(openSecStruct);
+        menuBar.getMenus().add(menuSecStruct);
 
         borderPane.setTop(menuBar);
         this.label = new Label("No PDB file selected.");
@@ -140,5 +146,9 @@ public class Rna3DViewerView {
 
     public BorderPane getBorderPane() {
         return this.borderPane;
+    }
+
+    public MenuItem getOpenSecStruct() {
+        return this.openSecStruct;
     }
 }
