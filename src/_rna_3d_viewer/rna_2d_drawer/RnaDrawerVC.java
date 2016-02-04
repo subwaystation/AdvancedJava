@@ -1,10 +1,11 @@
 package _rna_3d_viewer.rna_2d_drawer;
 
+import _rna_3d_viewer.model.Rna3DViewerModel;
 import _rna_3d_viewer.model.structure.SecStruct2DRepresentations;
+import _rna_3d_viewer.view.Rna3DViewerVC;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 
 /**
  * Created by heumos on 23.11.15.
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 public class RnaDrawerVC {
 
     // model
-    private RnaDrawerModel rnaDrawerModel;
+    public static RnaDrawerModel rnaDrawerModel;
 
     // view
     private RnaDrawerView rnaDrawerView;
@@ -39,5 +40,9 @@ public class RnaDrawerVC {
 
     public RnaDrawerView getRnaDrawerView() {
         return this.rnaDrawerView;
+    }
+
+    public void setRnaDrawerModel(RnaDrawerModel rnaDrawerModel) {
+        this.rnaDrawerModel = rnaDrawerModel;
     }
 }

@@ -10,7 +10,7 @@ import _rna_3d_viewer.model.Rna3DViewerModel;
 public class Rna3DViewerVC {
 
     // model
-    private Rna3DViewerModel rna3DViewerModel;
+    private static Rna3DViewerModel rna3DViewerModel;
 
     // view
     private Rna3DViewerView rna3DViewerView;
@@ -19,7 +19,7 @@ public class Rna3DViewerVC {
     private Stage primaryStage;
 
     // secondary stage
-    private Stage secondaryStage = new Stage();
+    private static Stage secondaryStage = new Stage();
 
     public Rna3DViewerVC(Rna3DViewerModel rna3DViewerModel, Stage primaryStage) {
         this.rna3DViewerModel = rna3DViewerModel;
@@ -36,11 +36,15 @@ public class Rna3DViewerVC {
         this.rna3DViewerView.getScene().widthProperty().addListener(new Rna3DViewerVP.HandleSceneWidth(this.rna3DViewerView));
         this.rna3DViewerView.getScene().heightProperty().addListener(new Rna3DViewerVP.HandleSceneHeight(this.rna3DViewerView));
         this.rna3DViewerView.getOpenSecStruct().setOnAction((actionEvent) ->
-                Rna3DViewerVP.handleSecStruct(this.rna3DViewerView, this.rna3DViewerModel, primaryStage, secondaryStage));
+                Rna3DViewerVP.handleSecStruct(this.rna3DViewerModel, secondaryStage));
         this.primaryStage.setOnCloseRequest((close) -> Platform.exit());
     }
 
     public void show() {
         this.rna3DViewerView.show(this.primaryStage);
+    }
+
+    public Rna3DViewerModel getRna3DViewerModel() {
+        return this.rna3DViewerModel;
     }
 }

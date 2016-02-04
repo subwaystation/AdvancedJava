@@ -62,7 +62,7 @@ public class SecStruct2DRepresentations {
         return aSecStruct2Ds;
     }
 
-    public int secStruct2dCirclesSize() {
+    public int secStruct2DCirclesSize() {
         return this.secStruct2DCircles.size() - 1;
     }
 
@@ -77,5 +77,9 @@ public class SecStruct2DRepresentations {
             int residueIndex = secStruct2DCircle.getResidueIndex();
             this.secStruct2DCircleHashMap.put(residueIndex, secStruct2DCircle);
         }
+    }
+
+    public int secStruct2DLinesSize() {
+        return this.secStruct2DLines.size() - 1;
     }
 }

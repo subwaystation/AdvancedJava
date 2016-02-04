@@ -23,7 +23,7 @@ public class SecStruct2DLine extends ANucleotideStructure {
     // the second residue number of the nucleotide that gets connected by this line
     private int residueIndex2;
 
-    private Color defaultColor;
+    private Color defaultColor = Color.RED;
 
     public SecStruct2DLine(Line line, int residueIndex1, int residueIndex2) {
         this.line = line;
@@ -41,7 +41,7 @@ public class SecStruct2DLine extends ANucleotideStructure {
     }
 
     @Override
-    protected void resetColor() {
+    public void resetColor() {
         this.line.setFill(this.defaultColor);
         this.line.setStroke(this.defaultColor);
     }

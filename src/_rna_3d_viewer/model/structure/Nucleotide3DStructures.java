@@ -3,6 +3,7 @@ package _rna_3d_viewer.model.structure;
 import javafx.scene.shape.MeshView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -11,6 +12,8 @@ import java.util.List;
 public class Nucleotide3DStructures {
 
     private List<ANucleotideStructure> nucleotide3DStructures;
+
+    private HashMap<Integer, Nucleotide3DStructure> nucleotideStructureHashMap = new HashMap<>();
 
     public Nucleotide3DStructures(List<ANucleotideStructure> nucleotide3DStructures) {
         this.nucleotide3DStructures = nucleotide3DStructures;
@@ -50,5 +53,15 @@ public class Nucleotide3DStructures {
             meshViews.add((MeshView) nucleotide3DStructure.getStructure());
         }
         return meshViews;
+    }
+
+    public Nucleotide3DStructure getFast(int residueIndex) {
+        if (this.nucleotideStructureHashMap.size() == 0) {
+            for (ANucleotideStructure aNucleotideStructure : this.nucleotide3DStructures) {
+                Nucleotide3DStructure nucleotide3DStructure = (Nucleotide3DStructure) aNucleotideStructure;
+                this.nucleotideStructureHashMap.put(nucleotide3DStructure.getResidueIndex(), nucleotide3DStructure);
+            }
+        }
+        return this.nucleotideStructureHashMap.get(residueIndex);
     }
 }

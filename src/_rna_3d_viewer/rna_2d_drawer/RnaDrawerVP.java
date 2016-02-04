@@ -26,10 +26,7 @@ import java.util.List;
  */
 public class RnaDrawerVP {
 
-    public static boolean wasDrawn = false;
-
     public static void handleDrawBEvent(RnaDrawerView rnaDrawerView, RnaDrawerModel rnaDrawerModel) {
-        wasDrawn = true;
         SecStruct2DRepresentations secStruct2DRepresentations = rnaDrawerModel.getSecStruct2DRepresentations();
         List<Residue> residues = rnaDrawerModel.getResidueList();
         rnaDrawerView.getDrawingP().getChildren().clear();
@@ -124,6 +121,7 @@ public class RnaDrawerVP {
             Integer basePos1 = pair.getKey() - 1;
             Integer basePos2 = pair.getValue() - 1;
             Line line = new Line();
+            line.setStrokeWidth(3.0);
             Circle circle1 = circles.get(basePos1);
             Circle circle2 = circles.get(basePos2);
             // add line to 2d presentation
@@ -148,6 +146,6 @@ public class RnaDrawerVP {
             parallelTransition.play();
         }
         secStruct2DRepresentations.createCircle2DMap();
-        Rna3DViewerVP.extendSelectionModel(rnaDrawerModel);
+        Rna3DViewerVP.initSelectionModel(rnaDrawerModel);
     }
 }
