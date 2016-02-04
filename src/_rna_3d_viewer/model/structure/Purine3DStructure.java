@@ -8,6 +8,8 @@ import javafx.scene.shape.MeshView;
  */
 public class Purine3DStructure  extends Nucleotide3DStructure{
 
+    private Color defaultColor = Color.GREEN;
+
     public Purine3DStructure(MeshView structure, int iD, int residueNumber) {
         super(structure, iD, residueNumber);
     }
@@ -15,6 +17,13 @@ public class Purine3DStructure  extends Nucleotide3DStructure{
 
     @Override
     protected Color getDefaultColor() {
-        return Color.GREEN;
+        return defaultColor;
     }
+
+    @Override
+    protected void setDefaultColor(Color color) {
+        this.defaultColor = color;
+    }
+
+
 }

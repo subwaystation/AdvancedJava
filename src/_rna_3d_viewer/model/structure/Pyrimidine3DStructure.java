@@ -8,13 +8,20 @@ import javafx.scene.shape.MeshView;
  */
 public class Pyrimidine3DStructure extends Nucleotide3DStructure{
 
+    private Color defaultColor = Color.RED;
+
     public Pyrimidine3DStructure(MeshView structure, int iD, int residueNumber) {
         super(structure, iD, residueNumber);
     }
 
     @Override
     protected Color getDefaultColor() {
-        return Color.RED;
+        return this.defaultColor;
+    }
+
+    @Override
+    protected void setDefaultColor(Color color) {
+        this.defaultColor = color;
     }
 
 }

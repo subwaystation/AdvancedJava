@@ -40,6 +40,12 @@ public class SecStruct2DLine extends ANucleotideStructure {
         this.defaultColor = defaultColor;
     }
 
+    @Override
+    protected void resetColor() {
+        this.line.setFill(this.defaultColor);
+        this.line.setStroke(this.defaultColor);
+    }
+
     public Line getLine() {
         return line;
     }

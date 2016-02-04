@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
+import model.RnaDrawerModel;
 
 /**
  * Created by heumos on 04.02.16.
@@ -23,7 +24,8 @@ public class SecStruct2DCircle extends ANucleotideStructure {
     // is this structure selected?
     private BooleanProperty isSelected;
 
-    private Color defaultColor;
+    // default color
+    private Color defaultColor = Color.BLACK;
 
     public SecStruct2DCircle(int residueIndex, String residueType, Circle circle) {
         this.residueIndex = residueIndex;
@@ -68,17 +70,23 @@ public class SecStruct2DCircle extends ANucleotideStructure {
         this.isSelected.set(isSelected);
     }
 
-    public Color getDefaultColor() {
-        return defaultColor;
-    }
-
-    public void setDefaultColor(Color defaultColor) {
-        this.defaultColor = defaultColor;
-    }
-
-
     @Override
     public Shape getStructure() {
         return getCircle();
+    }
+
+    @Override
+    protected Color getDefaultColor() {
+        return this.defaultColor;
+    }
+
+    @Override
+    protected void setDefaultColor(Color color) {
+        this.defaultColor = color;
+    }
+
+    @Override
+    public void resetColor() {
+        this.circle.setFill(this.defaultColor);
     }
 }

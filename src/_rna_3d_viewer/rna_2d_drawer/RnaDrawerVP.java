@@ -4,6 +4,7 @@ import _rna_3d_viewer.model.Residue;
 import _rna_3d_viewer.model.structure.SecStruct2DCircle;
 import _rna_3d_viewer.model.structure.SecStruct2DLine;
 import _rna_3d_viewer.model.structure.SecStruct2DRepresentations;
+import _rna_3d_viewer.view.Rna3DViewerVP;
 import drawing.Graph;
 import drawing.SpringEmbedder;
 import javafx.animation.ParallelTransition;
@@ -146,5 +147,7 @@ public class RnaDrawerVP {
         if (animation) {
             parallelTransition.play();
         }
+        secStruct2DRepresentations.createCircle2DMap();
+        Rna3DViewerVP.extendSelectionModel(rnaDrawerModel);
     }
 }

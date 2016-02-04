@@ -1,7 +1,6 @@
 package _rna_3d_viewer.model.structure;
 
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.MeshView;
 
@@ -29,8 +28,6 @@ public abstract class Nucleotide3DStructure extends ANucleotideStructure{
         this.isSelected = new SimpleBooleanProperty(false);
     }
 
-    protected abstract Color getDefaultColor();
-
     public void resetColor() {
         this.structure.setMaterial(new PhongMaterial(getDefaultColor()));
     }
@@ -44,6 +41,10 @@ public abstract class Nucleotide3DStructure extends ANucleotideStructure{
     }
 
     public int getResidueNumber() {
+        return residueNumber;
+    }
+
+    public int getResidueIndex() {
         return residueNumber;
     }
 

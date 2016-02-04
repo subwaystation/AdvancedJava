@@ -3,6 +3,7 @@ package _rna_3d_viewer.model.structure;
 import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -14,11 +15,14 @@ public class SecStruct2DRepresentations {
 
     private List<SecStruct2DLine> secStruct2DLines;
 
+    private HashMap<Integer, SecStruct2DCircle> secStruct2DCircleHashMap;
+
     public SecStruct2DRepresentations(List<SecStruct2DCircle> secStruct2DCircles,
                                       List<SecStruct2DLine> secStruct2DLines) {
         this.secStruct2DCircles = secStruct2DCircles;
         this.secStruct2DLines = secStruct2DLines;
     }
+
 
     public List<SecStruct2DCircle> getSecStruct2DCircles() {
         return secStruct2DCircles;
@@ -56,5 +60,22 @@ public class SecStruct2DRepresentations {
         aSecStruct2DsList.addAll(this.secStruct2DLines);
         aSecStruct2Ds = aSecStruct2DsList.toArray(aSecStruct2Ds);
         return aSecStruct2Ds;
+    }
+
+    public int secStruct2dCirclesSize() {
+        return this.secStruct2DCircles.size() - 1;
+    }
+
+    public SecStruct2DCircle getCircle2DStruct(int residueIndex) {
+        SecStruct2DCircle secStruct2DCircle = this.secStruct2DCircleHashMap.get(residueIndex);
+        return secStruct2DCircle;
+    }
+
+    public void createCircle2DMap() {
+        this.secStruct2DCircleHashMap = new HashMap<>();
+        for (SecStruct2DCircle secStruct2DCircle : this.secStruct2DCircles) {
+            int residueIndex = secStruct2DCircle.getResidueIndex();
+            this.secStruct2DCircleHashMap.put(residueIndex, secStruct2DCircle);
+        }
     }
 }
