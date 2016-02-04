@@ -4,14 +4,9 @@
     <bookmark url="file://$PROJECT_DIR$/src/StartDnaManipulator.java" line="25" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de223f9e-d0e8-46f4-b3d3-1ac4f3afd1fe" name="Default" comment="Before Great Changes.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/Nucleotide3DStructures.java" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/Nucleotide3DStructures.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerVC.java" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerVC.java" />
+    <list default="true" id="de223f9e-d0e8-46f4-b3d3-1ac4f3afd1fe" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerVP.java" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerVP.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_rna_3d_viewer/rna_2d_drawer/RnaDrawerVC.java" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/rna_2d_drawer/RnaDrawerVC.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_rna_3d_viewer/rna_2d_drawer/RnaDrawerVP.java" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/rna_2d_drawer/RnaDrawerVP.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/SecStruct2DLine.java" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/SecStruct2DLine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/SecStruct2DRepresentations.java" afterPath="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/SecStruct2DRepresentations.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="AdvancedJava.iws" />
@@ -45,20 +40,35 @@
         <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerVP.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="51" column="32" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
-              <folding />
+              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+              <folding>
+                <element signature="e#1917#1918#0" expanded="true" />
+                <element signature="e#1967#1968#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RnaDrawerVP.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RnaDrawerVP.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/rna_2d_drawer/RnaDrawerVP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="148" selection-end-column="57" />
+            <state vertical-scroll-proportion="0.28360215">
+              <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#7901#7902#0" expanded="true" />
+                <element signature="e#7930#7931#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Rna3DViewerModel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/model/Rna3DViewerModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="351" column="0" selection-start-line="351" selection-start-column="0" selection-end-line="351" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -88,17 +98,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RnaDrawerVC.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RnaDrawerVC.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/rna_2d_drawer/RnaDrawerVC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5752688">
-              <caret line="33" column="41" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="33" column="12" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#989#990#0" expanded="true" />
-                <element signature="e#1042#1043#0" expanded="true" />
-                <element signature="e#1198#1199#0" expanded="true" />
-                <element signature="e#1250#1251#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -177,10 +183,10 @@
         <option value="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/SecStruct2DRepresentations.java" />
         <option value="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/Nucleotide3DStructures.java" />
         <option value="$PROJECT_DIR$/src/_rna_3d_viewer/model/structure/SecStruct2DLine.java" />
-        <option value="$PROJECT_DIR$/src/_rna_3d_viewer/rna_2d_drawer/RnaDrawerVP.java" />
-        <option value="$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerVP.java" />
         <option value="$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerVC.java" />
         <option value="$PROJECT_DIR$/src/_rna_3d_viewer/rna_2d_drawer/RnaDrawerVC.java" />
+        <option value="$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerVP.java" />
+        <option value="$PROJECT_DIR$/src/_rna_3d_viewer/rna_2d_drawer/RnaDrawerVP.java" />
       </list>
     </option>
   </component>
@@ -225,7 +231,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -438,7 +444,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -1016,13 +1022,8 @@
       <workItem from="1454401025737" duration="22853000" />
       <workItem from="1454493554809" duration="4637000" />
       <workItem from="1454574634294" duration="10080000" />
-      <workItem from="1454590182429" duration="15050000" />
-    </task>
-    <task id="LOCAL-00011" summary="code trimming">
-      <created>1445846470249</created>
-      <option name="number" value="00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1445846470249</updated>
+      <workItem from="1454590182429" duration="15088000" />
+      <workItem from="1454609643195" duration="516000" />
     </task>
     <task id="LOCAL-00012" summary="Code Extension for DnaManipulator">
       <created>1446155446814</created>
@@ -1312,11 +1313,17 @@
       <option name="project" value="LOCAL" />
       <updated>1454600811270</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="working but adding second seq is not working yet">
+      <created>1454607490995</created>
+      <option name="number" value="00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1454607490995</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="285109000" />
+    <option name="totallyTimeSpent" value="285663000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -1371,7 +1378,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2D boxes now working, no buttons implemented" />
     <MESSAGE value="PDB Parser Ready" />
     <MESSAGE value="sugar molecules are drawn!" />
     <MESSAGE value="Pyrimidines and Purines are drawn now." />
@@ -1396,7 +1402,8 @@
     <MESSAGE value="Added Second Stage where secondary Structure is drawn." />
     <MESSAGE value="In the middle of SelectionModel for SectStructs." />
     <MESSAGE value="Before Great Changes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Before Great Changes." />
+    <MESSAGE value="working but adding second seq is not working yet" />
+    <option name="LAST_COMMIT_MESSAGE" value="working but adding second seq is not working yet" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1558,7 +1565,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1638,17 +1644,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/model/Rna3DViewerModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="31" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
-          <folding>
-            <element signature="e#13804#13805#0" expanded="true" />
-            <element signature="e#13854#13855#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/model/Residue.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1671,7 +1666,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1690,7 +1684,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="88" column="23" selection-start-line="88" selection-start-column="23" selection-end-line="88" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1830,24 +1823,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/rna_2d_drawer/RnaDrawerVP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="148" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerVP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="32" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerVC.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1863,14 +1838,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/rna_2d_drawer/RnaDrawerVC.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5752688">
-          <caret line="33" column="41" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="12" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#989#990#0" expanded="true" />
-            <element signature="e#1042#1043#0" expanded="true" />
-            <element signature="e#1198#1199#0" expanded="true" />
-            <element signature="e#1250#1251#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/model/Rna3DViewerModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="351" column="0" selection-start-line="351" selection-start-column="0" selection-end-line="351" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/view/Rna3DViewerVP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding>
+            <element signature="e#1917#1918#0" expanded="true" />
+            <element signature="e#1967#1968#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/_rna_3d_viewer/rna_2d_drawer/RnaDrawerVP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28360215">
+          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7901#7902#0" expanded="true" />
+            <element signature="e#7930#7931#0" expanded="true" />
           </folding>
         </state>
       </provider>

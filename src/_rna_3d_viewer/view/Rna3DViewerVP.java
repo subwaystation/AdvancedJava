@@ -5,6 +5,7 @@ import _rna_3d_viewer.model.SelectionModel;
 import _rna_3d_viewer.rna_2d_drawer.RnaDrawerModel;
 import _rna_3d_viewer.rna_2d_drawer.RnaDrawerVC;
 import _rna_3d_viewer.rna_2d_drawer.RnaDrawerVP;
+import _rna_3d_viewer.rna_2d_drawer.RnaDrawerView;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -42,11 +43,21 @@ public class Rna3DViewerVP {
 
     private static SecStruct2DRepresentations localSecStructRepresentations = null;
 
-    private static RnaDrawerModel rnaDrawerModel;
+    private static RnaDrawerModel localRnaDrawerModel;
 
     private static Rna3DViewerModel localRna3DViewerModel;
 
-    private static boolean wasDrawn = false;
+    private static RnaDrawerView localRnaDrawerView;
+
+    public static void handleDrawBEvent() {
+        localRnaDrawerModel = new RnaDrawerModel(localRna3DViewerModel.getSecondaryStructure(), localRna3DViewerModel.getResidues());
+        RnaDrawerVP.setFirstDraw(false);
+        RnaDrawerVP.handleDrawBEvent(localRnaDrawerView, localRnaDrawerModel);
+    }
+
+    public static void setLocalRnaDrawerView(RnaDrawerView rnaDrawerView) {
+        localRnaDrawerView = rnaDrawerView;
+    }
 
     protected static class HandleSceneWidth implements ChangeListener<Number> {
         private Rna3DViewerView rna3DViewerView;
@@ -150,8 +161,8 @@ public class Rna3DViewerVP {
     protected static void handleSecStruct(Rna3DViewerModel rna3DViewerModel,
                                           Stage secondaryStage) {
         if (is3DStructureReadIn) {
-            rnaDrawerModel = new RnaDrawerModel(rna3DViewerModel.getSecondaryStructure(), rna3DViewerModel.getResidues());
-            RnaDrawerVC rnaDrawerVC = new RnaDrawerVC(rnaDrawerModel, secondaryStage);
+            localRnaDrawerModel = new RnaDrawerModel(rna3DViewerModel.getSecondaryStructure(), rna3DViewerModel.getResidues());
+            RnaDrawerVC rnaDrawerVC = new RnaDrawerVC(localRnaDrawerModel, secondaryStage);
             rnaDrawerVC.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
