@@ -1,19 +1,17 @@
 package _rna_3d_viewer.view;
 
+import _rna_3d_viewer.model.structure.ANucleotideStructure;
 import _rna_3d_viewer.model.structure.Nucleotide3DStructure;
 import _rna_3d_viewer.model.SelectionModel;
-import _rna_3d_viewer.rna_drawer.RnaDrawerModel;
-import _rna_3d_viewer.rna_drawer.RnaDrawerVC;
+import _rna_3d_viewer.rna_2d_drawer.RnaDrawerModel;
+import _rna_3d_viewer.rna_2d_drawer.RnaDrawerVC;
+import _rna_3d_viewer.rna_2d_drawer.RnaDrawerVP;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.transform.Rotate;
@@ -33,6 +31,10 @@ import java.util.List;
 public class Rna3DViewerVP {
 
     private static List<Integer> lastIndices = new ArrayList<>();
+
+    private static boolean is3DStructureReadIn = false;
+
+    private static SelectionModel<Object> mySelectionModel;
 
     protected static class HandleSceneWidth implements ChangeListener<Number> {
         private Rna3DViewerView rna3DViewerView;
@@ -127,36 +129,53 @@ public class Rna3DViewerVP {
             rna3DViewerView.getRnaMoleculesG().getChildren().addAll(rna3DViewerModel.getHydrogenBonds());
 
             initSelectionModel(rna3DViewerModel);
+            is3DStructureReadIn = true;
         }
     }
 
     protected static void handleSecStruct(Rna3DViewerView rna3DViewerView, Rna3DViewerModel rna3DViewerModel,
                                           Stage primaryStage, Stage secondaryStage) {
-        RnaDrawerModel rnaDrawerModel = new RnaDrawerModel(rna3DViewerModel.getSecondaryStructure());
+        if (is3DStructureReadIn) {
+            RnaDrawerModel rnaDrawerModel = new RnaDrawerModel(rna3DViewerModel.getSecondaryStructure(), rna3DViewerModel.getResidues());
+            RnaDrawerVC rnaDrawerVC = new RnaDrawerVC(rnaDrawerModel, secondaryStage);
+            rnaDrawerVC.show();
+            if (RnaDrawerVP.wasDrawn) {
+                extendSelectionModel(rnaDrawerModel);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("PDB Information");
+            alert.setHeaderText("No PDB file read in yet.");
+            alert.setContentText("Please read in PDB file.");
+            alert.showAndWait();
+        }
+    }
 
-        RnaDrawerVC rnaDrawerVC = new RnaDrawerVC(rnaDrawerModel, secondaryStage);
-        rnaDrawerVC.show();
-        /*System.out.println("Hello World!");
+    private static void extendSelectionModel(RnaDrawerModel rnaDrawerModel) {
+        // TODO
+        ANucleotideStructure[] shapes = rnaDrawerModel.getSecStruct2DRepresentations().get2DStructureRepresentations();
+        // copy arrays
+        ANucleotideStructure[] shapes3D = (ANucleotideStructure[]) mySelectionModel.getItems();
+        int shapesLen = shapes.length;
+        int shapes3DLen = shapes3D.length;
+        ANucleotideStructure[] allShapes = new ANucleotideStructure[shapes3DLen + shapesLen];
+        System.arraycopy(shapes, 0, allShapes, 0, shapesLen);
+        System.arraycopy(shapes3D, 0, allShapes, shapesLen, shapes3DLen);
+        mySelectionModel.setItems(allShapes);
 
-        Stage secondStage = new Stage();
-        Button button = new Button("Click M2");
-        button.setOnAction((e) -> System.out.println("Yeah"));
-        secondStage.setScene(new Scene(new HBox(4, button)));
-        secondStage.show();*/
+
     }
 
     private static void initSelectionModel(Rna3DViewerModel rna3DViewerModel) {
+        // TODO remove here?
 
-        Nucleotide3DStructure[] shapes = rna3DViewerModel.getNucleotide3DStructures().getNucleotide3DStructuresAsArray();
-        for (int i = 0; i < shapes.length; i++) {
-            shapes[i] = rna3DViewerModel.getNucleotide3DStructures().get(i);
-        }
-        SelectionModel<Nucleotide3DStructure> mySelectionModel=new SelectionModel<>(shapes);
+        ANucleotideStructure[] shapes = rna3DViewerModel.getNucleotide3DStructures().getNucleotide3DStructuresAsArray();
+        mySelectionModel = new SelectionModel<>(shapes);
 
         // setup selection capture in view:
         for (int i = 0; i < shapes.length; i++) {
             final int index=i;
-            Nucleotide3DStructure shape = shapes[i];
+            ANucleotideStructure shape = shapes[i];
 
             BooleanBinding binding = new BooleanBinding() {
                 {
@@ -186,20 +205,21 @@ public class Rna3DViewerVP {
                         lastIndices.remove(new Integer(index));
                     }
                     lastIndices.add(index);
-                    selectAndColorStructure(shape);
+                    color3DStructure((Nucleotide3DStructure) shape);
                 }
             });
         }
 
     }
 
-     public static void selectAndColorStructure(Nucleotide3DStructure shape) {
-        shape.getStructure().setMaterial(new PhongMaterial(Color.ORANGE));
+     public static void color3DStructure(Nucleotide3DStructure shape) {
+         shape.getStructure().setMaterial(new PhongMaterial(Color.ORANGE));
     }
 
     private static void update3DColoring(Rna3DViewerModel rna3DViewerModel) {
         for (int lastIndex : lastIndices) {
-            rna3DViewerModel.getNucleotide3DStructures().get(lastIndex).resetColor();
+            Nucleotide3DStructure nucleotide3DStructure = (Nucleotide3DStructure) rna3DViewerModel.getNucleotide3DStructures().get(lastIndex);
+            nucleotide3DStructure.resetColor();
         }
     }
 }

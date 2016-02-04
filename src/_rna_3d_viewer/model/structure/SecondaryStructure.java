@@ -2,7 +2,6 @@ package _rna_3d_viewer.model.structure;
 
 import javafx.util.Pair;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -95,6 +95,9 @@ public class HydrogenBond3DStructureBuilder {
         // cytosine coordinates
         Point3D n4points = residue2.getAtomPoint3D("N4");
         Point3D h4points = residue2.getAtomPoint3D("H41");
+        if (h4points == null) {
+            return false;
+        }
         Point3D n3points = residue2.getAtomPoint3D("N3");
         Point3D o2points = residue2.getAtomPoint3D("O2");
 

@@ -70,6 +70,9 @@ public class Residue {
 
     public Point3D getAtomPoint3D(String atomName) {
         float[] atomCoords = this.getAtomCoords(atomName);
+        if (atomCoords == null) {
+            return null;
+        }
         return new Point3D(atomCoords[0], atomCoords[1], atomCoords[2]);
     }
 

@@ -1,5 +1,7 @@
-package _rna_3d_viewer.rna_drawer;
+package _rna_3d_viewer.rna_2d_drawer;
 
+import _rna_3d_viewer.model.Residue;
+import _rna_3d_viewer.model.structure.SecStruct2DRepresentations;
 import _rna_3d_viewer.model.structure.SecondaryStructure;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -10,9 +12,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import javafx.util.Pair;
-import lib.sec_struct.Nussinov;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by heumos on 23.11.15.
@@ -22,12 +24,18 @@ public class RnaDrawerModel {
     // nussinov
     private SecondaryStructure secondaryStructure;
 
+    private List<Residue> residueList;
+
+    private SecStruct2DRepresentations secStruct2DRepresentations;
+
     // store the location of the last clicked node
     private double xPoint;
     private double yPoint;
 
-    public RnaDrawerModel(SecondaryStructure secondaryStructure) {
+    public RnaDrawerModel(SecondaryStructure secondaryStructure, List<Residue> residues) {
         this.secondaryStructure = secondaryStructure;
+        this.residueList = residues;
+        this.secStruct2DRepresentations = new SecStruct2DRepresentations(new ArrayList<>(), new ArrayList<>());
     }
 
     public SecondaryStructure getSecondaryStructure() {
@@ -127,5 +135,13 @@ public class RnaDrawerModel {
         KeyFrame keyFrame = new KeyFrame(Duration.millis(3000), xKeyVal, yKeyVal);
         timeline.getKeyFrames().add(keyFrame);
         timeline.play();
+    }
+
+    public List<Residue> getResidueList() {
+        return residueList;
+    }
+
+    public SecStruct2DRepresentations getSecStruct2DRepresentations() {
+        return secStruct2DRepresentations;
     }
 }

@@ -351,4 +351,8 @@ public class Rna3DViewerModel {
     public SecondaryStructure getSecondaryStructure() {
         return new SecondaryStructure(this.sequenceBuilder.toString(), this.nucleotidePairs, this.getDotBracketNotation());
     }
+
+    public List<Residue> getResidues() {
+        return residues;
+    }
 }

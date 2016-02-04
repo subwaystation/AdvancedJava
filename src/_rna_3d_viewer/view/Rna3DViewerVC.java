@@ -1,5 +1,6 @@
 package _rna_3d_viewer.view;
 
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import _rna_3d_viewer.model.Rna3DViewerModel;
 
@@ -36,6 +37,7 @@ public class Rna3DViewerVC {
         this.rna3DViewerView.getScene().heightProperty().addListener(new Rna3DViewerVP.HandleSceneHeight(this.rna3DViewerView));
         this.rna3DViewerView.getOpenSecStruct().setOnAction((actionEvent) ->
                 Rna3DViewerVP.handleSecStruct(this.rna3DViewerView, this.rna3DViewerModel, primaryStage, secondaryStage));
+        this.primaryStage.setOnCloseRequest((close) -> Platform.exit());
     }
 
     public void show() {

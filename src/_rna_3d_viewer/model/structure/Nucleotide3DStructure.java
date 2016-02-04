@@ -1,6 +1,5 @@
 package _rna_3d_viewer.model.structure;
 
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
@@ -9,7 +8,7 @@ import javafx.scene.shape.MeshView;
 /**
  * Created by heumos on 02.02.16.
  */
-public abstract class Nucleotide3DStructure {
+public abstract class Nucleotide3DStructure extends ANucleotideStructure{
 
     // the id of the structure
     private int iD;

@@ -1,5 +1,9 @@
-package _rna_3d_viewer.rna_drawer;
+package _rna_3d_viewer.rna_2d_drawer;
 
+import _rna_3d_viewer.model.Residue;
+import _rna_3d_viewer.model.structure.SecStruct2DCircle;
+import _rna_3d_viewer.model.structure.SecStruct2DLine;
+import _rna_3d_viewer.model.structure.SecStruct2DRepresentations;
 import drawing.Graph;
 import drawing.SpringEmbedder;
 import javafx.animation.ParallelTransition;
@@ -21,7 +25,12 @@ import java.util.List;
  */
 public class RnaDrawerVP {
 
+    public static boolean wasDrawn = false;
+
     public static void handleDrawBEvent(RnaDrawerView rnaDrawerView, RnaDrawerModel rnaDrawerModel) {
+        wasDrawn = true;
+        SecStruct2DRepresentations secStruct2DRepresentations = rnaDrawerModel.getSecStruct2DRepresentations();
+        List<Residue> residues = rnaDrawerModel.getResidueList();
         rnaDrawerView.getDrawingP().getChildren().clear();
         boolean animation = true;
         ParallelTransition parallelTransition = new ParallelTransition();
@@ -47,6 +56,7 @@ public class RnaDrawerVP {
         String rnaSeq;
             rnaSeq = rnaDrawerModel.getSecondaryStructure().getSequence();
         for (int i = 0; i < coordinatesOriginal.length; i++) {
+            Residue residue = residues.get(i);
             double[] coordinate = coordinatesOriginal[i];
             double xPoint = coordinate[0];
             double yPoint = coordinate[1];
@@ -55,6 +65,10 @@ public class RnaDrawerVP {
             circle.setCenterY(yPoint);
             circle.setRadius(5.0);
             circles.add(circle);
+            // add circle to 2d representation
+            SecStruct2DCircle secStruct2DCircle =  new SecStruct2DCircle(residue.getResidueIndex(), residue.getResidueType(), circle);
+            secStruct2DRepresentations.getSecStruct2DCircles().add(secStruct2DCircle);
+
             String tooltipS = String.valueOf(i+1);
             tooltipS += ",";
             char base = rnaSeq.charAt(i);
@@ -104,8 +118,6 @@ public class RnaDrawerVP {
         // draw bridges if necessary
         List<Pair<Integer,Integer>> secondaryStructure;
         secondaryStructure = rnaDrawerModel.getSecondaryStructure().getSecondaryStructure();
-        // FIXME
-        System.out.println(circles.size());
         for (Pair<Integer, Integer> pair : secondaryStructure) {
             // pairs positions begin with 1!!!
             Integer basePos1 = pair.getKey() - 1;
@@ -113,6 +125,10 @@ public class RnaDrawerVP {
             Line line = new Line();
             Circle circle1 = circles.get(basePos1);
             Circle circle2 = circles.get(basePos2);
+            // add line to 2d presentation
+            SecStruct2DLine secStruct2DLine = new SecStruct2DLine(line, residues.get(basePos1).getResidueIndex(),
+                    residues.get(basePos2).getResidueIndex());
+            secStruct2DRepresentations.getSecStruct2DLines().add(secStruct2DLine);
             line.startXProperty().bind(circle1.centerXProperty().add(circle1.translateXProperty()));
             line.startYProperty().bind(circle1.centerYProperty().add(circle1.translateYProperty()));
             line.endXProperty().bind(circle2.centerXProperty().add(circle2.translateXProperty()));
