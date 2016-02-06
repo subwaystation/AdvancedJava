@@ -50,7 +50,8 @@ public class Rna3DViewerVP {
     private static RnaDrawerView localRnaDrawerView;
 
     public static void handleDrawBEvent() {
-        localRnaDrawerModel = new RnaDrawerModel(localRna3DViewerModel.getSecondaryStructure(), localRna3DViewerModel.getResidues());
+        localRnaDrawerModel = new RnaDrawerModel(localRna3DViewerModel.getSecondaryStructure(), localRna3DViewerModel.getResidues(),
+                localRna3DViewerModel.getPseudoKnotsFreeList());
         RnaDrawerVP.setFirstDraw(false);
         RnaDrawerVP.handleDrawBEvent(localRnaDrawerView, localRnaDrawerModel);
     }
@@ -161,7 +162,8 @@ public class Rna3DViewerVP {
     protected static void handleSecStruct(Rna3DViewerModel rna3DViewerModel,
                                           Stage secondaryStage) {
         if (is3DStructureReadIn) {
-            localRnaDrawerModel = new RnaDrawerModel(rna3DViewerModel.getSecondaryStructure(), rna3DViewerModel.getResidues());
+            localRnaDrawerModel = new RnaDrawerModel(rna3DViewerModel.getSecondaryStructure(), rna3DViewerModel.getResidues(),
+                    rna3DViewerModel.getPseudoKnotsFreeList());
             RnaDrawerVC rnaDrawerVC = new RnaDrawerVC(localRnaDrawerModel, secondaryStage);
             rnaDrawerVC.show();
         } else {

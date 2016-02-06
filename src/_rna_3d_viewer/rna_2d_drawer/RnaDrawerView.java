@@ -3,6 +3,7 @@ package _rna_3d_viewer.rna_2d_drawer;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -32,6 +33,9 @@ public class RnaDrawerView {
     // the group containing the drawing
     private Pane drawingP;
 
+    // the check box determining if the psudoknots shall be drawn or not
+    private CheckBox drawPseudoknotsCB;
+
     public Pane getDrawingP() {
         return drawingP;
     }
@@ -46,6 +50,9 @@ public class RnaDrawerView {
         this.rootNode.getChildren().addAll(this.sequenceL);
 
         initButtonHBox();
+        this.drawPseudoknotsCB = new CheckBox("Draw Pseudoknots.");
+        this.drawPseudoknotsCB.setSelected(false);
+        this.buttonHBox.getChildren().add(this.drawPseudoknotsCB);
 
         this.drawingP = new Pane();
         this.rootNode.getChildren().add(this.drawingP);
@@ -79,4 +86,6 @@ public class RnaDrawerView {
     public Label getSequenceL() {
         return sequenceL;
     }
+
+    public CheckBox getDrawPseudoknotsCB() {return this.drawPseudoknotsCB;}
 }

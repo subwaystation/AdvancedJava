@@ -28,14 +28,18 @@ public class RnaDrawerModel {
 
     private SecStruct2DRepresentations secStruct2DRepresentations;
 
+    private List<Pair<Integer, Integer>> pseudoKnotsFreeList;
+
     // store the location of the last clicked node
     private double xPoint;
     private double yPoint;
 
-    public RnaDrawerModel(SecondaryStructure secondaryStructure, List<Residue> residues) {
+    public RnaDrawerModel(SecondaryStructure secondaryStructure, List<Residue> residues,
+                          List<Pair<Integer, Integer>> pseudoKnotsFreeList) {
         this.secondaryStructure = secondaryStructure;
         this.residueList = residues;
         this.secStruct2DRepresentations = new SecStruct2DRepresentations(new ArrayList<>(), new ArrayList<>());
+        this.pseudoKnotsFreeList = pseudoKnotsFreeList;
     }
 
     public SecondaryStructure getSecondaryStructure() {
@@ -144,4 +148,6 @@ public class RnaDrawerModel {
     public SecStruct2DRepresentations getSecStruct2DRepresentations() {
         return secStruct2DRepresentations;
     }
+
+    public List<Pair<Integer, Integer>> getPseudoKnotsFreeList() {return pseudoKnotsFreeList;}
 }

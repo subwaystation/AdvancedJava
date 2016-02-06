@@ -53,6 +53,9 @@ public class Rna3DViewerModel {
 
     private StringBuilder dotBracketNotationBuilder = new StringBuilder();
 
+    // the pseudo knot free nucleotides
+    List<Pair<Integer, Integer>> adjustedNucleotidePairsList = new ArrayList<>();
+
     public Rna3DViewerModel() throws IOException {
 
     }
@@ -228,6 +231,7 @@ public class Rna3DViewerModel {
     private void buildSecondaryStructure() {
         HashSet<Pair<Integer, Integer>> adjustedNucleotidePairs =
                 new HashSet<>(PseudoknotUtils.adjustPseudoknots(new ArrayList<>(this.nucleotidePairs)));
+        this.adjustedNucleotidePairsList = new ArrayList<>(adjustedNucleotidePairs);
 
         for (int i = 0; i < this.residues.size(); i++) {
             dotBracketNotationBuilder.append(".");
@@ -355,4 +359,6 @@ public class Rna3DViewerModel {
     public List<Residue> getResidues() {
         return residues;
     }
+
+    public List<Pair<Integer, Integer>> getPseudoKnotsFreeList() { return this.adjustedNucleotidePairsList; }
 }

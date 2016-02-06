@@ -29,6 +29,7 @@ public class RnaDrawerVP {
     public static boolean firstDraw = false;
 
     public static void handleDrawBEvent(RnaDrawerView rnaDrawerView, RnaDrawerModel rnaDrawerModel) {
+        boolean drawPseudoknots = rnaDrawerView.getDrawPseudoknotsCB().isSelected();
         if (firstDraw) {
             Rna3DViewerVP.handleDrawBEvent();
         } else {
@@ -39,10 +40,10 @@ public class RnaDrawerVP {
             rnaDrawerView.getDrawingP().getChildren().clear();
             boolean animation = true;
             ParallelTransition parallelTransition = new ParallelTransition();
-            String dotBracktes = rnaDrawerModel.getSecondaryStructure().getDotBracketsNotation();
+            String dotBrackets = rnaDrawerModel.getSecondaryStructure().getDotBracketsNotation();
             Graph graph = new Graph();
             try {
-                graph.parseNotation(dotBracktes);
+                graph.parseNotation(dotBrackets);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -123,6 +124,9 @@ public class RnaDrawerVP {
             // draw bridges if necessary
             List<Pair<Integer,Integer>> secondaryStructure;
             secondaryStructure = rnaDrawerModel.getSecondaryStructure().getSecondaryStructure();
+            if (!drawPseudoknots) {
+                secondaryStructure = rnaDrawerModel.getPseudoKnotsFreeList();
+            }
             for (Pair<Integer, Integer> pair : secondaryStructure) {
                 // pairs positions begin with 1!!!
                 Integer basePos1 = pair.getKey() - 1;
@@ -154,6 +158,15 @@ public class RnaDrawerVP {
             }
             secStruct2DRepresentations.createCircle2DMap();
             Rna3DViewerVP.initSelectionModel(rnaDrawerModel);
+        }
+    }
+
+    private static void eliminatePseudoKnots(List<Pair<Integer, Integer>> secStruct,
+                                             List<Pair<Integer, Integer>> pseudoKnots) {
+        System.out.println(secStruct);
+        System.out.println(pseudoKnots);
+        for (Pair<Integer, Integer> pseudoKnot : pseudoKnots) {
+            secStruct.remove(pseudoKnot);
         }
     }
 
