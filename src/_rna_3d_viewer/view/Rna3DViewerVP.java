@@ -60,6 +60,17 @@ public class Rna3DViewerVP {
         localRnaDrawerView = rnaDrawerView;
     }
 
+    protected static class HandleShowHydrogenBonds implements ChangeListener<Boolean> {
+        private Rna3DViewerModel rna3DViewerModel;
+        public HandleShowHydrogenBonds(Rna3DViewerModel rna3DViewerModel) {
+            this.rna3DViewerModel = rna3DViewerModel;
+        }
+        @Override
+        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                this.rna3DViewerModel.setHydrogenBondsVisibile(newValue);
+        }
+    }
+
     protected static class HandleSceneWidth implements ChangeListener<Number> {
         private Rna3DViewerView rna3DViewerView;
         public HandleSceneWidth(Rna3DViewerView rna3DViewerView) {

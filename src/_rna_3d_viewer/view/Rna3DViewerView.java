@@ -2,10 +2,7 @@ package _rna_3d_viewer.view;
 
 import javafx.geometry.Point3D;
 import javafx.scene.*;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -49,6 +46,9 @@ public class Rna3DViewerView {
     // the open sec struct menu item
     private MenuItem openSecStruct;
 
+    // the show hydrogen bond check menu item
+    private CheckMenuItem showHydrogenBonds;
+
     public Rna3DViewerView() {
         this.rootBP = new StackPane();
 
@@ -82,6 +82,12 @@ public class Rna3DViewerView {
         this.openSecStruct = new MenuItem("Open SecStruct");
         menuSecStruct.getItems().add(openSecStruct);
         menuBar.getMenus().add(menuSecStruct);
+        showHydrogenBonds = new CheckMenuItem("Show Hydrogen Bonds");
+        showHydrogenBonds.setSelected(false);
+        Menu menuView = new Menu("View");
+        menuView.getItems().add(showHydrogenBonds);
+        menuBar.getMenus().add(menuView);
+
 
         borderPane.setTop(menuBar);
         this.label = new Label("No PDB file selected.");
@@ -150,5 +156,9 @@ public class Rna3DViewerView {
 
     public MenuItem getOpenSecStruct() {
         return this.openSecStruct;
+    }
+
+    public CheckMenuItem getShowHydrogenBonds() {
+        return this.showHydrogenBonds;
     }
 }

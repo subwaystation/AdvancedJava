@@ -1,6 +1,8 @@
 package _rna_3d_viewer.view;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.stage.Stage;
 import _rna_3d_viewer.model.Rna3DViewerModel;
 
@@ -38,6 +40,8 @@ public class Rna3DViewerVC {
         this.rna3DViewerView.getOpenSecStruct().setOnAction((actionEvent) ->
                 Rna3DViewerVP.handleSecStruct(this.rna3DViewerModel, secondaryStage));
         this.primaryStage.setOnCloseRequest((close) -> Platform.exit());
+        this.rna3DViewerView.getShowHydrogenBonds().selectedProperty().addListener(
+                new Rna3DViewerVP.HandleShowHydrogenBonds(this.getRna3DViewerModel()));
     }
 
     public void show() {

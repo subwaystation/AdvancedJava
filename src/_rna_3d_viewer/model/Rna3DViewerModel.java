@@ -225,6 +225,7 @@ public class Rna3DViewerModel {
             }
 
         }
+        setHydrogenBondsVisibile(false);
         buildSecondaryStructure();
     }
 
@@ -361,4 +362,16 @@ public class Rna3DViewerModel {
     }
 
     public List<Pair<Integer, Integer>> getPseudoKnotsFreeList() { return this.adjustedNucleotidePairsList; }
+
+    public void setHydrogenBondsVisibile(Boolean newValue) {
+        if (newValue) {
+            for (Cylinder cylinder : hydrogenBonds) {
+                cylinder.setVisible(true);
+            }
+        } else {
+            for (Cylinder cylinder : hydrogenBonds) {
+                cylinder.setVisible(false);
+            }
+        }
+    }
 }
