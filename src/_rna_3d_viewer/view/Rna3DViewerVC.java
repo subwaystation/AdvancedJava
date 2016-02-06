@@ -42,6 +42,10 @@ public class Rna3DViewerVC {
         this.primaryStage.setOnCloseRequest((close) -> Platform.exit());
         this.rna3DViewerView.getShowHydrogenBonds().selectedProperty().addListener(
                 new Rna3DViewerVP.HandleShowHydrogenBonds(this.getRna3DViewerModel()));
+        this.rna3DViewerView.getBaseColoringCMI().selectedProperty().addListener(
+                new Rna3DViewerVP.HandleBaseColoringEvent(this.getRna3DViewerModel(), this.rna3DViewerView));
+        this.rna3DViewerView.getTypeColoringCMI().selectedProperty().addListener(
+                new Rna3DViewerVP.HandleTypeColoringEvent(this.getRna3DViewerModel(), this.rna3DViewerView));
     }
 
     public void show() {

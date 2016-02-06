@@ -10,8 +10,8 @@ public class Purine3DStructure  extends Nucleotide3DStructure{
 
     private Color defaultColor = Color.GREEN;
 
-    public Purine3DStructure(MeshView structure, int iD, int residueNumber) {
-        super(structure, iD, residueNumber);
+    public Purine3DStructure(MeshView structure, int iD, int residueNumber, String residueType) {
+        super(structure, iD, residueNumber, residueType);
     }
 
 

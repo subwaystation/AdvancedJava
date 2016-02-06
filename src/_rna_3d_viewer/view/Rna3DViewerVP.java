@@ -6,6 +6,7 @@ import _rna_3d_viewer.rna_2d_drawer.RnaDrawerModel;
 import _rna_3d_viewer.rna_2d_drawer.RnaDrawerVC;
 import _rna_3d_viewer.rna_2d_drawer.RnaDrawerVP;
 import _rna_3d_viewer.rna_2d_drawer.RnaDrawerView;
+import javafx.beans.InvalidationListener;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -43,7 +44,7 @@ public class Rna3DViewerVP {
 
     private static SecStruct2DRepresentations localSecStructRepresentations = null;
 
-    private static RnaDrawerModel localRnaDrawerModel;
+    private static RnaDrawerModel localRnaDrawerModel = new RnaDrawerModel(null, null, null);
 
     private static Rna3DViewerModel localRna3DViewerModel;
 
@@ -68,6 +69,46 @@ public class Rna3DViewerVP {
         @Override
         public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 this.rna3DViewerModel.setHydrogenBondsVisibile(newValue);
+        }
+    }
+
+    protected static class HandleBaseColoringEvent implements ChangeListener<Boolean> {
+        private Rna3DViewerModel rna3DViewerModel;
+        private Rna3DViewerView rna3DViewerView;
+        public HandleBaseColoringEvent(Rna3DViewerModel rna3DViewerModel, Rna3DViewerView rna3DViewerView) {
+            this.rna3DViewerModel = rna3DViewerModel;
+            this.rna3DViewerView = rna3DViewerView;
+        }
+        @Override
+        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+            // do base coloring
+            if (newValue) {
+                rna3DViewerView.getTypeColoringCMI().setSelected(false);
+                rna3DViewerModel.colorNucleotidesByBase();
+                if (localRnaDrawerModel.getResidueList() != null) {
+                    localRnaDrawerModel.colorCircliesByBase();
+                }
+            }
+        }
+    }
+
+    protected static class HandleTypeColoringEvent implements ChangeListener<Boolean> {
+        private Rna3DViewerModel rna3DViewerModel;
+        private Rna3DViewerView rna3DViewerView;
+        public HandleTypeColoringEvent(Rna3DViewerModel rna3DViewerModel, Rna3DViewerView rna3DViewerView) {
+            this.rna3DViewerModel = rna3DViewerModel;
+            this.rna3DViewerView = rna3DViewerView;
+        }
+        @Override
+        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+            // do type coloring
+            if (newValue) {
+                rna3DViewerView.getBaseColoringCMI().setSelected(false);
+                rna3DViewerModel.colorNucleotidesByType();
+                if (localRnaDrawerModel.getResidueList() != null) {
+                    localRnaDrawerModel.colorCircliesByType();
+                }
+            }
         }
     }
 
@@ -327,5 +368,4 @@ public class Rna3DViewerVP {
             }
         }
     }
-
 }

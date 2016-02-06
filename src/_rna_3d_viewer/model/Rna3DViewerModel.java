@@ -3,11 +3,15 @@ package _rna_3d_viewer.model;
 import _rna_3d_viewer.PseudoknotUtils;
 import _rna_3d_viewer.io.PdbAtom;
 import _rna_3d_viewer.io.PdbFileParser;
+import _rna_3d_viewer.model.structure.ANucleotideStructure;
+import _rna_3d_viewer.model.structure.Nucleotide3DStructure;
 import _rna_3d_viewer.model.structure.Nucleotide3DStructures;
 import _rna_3d_viewer.model.structure.SecondaryStructure;
 import _rna_3d_viewer.model.structure_builder.HydrogenBond3DStructureBuilder;
 import _rna_3d_viewer.model.structure_builder.Molecule3DConnectionBuilder;
 import _rna_3d_viewer.model.structure_builder.Residue3DStructureBuilder;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.*;
 import javafx.util.Pair;
 
@@ -135,8 +139,24 @@ public class Rna3DViewerModel {
             }
 
         }
+        /// color nucleotides by type
+        colorNucleotidesByType();
         // build hydrogen bonds and extract nucleotide pairs
         buildHydrogenBonds();
+    }
+
+    public void colorNucleotidesByType() {
+        for (ANucleotideStructure aNucleotideStructure : this.nucleotide3DStructures.getNucleotide3DStructures()) {
+            Nucleotide3DStructure nucleotide3DStructure = (Nucleotide3DStructure) aNucleotideStructure;
+            colorMeshViewByType(nucleotide3DStructure.getStructure(), nucleotide3DStructure.getResidueType().charAt(0));
+        }
+    }
+
+    public void colorNucleotidesByBase() {
+        for (ANucleotideStructure aNucleotideStructure : this.nucleotide3DStructures.getNucleotide3DStructures()) {
+            Nucleotide3DStructure nucleotide3DStructure = (Nucleotide3DStructure) aNucleotideStructure;
+            colorMeshViewByBase(nucleotide3DStructure.getStructure(), nucleotide3DStructure.getResidueType().charAt(0));
+        }
     }
 
     private void buildHydrogenBonds() {
@@ -372,6 +392,44 @@ public class Rna3DViewerModel {
             for (Cylinder cylinder : hydrogenBonds) {
                 cylinder.setVisible(false);
             }
+        }
+    }
+
+    private void colorMeshViewByBase(MeshView meshView, char base) {
+        base = Character.toLowerCase(base);
+        switch(base) {
+            case 'a':
+                meshView.setMaterial(new PhongMaterial(Color.GREEN));
+                break;
+            case 'u':
+                meshView.setMaterial(new PhongMaterial(Color.RED));
+                break;
+            case 'c':
+                meshView.setMaterial(new PhongMaterial(Color.YELLOW));
+                break;
+            case 'g':
+                meshView.setMaterial(new PhongMaterial(Color.BLUE));
+                break;
+            default:
+                meshView.setMaterial(new PhongMaterial(Color.BLACK));
+                break;
+        }
+    }
+
+    private void colorMeshViewByType(MeshView meshView, char base) {
+        base = Character.toLowerCase(base);
+        switch(base) {
+            case 'a':
+            case 'u':
+                meshView.setMaterial(new PhongMaterial(Color.GREEN));
+                break;
+            case 'c':
+            case 'g':
+                meshView.setMaterial(new PhongMaterial(Color.RED));
+                break;
+            default:
+                meshView.setMaterial(new PhongMaterial(Color.BLACK));
+                break;
         }
     }
 }

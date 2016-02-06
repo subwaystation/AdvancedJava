@@ -10,8 +10,8 @@ public class Pyrimidine3DStructure extends Nucleotide3DStructure{
 
     private Color defaultColor = Color.RED;
 
-    public Pyrimidine3DStructure(MeshView structure, int iD, int residueNumber) {
-        super(structure, iD, residueNumber);
+    public Pyrimidine3DStructure(MeshView structure, int iD, int residueNumber, String residueType) {
+        super(structure, iD, residueNumber, residueType);
     }
 
     @Override

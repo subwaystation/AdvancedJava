@@ -1,6 +1,7 @@
 package _rna_3d_viewer.rna_2d_drawer;
 
 import _rna_3d_viewer.model.Residue;
+import _rna_3d_viewer.model.structure.SecStruct2DCircle;
 import _rna_3d_viewer.model.structure.SecStruct2DRepresentations;
 import _rna_3d_viewer.model.structure.SecondaryStructure;
 import javafx.animation.KeyFrame;
@@ -81,24 +82,53 @@ public class RnaDrawerModel {
         return secondaryStructure;
     }
 
-    public static void colorCircle(Circle circle, char base) {
+    public static void colorCircleByBase(Circle circle, char base) {
         base = Character.toLowerCase(base);
         switch(base) {
             case 'a':
-                circle.setStroke(Color.AQUAMARINE);
+                circle.setStroke(Color.GREEN);
                 break;
             case 'u':
-                circle.setStroke(Color.BROWN);
+                circle.setStroke(Color.RED);
                 break;
             case 'c':
-                circle.setStroke(Color.GREENYELLOW);
+                circle.setStroke(Color.YELLOW);
                 break;
             case 'g':
-                circle.setStroke(Color.DARKRED);
+                circle.setStroke(Color.BLUE);
                 break;
             default:
                 circle.setStroke(Color.BLACK);
                 break;
+        }
+    }
+
+    public static void colorCircleByType(Circle circle, char base) {
+        base = Character.toLowerCase(base);
+        switch(base) {
+            case 'a':
+            case 'u':
+                circle.setStroke(Color.GREEN);
+                break;
+            case 'c':
+            case 'g':
+                circle.setStroke(Color.RED);
+                break;
+            default:
+                circle.setStroke(Color.BLACK);
+                break;
+        }
+    }
+
+    public void colorCircliesByBase() {
+        for (SecStruct2DCircle secStruct2DCircle : this.getSecStruct2DRepresentations().getSecStruct2DCircles()) {
+            colorCircleByBase(secStruct2DCircle.getCircle(), secStruct2DCircle.getResidueType().charAt(0));
+        }
+    }
+
+    public void colorCircliesByType() {
+        for (SecStruct2DCircle secStruct2DCircle : this.getSecStruct2DRepresentations().getSecStruct2DCircles()) {
+            colorCircleByType(secStruct2DCircle.getCircle(), secStruct2DCircle.getResidueType().charAt(0));
         }
     }
 

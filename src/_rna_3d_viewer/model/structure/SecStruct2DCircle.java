@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
-import model.RnaDrawerModel;
 
 /**
  * Created by heumos on 04.02.16.

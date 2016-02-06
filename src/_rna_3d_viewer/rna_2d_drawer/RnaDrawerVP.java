@@ -79,7 +79,7 @@ public class RnaDrawerVP {
                 tooltipS += ",";
                 char base = rnaSeq.charAt(i);
                 tooltipS += base;
-                RnaDrawerModel.colorCircle(circle, base);
+                RnaDrawerModel.colorCircleByType(circle, base);
                 Tooltip tooltip = new Tooltip(tooltipS);
                 Tooltip.install(circle, tooltip);
                 if (animation) {

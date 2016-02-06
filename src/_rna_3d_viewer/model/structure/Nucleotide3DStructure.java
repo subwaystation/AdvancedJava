@@ -21,11 +21,15 @@ public abstract class Nucleotide3DStructure extends ANucleotideStructure{
     // a boolean property stating, if the structure is selected or not in the view
     private SimpleBooleanProperty isSelected;
 
-    public Nucleotide3DStructure(MeshView structure, int iD, int residueNumber) {
+    // the residue Type
+    private String residueType;
+
+    public Nucleotide3DStructure(MeshView structure, int iD, int residueNumber, String residueType) {
         this.iD = iD;
         this.residueNumber = residueNumber;
         this.structure = structure;
         this.isSelected = new SimpleBooleanProperty(false);
+        this.residueType = residueType;
     }
 
     public void resetColor() {
@@ -70,5 +74,9 @@ public abstract class Nucleotide3DStructure extends ANucleotideStructure{
 
     public void setIsSelected(boolean isSelected) {
         this.isSelected.set(isSelected);
+    }
+
+    public String getResidueType() {
+        return this.residueType;
     }
 }

@@ -43,12 +43,14 @@ public class Residue3DStructureBuilder {
             this.purine3DStructureBuilder.setCoordinates(this.residue.getNucleotideCoordinates());
             meshView = this.purine3DStructureBuilder.
                     generateMeshView(this.residue.getResidueType(), this.residue.getResidueIndex());
-            return new Purine3DStructure(meshView, this.residue.getResidueIndex(), this.residue.getResidueIndex());
+            return new Purine3DStructure(meshView, this.residue.getResidueIndex(), this.residue.getResidueIndex(),
+                    this.residue.getResidueType());
         } else {
             this.pyrimidine3DStructureBuilder.setCoordinates(this.residue.getNucleotideCoordinates());
             meshView = this.pyrimidine3DStructureBuilder.
                     generateMeshView(this.residue.getResidueType(), this.residue.getResidueIndex());
-            return new Pyrimidine3DStructure(meshView, this.residue.getResidueIndex(), this.residue.getResidueIndex());
+            return new Pyrimidine3DStructure(meshView, this.residue.getResidueIndex(), this.residue.getResidueIndex(),
+                    this.residue.getResidueType());
         }
     }
 

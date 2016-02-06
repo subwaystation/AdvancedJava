@@ -49,6 +49,12 @@ public class Rna3DViewerView {
     // the show hydrogen bond check menu item
     private CheckMenuItem showHydrogenBonds;
 
+    // the base coloring  check menu item
+    private CheckMenuItem baseColoringCMI;
+
+    // the type coloring check menu item
+    private CheckMenuItem typeColoringCMI;
+
     public Rna3DViewerView() {
         this.rootBP = new StackPane();
 
@@ -87,7 +93,11 @@ public class Rna3DViewerView {
         Menu menuView = new Menu("View");
         menuView.getItems().add(showHydrogenBonds);
         menuBar.getMenus().add(menuView);
-
+        this.baseColoringCMI = new CheckMenuItem("Base Coloring");
+        this.baseColoringCMI.setSelected(false);
+        this.typeColoringCMI = new CheckMenuItem("Type Coloring");
+        this.typeColoringCMI.setSelected(true);
+        menuView.getItems().addAll(baseColoringCMI, typeColoringCMI);
 
         borderPane.setTop(menuBar);
         this.label = new Label("No PDB file selected.");
@@ -160,5 +170,13 @@ public class Rna3DViewerView {
 
     public CheckMenuItem getShowHydrogenBonds() {
         return this.showHydrogenBonds;
+    }
+
+    public CheckMenuItem getBaseColoringCMI() {
+        return baseColoringCMI;
+    }
+
+    public CheckMenuItem getTypeColoringCMI() {
+        return typeColoringCMI;
     }
 }
