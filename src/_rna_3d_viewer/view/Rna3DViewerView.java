@@ -124,6 +124,30 @@ public class Rna3DViewerView {
         stage.show();
     }
 
+    public void update(){
+        double deltaX;
+        double zoomFactorX;
+
+        double finalTranslateZ;
+
+        double halfMoleculeWidth = this.rnaMoleculesG.getLayoutBounds().getWidth() / 2.0;
+
+        double halfFovAngle = this.perspectiveCamera.getFieldOfView() / 2.0;
+
+        double computedCamerDistance = halfMoleculeWidth / (Math.tan(Math.toRadians(halfFovAngle)));
+
+        double ratio = this.scene.getWidth() / this.scene.getHeight();
+
+        deltaX = this.rnaMoleculesG.getLayoutBounds().getWidth();
+
+        zoomFactorX = this.scene.getWidth() / deltaX;
+
+        finalTranslateZ = computedCamerDistance * zoomFactorX + (this.scene.getHeight() - zoomFactorX*deltaX) - ratio*100 - 10*ratio;
+
+        this.perspectiveCamera.setTranslateZ(finalTranslateZ);
+    }
+
+
     public Scene getScene() {
         return scene;
     }

@@ -5,6 +5,9 @@ import _rna_3d_viewer.io.PdbAtom;
 import java.util.*;
 
 /**
+ * Class representing a way to extract the sugar coordinates from
+ * a given residue.
+ *
  * Created by heumos on 14.12.15.
  */
 public class SugarCoordinateExtractor {
@@ -34,6 +37,11 @@ public class SugarCoordinateExtractor {
         return coordinates;
     }
 
+    /**
+     * extract the sugar coordinates from given atom hashmap
+     * @param atomNameCoordinatesMap all atom coordinates hashed by their atom name
+     * @return float[] 3D coordinates of sugar
+     */
     public static float[] extractSugarCoordinates(Map<String, float[]> atomNameCoordinatesMap) {
         float[] coordinates = new float[15];
         for (Map.Entry<String, Integer> entry : SUGAR_ATOMS.entrySet()) {

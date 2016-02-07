@@ -125,6 +125,7 @@ public class Rna3DViewerVP {
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
             this.rna3DViewerView.getPerspectiveCamera().
                     setTranslateX(-newValue.doubleValue() / 2);
+            this.rna3DViewerView.update();
         }
     }
 
@@ -138,6 +139,7 @@ public class Rna3DViewerVP {
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
             this.rna3DViewerView.getPerspectiveCamera().
                     setTranslateY(-newValue.doubleValue() / 2);
+            this.rna3DViewerView.update();
         }
     }
 
@@ -211,6 +213,7 @@ public class Rna3DViewerVP {
             local3DNucleotides = rna3DViewerModel.getNucleotide3DStructures();
 
             is3DStructureReadIn = true;
+            rna3DViewerView.update();
         }
     }
 

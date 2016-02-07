@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Class representing a way to extract the nucleotide purine coordinates.
+ *
  * Created by heumos on 05.01.16.
  */
 public class PurineCoordinateExtractor {
@@ -40,7 +42,12 @@ public class PurineCoordinateExtractor {
         return coordinates;
     }
 
-    public static float[] extractPyrimidineCoordinates(Map<String, float[]> atomNameCoordinatesMap) {
+    /**
+     *
+     * @param atomNameCoordinatesMap all atom coordinates hashed by their atom name
+     * @return float[] the 3D coordinates of the purine
+     */
+    public static float[] extractPurineCoordinates(Map<String, float[]> atomNameCoordinatesMap) {
         float[] coordinates = new float[27];
         for (Map.Entry<String, Integer> entry : PURIN_ATOMS.entrySet()) {
             String atomName = entry.getKey();

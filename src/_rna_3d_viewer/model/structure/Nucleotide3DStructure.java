@@ -1,11 +1,12 @@
 package _rna_3d_viewer.model.structure;
 
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.MeshView;
 
 /**
+ * Class representing a nucleotide 3D structure.
+ *
  * Created by heumos on 02.02.16.
  */
 public abstract class Nucleotide3DStructure extends ANucleotideStructure{
@@ -25,6 +26,13 @@ public abstract class Nucleotide3DStructure extends ANucleotideStructure{
     // the residue Type
     private String residueType;
 
+    /**
+     *
+     * @param structure the structure itself as a MeshView
+     * @param iD the id of the 3d structure
+     * @param residueNumber the residue number of the 3d structure
+     * @param residueType the residue type of the 3d structure
+     */
     public Nucleotide3DStructure(MeshView structure, int iD, int residueNumber, String residueType) {
         this.iD = iD;
         this.residueNumber = residueNumber;

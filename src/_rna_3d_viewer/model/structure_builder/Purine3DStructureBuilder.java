@@ -1,9 +1,10 @@
 package _rna_3d_viewer.model.structure_builder;
 
-import _rna_3d_viewer.model.structure_builder.Nucleotide3DStructureBuilder;
 import javafx.scene.paint.Color;
 
 /**
+ * Providing important fields to generate purine 3d molecule structure.
+ *
  * Created by heumos on 05.01.16.
  */
 public class Purine3DStructureBuilder extends Nucleotide3DStructureBuilder {

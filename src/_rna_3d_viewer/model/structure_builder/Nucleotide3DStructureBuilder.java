@@ -23,8 +23,9 @@ public abstract class Nucleotide3DStructureBuilder {
 
     /**
      * Main method, returns a 3D representative view.
-     * @param residueType
-     * @param residueNumber
+     * Generate mesh view.
+     * @param residueType the residue type
+     * @param residueNumber the residue number
      * @return
      */
     public MeshView generateMeshView(String residueType, Integer residueNumber) {

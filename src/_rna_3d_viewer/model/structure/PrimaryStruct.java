@@ -7,11 +7,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 /**
+ *
+ * Class representing a primary structure (single nucleotide)
+ * for drawing purposes.
+ *
  * Created by heumos on 07.02.16.
  */
 public class PrimaryStruct extends ANucleotideStructure{
 
-    private Text nucleotideLabel;
+    private Text nucleotideText;
 
     private BooleanProperty isSelected;
 
@@ -19,8 +23,13 @@ public class PrimaryStruct extends ANucleotideStructure{
 
     private int residueIndex;
 
-    public PrimaryStruct(Text nucleotideLabel, int residueIndex) {
-        this.nucleotideLabel = nucleotideLabel;
+    /**
+     *
+     * @param nucleotideText the Text in which the residue type is stored
+     * @param residueIndex the residue index
+     */
+    public PrimaryStruct(Text nucleotideText, int residueIndex) {
+        this.nucleotideText = nucleotideText;
         this.isSelected = new SimpleBooleanProperty(false);
         this.residueIndex = residueIndex;
     }
@@ -32,7 +41,7 @@ public class PrimaryStruct extends ANucleotideStructure{
 
     @Override
     public Node getStructure() {
-        return this.nucleotideLabel;
+        return this.nucleotideText;
     }
 
     @Override
@@ -47,11 +56,11 @@ public class PrimaryStruct extends ANucleotideStructure{
 
     @Override
     public void resetColor() {
-        this.nucleotideLabel.setFill(this.color);
+        this.nucleotideText.setFill(this.color);
     }
 
-    public Text getNucleotideLabel() {
-        return nucleotideLabel;
+    public Text getNucleotideText() {
+        return nucleotideText;
     }
 
     public boolean getIsSelected() {

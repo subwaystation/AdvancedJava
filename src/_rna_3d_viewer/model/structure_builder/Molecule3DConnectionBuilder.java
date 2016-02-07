@@ -8,6 +8,8 @@ import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 
 /**
+ * Creates molecule connections given end and start points (atoms).
+ *
  * Created by heumos on 06.01.16.
  */
 public class Molecule3DConnectionBuilder {
@@ -79,6 +81,10 @@ public class Molecule3DConnectionBuilder {
         setEndPoint(point2);
     }
 
+    /**
+     * Create molecule (atom) connection in 3d representation.
+     * @return the molecule connection
+     */
     public Cylinder createConnection() {
         if(this.initPoint != null && this.endPoint != null){
             Point3D yAxis = new Point3D(0, 1, 0);

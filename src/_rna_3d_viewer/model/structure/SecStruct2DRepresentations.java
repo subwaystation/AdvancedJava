@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * Class representing the 2d structs for drawing.
+ *
  * Created by heumos on 04.02.16.
  */
 public class SecStruct2DRepresentations {
@@ -17,6 +19,11 @@ public class SecStruct2DRepresentations {
 
     private HashMap<Integer, SecStruct2DCircle> secStruct2DCircleHashMap;
 
+    /**
+     *
+     * @param secStruct2DCircles secondary structure nucleotides
+     * @param secStruct2DLines secondary structure connecting base pairs
+     */
     public SecStruct2DRepresentations(List<SecStruct2DCircle> secStruct2DCircles,
                                       List<SecStruct2DLine> secStruct2DLines) {
         this.secStruct2DCircles = secStruct2DCircles;
@@ -53,6 +60,10 @@ public class SecStruct2DRepresentations {
         return shapes;
     }
 
+    /**
+     * Concatenates the two secondary structure representations lines and circles.
+     * @return the lines and circles as a list
+     */
     public ANucleotideStructure[] get2DStructureRepresentations() {
         ANucleotideStructure[] aSecStruct2Ds = new ANucleotideStructure[this.secStruct2DLines.size() + this.secStruct2DCircles.size()];
         List<ANucleotideStructure> aSecStruct2DsList = new ArrayList<>();

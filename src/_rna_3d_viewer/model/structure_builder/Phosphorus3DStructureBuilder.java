@@ -6,6 +6,8 @@ import javafx.scene.shape.Sphere;
 
 
 /**
+ * Class providing method to build a phosphate 3d structure molecule.
+ *
  * Created by heumos on 08.01.16.
  */
 public class Phosphorus3DStructureBuilder {
@@ -26,6 +28,10 @@ public class Phosphorus3DStructureBuilder {
         this.coordinates = coordinates;
     }
 
+    /**
+     * generate phosphate molecule with radius, material and color
+     * @return
+     */
     public Sphere generatePhosphate() {
         Sphere sphere = new Sphere(this.radius);
         sphere.setMaterial(this.material);

@@ -6,16 +6,27 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ *
+ * Class representing the whole primary structure of a pdb file.
+ *
  * Created by heumos on 07.02.16.
  */
 public class PrimaryStructRepresentations {
 
+    // primary structures
     private List<PrimaryStruct> primaryStructList;
 
+    // primary structures as hash map with residue index as key
     private HashMap<Integer, PrimaryStruct> primaryStructHashMap;
 
+    // the drawing representation
     private TextFlow textFlow;
 
+    /**
+     *
+     * @param primaryStructList the primary structures
+     * @param textFlow the text flow holding all texts of the primary structures
+     */
     public PrimaryStructRepresentations(List<PrimaryStruct> primaryStructList, TextFlow textFlow) {
         this.primaryStructList = primaryStructList;
         this.textFlow = textFlow;

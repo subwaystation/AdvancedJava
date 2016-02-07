@@ -82,7 +82,7 @@ public class Residue {
      */
     public float[] getNucleotideCoordinates() {
         if (isPurine()) {
-            return PurineCoordinateExtractor.extractPyrimidineCoordinates(this.atomNameCoordinatesMap);
+            return PurineCoordinateExtractor.extractPurineCoordinates(this.atomNameCoordinatesMap);
         } else {
             return PyrimidineCoordinateExtractor.extractPyrimidineCoordinates(this.atomNameCoordinatesMap);
         }

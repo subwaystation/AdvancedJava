@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The two methods in this class were taken over from Sven_Fillinger.
+ * sven.fillinger@mailbox.org
+ *
  * Created by heumos on 01.02.16.
  */
 public class PseudoknotUtils {

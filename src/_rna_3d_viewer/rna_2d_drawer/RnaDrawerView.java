@@ -33,7 +33,7 @@ public class RnaDrawerView {
     // the draw button
     private Button drawB;
 
-    // the group containing the drawing
+    // the group containing the _rna_3d_viewer.drawing
     private Pane drawingP;
 
     // the check box determining if the psudoknots shall be drawn or not

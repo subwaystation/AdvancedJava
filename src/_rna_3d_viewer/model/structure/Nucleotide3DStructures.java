@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ *
+ * Class holding all 3D structures.
+ *
  * Created by heumos on 02.02.16.
  */
 public class Nucleotide3DStructures {
@@ -15,6 +18,10 @@ public class Nucleotide3DStructures {
 
     private HashMap<Integer, Nucleotide3DStructure> nucleotideStructureHashMap = new HashMap<>();
 
+    /**
+     *
+     * @param nucleotide3DStructures the list of nucleotide structures
+     */
     public Nucleotide3DStructures(List<ANucleotideStructure> nucleotide3DStructures) {
         this.nucleotide3DStructures = nucleotide3DStructures;
     }
@@ -55,6 +62,11 @@ public class Nucleotide3DStructures {
         return meshViews;
     }
 
+    /**
+     *
+     * @param residueIndex the residue index
+     * @return the nucleotide 3d structure corresponding to the given residue index
+     */
     public Nucleotide3DStructure getFast(int residueIndex) {
         if (this.nucleotideStructureHashMap.size() == 0) {
             for (ANucleotideStructure aNucleotideStructure : this.nucleotide3DStructures) {

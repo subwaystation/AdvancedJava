@@ -1,7 +1,7 @@
 package ui.rna_drawer;
 
-import drawing.Graph;
-import drawing.SpringEmbedder;
+import _rna_3d_viewer.drawing.Graph;
+import _rna_3d_viewer.drawing.SpringEmbedder;
 import javafx.animation.ParallelTransition;
 import javafx.event.EventHandler;
 import javafx.scene.control.Tooltip;

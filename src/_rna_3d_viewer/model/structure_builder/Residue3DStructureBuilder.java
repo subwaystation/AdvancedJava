@@ -9,6 +9,9 @@ import javafx.scene.shape.MeshView;
 import javafx.scene.shape.Sphere;
 
 /**
+ *
+ * Class proving methods for the creation for the different 3d structures.
+ *
  * Created by heumos on 31.01.16.
  */
 public class Residue3DStructureBuilder {
@@ -25,6 +28,9 @@ public class Residue3DStructureBuilder {
 
     private Phosphorus3DStructureBuilder phosphorus3DStructureBuilder;
 
+    /**
+     * initiate 3d structure builders
+     */
     public Residue3DStructureBuilder() {
         this.purine3DStructureBuilder = new Purine3DStructureBuilder();
         this.pyrimidine3DStructureBuilder = new Pyrimidine3DStructureBuilder();
@@ -37,6 +43,10 @@ public class Residue3DStructureBuilder {
         this.residue = residue;
     }
 
+    /**
+     * build the nucleotide 3d structure
+     * @return depending on the residue type a purine or pyrimidine 3d structure
+     */
     public Nucleotide3DStructure buildNucleotide3DStructure() {
         MeshView meshView;
         if (this.residue.isPurine()) {
@@ -69,21 +79,37 @@ public class Residue3DStructureBuilder {
         }
     }
 
+    /**
+     * build sugar 3d structure
+     * @return the resulting MeshView
+     */
     public MeshView buildSugar3DStructure() {
         this.sugar3DStructureBuilder.setCoordinates(this.residue.getSugarCoordinates());
         return this.sugar3DStructureBuilder.generateMeshView();
     }
 
+    /**
+     * build connection between sugar and nucleotide
+     * @return the resulting Cylinder
+     */
     public Cylinder buildNucleotideSugarConnection3DStructure() {
         this.molecule3DConnectionBuilder.setPoints(this.residue.getNucleotideSugarCoords());
         return this.molecule3DConnectionBuilder.createConnection();
     }
 
+    /**
+     * build phosphorus 3d structure
+     * @return the resulting Sphere
+     */
     public Sphere buildPhosphorus3DStructure() {
         this.phosphorus3DStructureBuilder.setCoordinates(this.residue.getPhosphorusCoords());
         return this.phosphorus3DStructureBuilder.generatePhosphate();
     }
 
+    /**
+     * build connections between sugar and phosphorus
+     * @return the resulting cylinder
+     */
     public Cylinder buildSugarPhosphorusConnection3DStructure() {
         float[] phosphorusCoordinates = this.residue.getPhosphorusCoords();
         if (this.residue.getPhosphorusCoords() == null ||

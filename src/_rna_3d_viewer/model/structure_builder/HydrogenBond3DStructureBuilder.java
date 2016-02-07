@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Class providing methods to build hydrogen bonds 3d structure.
+ *
  * Created by heumos on 31.01.16.
  */
 public class HydrogenBond3DStructureBuilder {
@@ -21,6 +23,9 @@ public class HydrogenBond3DStructureBuilder {
 
     private List<Cylinder> hydrogenBonds3DStructure = new ArrayList<>();
 
+    /**
+     * Create new Molecule3DConnectionBuilder for bond creation.
+     */
     public HydrogenBond3DStructureBuilder() {
         this.molecule3DConnectionBuilder = new Molecule3DConnectionBuilder(0.2);
         this.molecule3DConnectionBuilder.setColor(Color.BLUE);
@@ -50,6 +55,10 @@ public class HydrogenBond3DStructureBuilder {
         this.molecule3DConnectionBuilder = molecule3DConnectionBuilder;
     }
 
+    /**
+     * build a adenine uracil hydrogen bond
+     * @return was the building successful?
+     */
     public boolean buildAdeUraHydrogenBond() {
         this.hydrogenBonds3DStructure.clear();
         // adenine coordinates
@@ -90,6 +99,10 @@ public class HydrogenBond3DStructureBuilder {
         return isValidHydrogenBond;
     }
 
+    /**
+     * build a guanine cytosine hydrogen bond
+     * @return was the building successful?
+     */
     public boolean buildGuaCytHydrogenBond() {
         this.hydrogenBonds3DStructure.clear();
         // cytosine coordinates

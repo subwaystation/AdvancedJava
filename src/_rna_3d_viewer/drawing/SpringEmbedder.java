@@ -1,4 +1,4 @@
-package drawing;
+package _rna_3d_viewer.drawing;
 
 /**
  * simple spring embedder

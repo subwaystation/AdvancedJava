@@ -6,6 +6,10 @@ import javafx.scene.shape.MeshView;
 import javafx.scene.shape.TriangleMesh;
 
 /**
+ *
+ * This class provides functionality in order to build a sugar
+ * 3d molecule structure.
+ *
  * Created by heumos on 14.12.15.
  */
 public class Sugar3DStructureBuilder {
@@ -45,6 +49,10 @@ public class Sugar3DStructureBuilder {
         this.coordinates = coordinates;
     }
 
+    /**
+     * generate mesh view of sugar 3d structure
+     * @return the sugar molecule
+     */
     public MeshView generateMeshView() {
         MeshView meshView = new MeshView();
         TriangleMesh triangleMesh = new TriangleMesh();

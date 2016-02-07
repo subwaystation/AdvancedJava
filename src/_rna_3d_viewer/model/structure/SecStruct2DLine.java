@@ -7,6 +7,8 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 
 /**
+ * A secondary structure line connecting two base pairs.
+ *
  * Created by heumos on 04.02.16.
  */
 public class SecStruct2DLine extends ANucleotideStructure {
@@ -25,6 +27,12 @@ public class SecStruct2DLine extends ANucleotideStructure {
 
     private Color defaultColor = Color.RED;
 
+    /**
+     *
+     * @param line the line
+     * @param residueIndex1 residue index of base 1
+     * @param residueIndex2 residue index of base 2
+     */
     public SecStruct2DLine(Line line, int residueIndex1, int residueIndex2) {
         this.line = line;
         this.residueIndex1 = residueIndex1;

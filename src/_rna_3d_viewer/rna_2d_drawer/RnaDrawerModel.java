@@ -6,7 +6,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -264,7 +263,7 @@ public class RnaDrawerModel {
 
     public void colorSeqByBase() {
         for (PrimaryStruct primaryStruct : this.primaryStructRepresentations.getPrimaryStructList()) {
-            Color color = this.getColorByBase(primaryStruct.getNucleotideLabel().getText().charAt(0));
+            Color color = this.getColorByBase(primaryStruct.getNucleotideText().getText().charAt(0));
             primaryStruct.setDefaultColor(color);
             Text text = (Text) primaryStruct.getStructure();
             text.setFill(color);
@@ -273,7 +272,7 @@ public class RnaDrawerModel {
 
     public void colorSeqByType() {
         for (PrimaryStruct primaryStruct : this.primaryStructRepresentations.getPrimaryStructList()) {
-            Color color = this.getColorByType(primaryStruct.getNucleotideLabel().getText().charAt(0));
+            Color color = this.getColorByType(primaryStruct.getNucleotideText().getText().charAt(0));
             primaryStruct.setDefaultColor(color);
             Text text = (Text) primaryStruct.getStructure();
             text.setFill(color);

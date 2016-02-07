@@ -7,6 +7,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 
 /**
+ * Class representing a nucleotide in the 2d view.
+ *
  * Created by heumos on 04.02.16.
  */
 public class SecStruct2DCircle extends ANucleotideStructure {
@@ -26,6 +28,12 @@ public class SecStruct2DCircle extends ANucleotideStructure {
     // default color
     private Color defaultColor = Color.BLACK;
 
+    /**
+     *
+     * @param residueIndex the residue index
+     * @param residueType the residue type
+     * @param circle the circle 2d structure
+     */
     public SecStruct2DCircle(int residueIndex, String residueType, Circle circle) {
         this.residueIndex = residueIndex;
         this.residueType = residueType;
