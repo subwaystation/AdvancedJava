@@ -3,10 +3,7 @@ package _rna_3d_viewer.model;
 import _rna_3d_viewer.PseudoknotUtils;
 import _rna_3d_viewer.io.PdbAtom;
 import _rna_3d_viewer.io.PdbFileParser;
-import _rna_3d_viewer.model.structure.ANucleotideStructure;
-import _rna_3d_viewer.model.structure.Nucleotide3DStructure;
-import _rna_3d_viewer.model.structure.Nucleotide3DStructures;
-import _rna_3d_viewer.model.structure.SecondaryStructure;
+import _rna_3d_viewer.model.structure.*;
 import _rna_3d_viewer.model.structure_builder.HydrogenBond3DStructureBuilder;
 import _rna_3d_viewer.model.structure_builder.Molecule3DConnectionBuilder;
 import _rna_3d_viewer.model.structure_builder.Residue3DStructureBuilder;
@@ -149,6 +146,7 @@ public class Rna3DViewerModel {
         for (ANucleotideStructure aNucleotideStructure : this.nucleotide3DStructures.getNucleotide3DStructures()) {
             Nucleotide3DStructure nucleotide3DStructure = (Nucleotide3DStructure) aNucleotideStructure;
             colorMeshViewByType(nucleotide3DStructure.getStructure(), nucleotide3DStructure.getResidueType().charAt(0));
+            resetColorByType(nucleotide3DStructure);
         }
     }
 
@@ -156,6 +154,7 @@ public class Rna3DViewerModel {
         for (ANucleotideStructure aNucleotideStructure : this.nucleotide3DStructures.getNucleotide3DStructures()) {
             Nucleotide3DStructure nucleotide3DStructure = (Nucleotide3DStructure) aNucleotideStructure;
             colorMeshViewByBase(nucleotide3DStructure.getStructure(), nucleotide3DStructure.getResidueType().charAt(0));
+            resetColorByBase(nucleotide3DStructure);
         }
     }
 
@@ -416,6 +415,32 @@ public class Rna3DViewerModel {
         }
     }
 
+    private void resetColorByBase(Nucleotide3DStructure nucleotide3DStructure) {
+        char base = Character.toLowerCase(nucleotide3DStructure.getResidueType().charAt(0));
+        Purine3DStructure purine3DStructure;
+        Pyrimidine3DStructure pyrimidin3DStructure;
+        switch(base) {
+            case 'a':
+                purine3DStructure = (Purine3DStructure) nucleotide3DStructure;
+                purine3DStructure.setDefaultColor(Color.GREEN);
+                break;
+            case 'u':
+                pyrimidin3DStructure = (Pyrimidine3DStructure) nucleotide3DStructure;
+                pyrimidin3DStructure.setDefaultColor(Color.RED);
+                break;
+            case 'c':
+                pyrimidin3DStructure = (Pyrimidine3DStructure) nucleotide3DStructure;
+                pyrimidin3DStructure.setDefaultColor(Color.YELLOW);
+                break;
+            case 'g':
+                purine3DStructure = (Purine3DStructure) nucleotide3DStructure;
+                purine3DStructure.setDefaultColor(Color.BLUE);
+                break;
+            default:
+                break;
+        }
+    }
+
     private void colorMeshViewByType(MeshView meshView, char base) {
         base = Character.toLowerCase(base);
         switch(base) {
@@ -429,6 +454,32 @@ public class Rna3DViewerModel {
                 break;
             default:
                 meshView.setMaterial(new PhongMaterial(Color.BLACK));
+                break;
+        }
+    }
+
+    private void resetColorByType(Nucleotide3DStructure nucleotide3DStructure) {
+        char base = Character.toLowerCase(nucleotide3DStructure.getResidueType().charAt(0));
+        Purine3DStructure purine3DStructure;
+        Pyrimidine3DStructure pyrimidin3DStructure;
+        switch(base) {
+            case 'a':
+                purine3DStructure = (Purine3DStructure) nucleotide3DStructure;
+                purine3DStructure.setDefaultColor(Color.GREEN);
+                break;
+            case 'u':
+                pyrimidin3DStructure = (Pyrimidine3DStructure) nucleotide3DStructure;
+                pyrimidin3DStructure.setDefaultColor(Color.GREEN);
+                break;
+            case 'c':
+                pyrimidin3DStructure = (Pyrimidine3DStructure) nucleotide3DStructure;
+                pyrimidin3DStructure.setDefaultColor(Color.RED);
+                break;
+            case 'g':
+                purine3DStructure = (Purine3DStructure) nucleotide3DStructure;
+                purine3DStructure.setDefaultColor(Color.RED);
+                break;
+            default:
                 break;
         }
     }

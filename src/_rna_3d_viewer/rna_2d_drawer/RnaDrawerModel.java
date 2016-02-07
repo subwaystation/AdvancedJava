@@ -1,16 +1,16 @@
 package _rna_3d_viewer.rna_2d_drawer;
 
 import _rna_3d_viewer.model.Residue;
-import _rna_3d_viewer.model.structure.SecStruct2DCircle;
-import _rna_3d_viewer.model.structure.SecStruct2DRepresentations;
-import _rna_3d_viewer.model.structure.SecondaryStructure;
+import _rna_3d_viewer.model.structure.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
@@ -30,6 +30,8 @@ public class RnaDrawerModel {
     private SecStruct2DRepresentations secStruct2DRepresentations;
 
     private List<Pair<Integer, Integer>> pseudoKnotsFreeList;
+
+    private PrimaryStructRepresentations primaryStructRepresentations = null;
 
     // store the location of the last clicked node
     private double xPoint;
@@ -123,12 +125,83 @@ public class RnaDrawerModel {
     public void colorCircliesByBase() {
         for (SecStruct2DCircle secStruct2DCircle : this.getSecStruct2DRepresentations().getSecStruct2DCircles()) {
             colorCircleByBase(secStruct2DCircle.getCircle(), secStruct2DCircle.getResidueType().charAt(0));
+            setDefaultColorByBase(secStruct2DCircle);
+        }
+    }
+
+    private void setDefaultColorByBase(SecStruct2DCircle secStruct2DCircle) {
+        char base = Character.toLowerCase(secStruct2DCircle.getResidueType().charAt(0));
+        switch(base) {
+            case 'a':
+                secStruct2DCircle.setDefaultColor(Color.GREEN);
+                break;
+            case 'u':
+                secStruct2DCircle.setDefaultColor(Color.RED);
+                break;
+            case 'c':
+                secStruct2DCircle.setDefaultColor(Color.YELLOW);
+                break;
+            case 'g':
+                secStruct2DCircle.setDefaultColor(Color.BLUE);
+                break;
+            default:
+                secStruct2DCircle.setDefaultColor(Color.GREEN);
+                break;
         }
     }
 
     public void colorCircliesByType() {
         for (SecStruct2DCircle secStruct2DCircle : this.getSecStruct2DRepresentations().getSecStruct2DCircles()) {
             colorCircleByType(secStruct2DCircle.getCircle(), secStruct2DCircle.getResidueType().charAt(0));
+            setDefaultColorByType(secStruct2DCircle);
+        }
+    }
+
+    private void setDefaultColorByType(SecStruct2DCircle secStruct2DCircle) {
+        char base = Character.toLowerCase(secStruct2DCircle.getResidueType().charAt(0));
+        switch(base) {
+            case 'a':
+            case 'u':
+                secStruct2DCircle.setDefaultColor(Color.GREEN);
+                break;
+            case 'c':
+            case 'g':
+                secStruct2DCircle.setDefaultColor(Color.RED);
+                break;
+            default:
+                secStruct2DCircle.setDefaultColor(Color.BLACK);
+                break;
+        }
+    }
+
+    public Color getColorByType(char base) {
+        base = Character.toLowerCase(base);
+        switch(base) {
+            case 'a':
+            case 'u':
+                return Color.GREEN;
+            case 'c':
+            case 'g':
+                return Color.RED;
+            default:
+                return Color.BLACK;
+        }
+
+    }
+
+    public Color getColorByBase(char base) {
+        base = Character.toLowerCase(base);
+        switch (base) {
+            case 'a':
+                return Color.GREEN;
+            case 'u':
+                return Color.RED;
+            case 'c':
+                return Color.YELLOW;
+            case 'g':
+                return Color.BLUE;
+            default:
+                return Color.BLACK;
         }
     }
 
@@ -180,4 +253,30 @@ public class RnaDrawerModel {
     }
 
     public List<Pair<Integer, Integer>> getPseudoKnotsFreeList() {return pseudoKnotsFreeList;}
+
+    public PrimaryStructRepresentations getPrimaryStructRepresentations() {
+        return primaryStructRepresentations;
+    }
+
+    public void setPrimaryStructRepresentations(PrimaryStructRepresentations primaryStructRepresentations) {
+        this.primaryStructRepresentations = primaryStructRepresentations;
+    }
+
+    public void colorSeqByBase() {
+        for (PrimaryStruct primaryStruct : this.primaryStructRepresentations.getPrimaryStructList()) {
+            Color color = this.getColorByBase(primaryStruct.getNucleotideLabel().getText().charAt(0));
+            primaryStruct.setDefaultColor(color);
+            Text text = (Text) primaryStruct.getStructure();
+            text.setFill(color);
+        }
+    }
+
+    public void colorSeqByType() {
+        for (PrimaryStruct primaryStruct : this.primaryStructRepresentations.getPrimaryStructList()) {
+            Color color = this.getColorByType(primaryStruct.getNucleotideLabel().getText().charAt(0));
+            primaryStruct.setDefaultColor(color);
+            Text text = (Text) primaryStruct.getStructure();
+            text.setFill(color);
+        }
+    }
 }

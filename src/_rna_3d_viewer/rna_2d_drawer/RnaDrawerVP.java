@@ -1,19 +1,22 @@
 package _rna_3d_viewer.rna_2d_drawer;
 
 import _rna_3d_viewer.model.Residue;
-import _rna_3d_viewer.model.structure.SecStruct2DCircle;
-import _rna_3d_viewer.model.structure.SecStruct2DLine;
-import _rna_3d_viewer.model.structure.SecStruct2DRepresentations;
+import _rna_3d_viewer.model.structure.*;
 import _rna_3d_viewer.view.Rna3DViewerVP;
 import drawing.Graph;
 import drawing.SpringEmbedder;
 import javafx.animation.ParallelTransition;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.util.Pair;
 import util.ArrayUtils;
 
@@ -29,6 +32,10 @@ public class RnaDrawerVP {
     public static boolean firstDraw = false;
 
     public static void handleDrawBEvent(RnaDrawerView rnaDrawerView, RnaDrawerModel rnaDrawerModel) {
+        // draw primary structure first
+        drawPrimaryStructure(rnaDrawerModel, rnaDrawerView);
+
+        // draw secondary structure
         boolean drawPseudoknots = rnaDrawerView.getDrawPseudoknotsCB().isSelected();
         if (firstDraw) {
             Rna3DViewerVP.handleDrawBEvent();
@@ -159,6 +166,23 @@ public class RnaDrawerVP {
             secStruct2DRepresentations.createCircle2DMap();
             Rna3DViewerVP.initSelectionModel(rnaDrawerModel);
         }
+    }
+
+    private static void drawPrimaryStructure(RnaDrawerModel rnaDrawerModel, RnaDrawerView rnaDrawerView) {
+        List<PrimaryStruct> primaryStructs = new ArrayList<>();
+        TextFlow textFlow = new TextFlow();
+        for (Residue residue : rnaDrawerModel.getResidueList()) {
+            int residueIndex = residue.getResidueIndex();
+            String residueType = residue.getResidueType();
+            Text text = new Text(residueType);
+            text.setFill(rnaDrawerModel.getColorByType(residueType.charAt(0)));
+            textFlow.getChildren().add(text);
+            PrimaryStruct primaryStruct = new PrimaryStruct(text, residueIndex);
+            primaryStructs.add(primaryStruct);
+        }
+        rnaDrawerView.getPrimaryseqHB().getChildren().add(textFlow);
+        PrimaryStructRepresentations primaryStructRepresentations = new PrimaryStructRepresentations(primaryStructs, textFlow);
+        rnaDrawerModel.setPrimaryStructRepresentations(primaryStructRepresentations);
     }
 
     private static void eliminatePseudoKnots(List<Pair<Integer, Integer>> secStruct,

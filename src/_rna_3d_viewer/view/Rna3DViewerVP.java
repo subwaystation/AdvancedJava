@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.MeshView;
+import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 import javafx.stage.FileChooser;
 
@@ -87,6 +88,7 @@ public class Rna3DViewerVP {
                 rna3DViewerModel.colorNucleotidesByBase();
                 if (localRnaDrawerModel.getResidueList() != null) {
                     localRnaDrawerModel.colorCircliesByBase();
+                    localRnaDrawerModel.colorSeqByBase();
                 }
             }
         }
@@ -107,6 +109,7 @@ public class Rna3DViewerVP {
                 rna3DViewerModel.colorNucleotidesByType();
                 if (localRnaDrawerModel.getResidueList() != null) {
                     localRnaDrawerModel.colorCircliesByType();
+                    localRnaDrawerModel.colorSeqByType();
                 }
             }
         }
@@ -229,21 +232,24 @@ public class Rna3DViewerVP {
 
     public static void initSelectionModel(RnaDrawerModel rnaDrawerModel) {
         localSecStructRepresentations = rnaDrawerModel.getSecStruct2DRepresentations();
-        ANucleotideStructure[] shapes = localSecStructRepresentations.get2DStructureRepresentations();
+        ANucleotideStructure[] shapes2D = localSecStructRepresentations.get2DStructureRepresentations();
 
 
         ANucleotideStructure[] shapes3D = local3DNucleotides.getNucleotide3DStructuresAsArray();
-        int shapesLen = shapes.length;
+        ANucleotideStructure[] shapes1D = localRnaDrawerModel.getPrimaryStructRepresentations().getPrimarySructAsArray();
+        int shapesLen = shapes2D.length;
         int shapes3DLen = shapes3D.length;
-        ANucleotideStructure[] allShapes = new ANucleotideStructure[shapes3DLen + shapesLen];
-        System.arraycopy(shapes, 0, allShapes, 0, shapesLen);
-        System.arraycopy(shapes3D, 0, allShapes, shapesLen, shapes3DLen);
-        mySelectionModel = new SelectionModel<Object>(allShapes);
+        int shapes1DLen = shapes1D.length;
+        ANucleotideStructure[] shapes = new ANucleotideStructure[shapes3DLen + shapesLen + shapes1DLen];
+        System.arraycopy(shapes2D, 0, shapes, 0, shapesLen);
+        System.arraycopy(shapes3D, 0, shapes, shapesLen, shapes3DLen);
+        System.arraycopy(shapes1D, 0, shapes, shapesLen + shapes3DLen, shapes1DLen);
+        mySelectionModel = new SelectionModel<Object>(shapes);
 
         // setup selection capture in view:
-        for (int i = 0; i < allShapes.length; i++) {
+        for (int i = 0; i < shapes.length; i++) {
             final int index=i;
-            ANucleotideStructure shape = allShapes[i];
+            ANucleotideStructure shape = shapes[i];
 
             BooleanBinding binding = new BooleanBinding() {
                 {
@@ -274,6 +280,9 @@ public class Rna3DViewerVP {
     }
 
     private static void colorStructures(int index) {
+        PrimaryStructRepresentations primaryStructRepresentations = localRnaDrawerModel.getPrimaryStructRepresentations();
+        primaryStructRepresentations.createPrimaryStructHashMap();
+        List<PrimaryStruct> primaryStructs = primaryStructRepresentations.getPrimaryStructList();
         // circle case
         if (index  <= localSecStructRepresentations.secStruct2DCirclesSize()) {
             // crawl circles
@@ -290,11 +299,13 @@ public class Rna3DViewerVP {
             resetLineColoring();
             // crawl 3d objects
             reset3DColoring();
+            resetSeqColoring();
             // set specific 3d object
             if (local3DNucleotides.getFast(residueIndex) != null) {
                 local3DNucleotides.getFast(residueIndex).getStructure().setMaterial(new PhongMaterial(Color.ORANGE));
             }
-
+            Text text = (Text) primaryStructRepresentations.getStruct(residueIndex).getStructure();
+            text.setFill(Color.ORANGE);
         } else {
             // lines case
             int residueIndex1 = -1;
@@ -312,26 +323,55 @@ public class Rna3DViewerVP {
                 }
                 reset3DColoring();
                 resetCircleColoring();
+                resetSeqColoring();
                 local3DNucleotides.getFast(residueIndex1).getStructure().setMaterial(new PhongMaterial(Color.ORANGE));
                 local3DNucleotides.getFast(residueIndex2).getStructure().setMaterial(new PhongMaterial(Color.ORANGE));
                 localSecStructRepresentations.getCircle2DStruct(residueIndex1).getCircle().setFill(Color.ORANGE);
                 localSecStructRepresentations.getCircle2DStruct(residueIndex2).getCircle().setFill(Color.ORANGE);
-
+                Text text1 = (Text) primaryStructRepresentations.getStruct(residueIndex1).getStructure();
+                text1.setFill(Color.ORANGE);
+                Text text2 = (Text) primaryStructRepresentations.getStruct(residueIndex2).getStructure();
+                text2.setFill(Color.ORANGE);
             } else {
                 int residueIndex = -1;
                 // 3d case
-                for (ANucleotideStructure aNucleotideStructure : local3DNucleotides.getNucleotide3DStructures()) {
-                    Nucleotide3DStructure nucleotide3DStructure = (Nucleotide3DStructure) aNucleotideStructure;
-                    if (nucleotide3DStructure.getIsSelected()) {
-                        nucleotide3DStructure.getStructure().setMaterial(new PhongMaterial(Color.ORANGE));
-                        residueIndex = nucleotide3DStructure.getResidueIndex();
-                    } else {
-                        nucleotide3DStructure.resetColor();
+                if (index <= localSecStructRepresentations.secStruct2DLinesSize() + localSecStructRepresentations.secStruct2DCirclesSize() +
+                        local3DNucleotides.getNucleotide3DStructuresAsArray().length) {
+                    for (ANucleotideStructure aNucleotideStructure : local3DNucleotides.getNucleotide3DStructures()) {
+                        Nucleotide3DStructure nucleotide3DStructure = (Nucleotide3DStructure) aNucleotideStructure;
+                        if (nucleotide3DStructure.getIsSelected()) {
+                            nucleotide3DStructure.getStructure().setMaterial(new PhongMaterial(Color.ORANGE));
+                            residueIndex = nucleotide3DStructure.getResidueIndex();
+                        } else {
+                            nucleotide3DStructure.resetColor();
+                        }
+                    }
+                    resetCircleColoring();
+                    resetLineColoring();
+                    resetSeqColoring();
+                    localSecStructRepresentations.getCircle2DStruct(residueIndex).getCircle().setFill(Color.ORANGE);
+                    Text text1 = (Text) primaryStructRepresentations.getStruct(residueIndex).getStructure();
+                    text1.setFill(Color.ORANGE);
+                } else {
+                    // 1d case
+                    int residueInd = -1;
+                    for (PrimaryStruct primaryStruct : primaryStructs) {
+                        if (primaryStruct.getIsSelected()) {
+                            Text text1 = (Text) primaryStruct.getStructure();
+                            text1.setFill(Color.ORANGE);
+                            residueInd = primaryStruct.getResidueIndex();
+                        } else {
+                            primaryStruct.resetColor();
+                        }
+                    }
+                    resetCircleColoring();
+                    resetLineColoring();
+                    reset3DColoring();
+                    localSecStructRepresentations.getCircle2DStruct(residueInd).getCircle().setFill(Color.ORANGE);
+                    if (local3DNucleotides.getFast(residueInd) != null) {
+                        local3DNucleotides.getFast(residueInd).getStructure().setMaterial(new PhongMaterial(Color.ORANGE));
                     }
                 }
-                resetCircleColoring();
-                resetLineColoring();
-                localSecStructRepresentations.getCircle2DStruct(residueIndex).getCircle().setFill(Color.ORANGE);
             }
         }
     }
@@ -365,6 +405,17 @@ public class Rna3DViewerVP {
                 secStruct2DCircle.getCircle().setFill(Color.ORANGE);
             } else {
                 secStruct2DCircle.resetColor();
+            }
+        }
+    }
+
+    private static void resetSeqColoring() {
+        for (PrimaryStruct primaryStruct : localRnaDrawerModel.getPrimaryStructRepresentations().getPrimaryStructList()) {
+            if (primaryStruct.getIsSelected()) {
+                Text text = (Text) primaryStruct.getStructure();
+                text.setFill(Color.ORANGE);
+            } else {
+                primaryStruct.resetColor();
             }
         }
     }

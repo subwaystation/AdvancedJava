@@ -16,12 +16,12 @@ public class Purine3DStructure  extends Nucleotide3DStructure{
 
 
     @Override
-    protected Color getDefaultColor() {
+    public Color getDefaultColor() {
         return defaultColor;
     }
 
     @Override
-    protected void setDefaultColor(Color color) {
+    public void setDefaultColor(Color color) {
         this.defaultColor = color;
     }
 

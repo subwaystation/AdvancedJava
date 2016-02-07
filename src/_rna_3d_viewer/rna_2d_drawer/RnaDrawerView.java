@@ -25,6 +25,9 @@ public class RnaDrawerView {
     // the button HBox
     private HBox buttonHBox;
 
+    // the primary sequence HBox
+    private HBox primaryseqHB;
+
     private Label sequenceL;
 
     // the draw button
@@ -61,11 +64,12 @@ public class RnaDrawerView {
     }
 
     private void initButtonHBox() {
+        this.primaryseqHB = new HBox();
         this.buttonHBox = new HBox();
         this.drawB = new Button("Draw RNA.");
         this.drawB.setDisable(false);
         this.buttonHBox.getChildren().addAll(this.drawB);
-        this.rootNode.getChildren().add(this.buttonHBox);
+        this.rootNode.getChildren().addAll(this.primaryseqHB, this.buttonHBox);
 
     }
 
@@ -88,4 +92,6 @@ public class RnaDrawerView {
     }
 
     public CheckBox getDrawPseudoknotsCB() {return this.drawPseudoknotsCB;}
+
+    public HBox getPrimaryseqHB() {return this.primaryseqHB;}
 }

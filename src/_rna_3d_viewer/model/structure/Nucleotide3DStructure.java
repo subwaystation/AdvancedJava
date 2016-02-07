@@ -1,6 +1,7 @@
 package _rna_3d_viewer.model.structure;
 
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.MeshView;
 
