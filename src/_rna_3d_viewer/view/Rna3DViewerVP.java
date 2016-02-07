@@ -29,28 +29,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Rna3DViewer processor.
+ *
  * Created by heumos on 14.12.15.
  */
 public class Rna3DViewerVP {
 
-    private static List<Integer> lastIndices = new ArrayList<>();
-
-    private static int lastResidueIndex = -1;
-
+    // was the pdb file parsed and the 3d structure read in?
     private static boolean is3DStructureReadIn = false;
 
+    // the selection model
     private static SelectionModel<Object> mySelectionModel;
 
+    // local variable for 3d nucleotide structures
     private static Nucleotide3DStructures local3DNucleotides = null;
 
+    // local variable for secondary 2d structures
     private static SecStruct2DRepresentations localSecStructRepresentations = null;
 
+    // local variable for rna drawer model
     private static RnaDrawerModel localRnaDrawerModel = new RnaDrawerModel(null, null, null);
 
+    // local variable for rna 3d viewer model
     private static Rna3DViewerModel localRna3DViewerModel;
 
+    // local variable for rna drawer view
     private static RnaDrawerView localRnaDrawerView;
 
+    /**
+     * happens when button "Draw SecStruct" was clicked
+     * creates a new rna drawer model
+     * and draws secondary and primary structure
+     */
     public static void handleDrawBEvent() {
         localRnaDrawerModel = new RnaDrawerModel(localRna3DViewerModel.getSecondaryStructure(), localRna3DViewerModel.getResidues(),
                 localRna3DViewerModel.getPseudoKnotsFreeList());
@@ -62,6 +72,9 @@ public class Rna3DViewerVP {
         localRnaDrawerView = rnaDrawerView;
     }
 
+    /**
+     * class with boolean change listener for setting hydrogen bonds visibility
+     */
     protected static class HandleShowHydrogenBonds implements ChangeListener<Boolean> {
         private Rna3DViewerModel rna3DViewerModel;
         public HandleShowHydrogenBonds(Rna3DViewerModel rna3DViewerModel) {

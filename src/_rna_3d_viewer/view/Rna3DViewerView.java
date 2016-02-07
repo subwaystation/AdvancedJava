@@ -124,6 +124,9 @@ public class Rna3DViewerView {
         stage.show();
     }
 
+    /**
+     * set the camera angle right so that the structure is always in plain sight
+     */
     public void update(){
         double deltaX;
         double zoomFactorX;

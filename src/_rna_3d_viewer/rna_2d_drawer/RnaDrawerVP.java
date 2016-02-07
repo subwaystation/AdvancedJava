@@ -182,15 +182,6 @@ public class RnaDrawerVP {
         rnaDrawerModel.setPrimaryStructRepresentations(primaryStructRepresentations);
     }
 
-    private static void eliminatePseudoKnots(List<Pair<Integer, Integer>> secStruct,
-                                             List<Pair<Integer, Integer>> pseudoKnots) {
-        System.out.println(secStruct);
-        System.out.println(pseudoKnots);
-        for (Pair<Integer, Integer> pseudoKnot : pseudoKnots) {
-            secStruct.remove(pseudoKnot);
-        }
-    }
-
     public static void setFirstDraw(boolean b) {
         firstDraw = b;
     }

@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class RnaDrawerModel {
 
-    // nussinov
+    //
     private SecondaryStructure secondaryStructure;
 
     private List<Residue> residueList;
