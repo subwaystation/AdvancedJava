@@ -1,6 +1,10 @@
 package _rna_3d_viewer.io;
 
 /**
+ *
+ * Class representing a PDB atom record parser.
+ * Provides a method to parse an PDB atom from a given String.
+ *
  * Created by heumos on 14.12.15.
  */
 public class PdbAtomRecordParser {
@@ -19,6 +23,10 @@ public class PdbAtomRecordParser {
         this.atomLine = atomLine;
     }
 
+    /**
+     * Parses the local string into an PDB atom object.
+     * @return PdbAtom the PDB atom
+     */
     public PdbAtom parseAtomRecord() {
         // String recordName = this.atomLine.substring(0,6);
         // Integer serial = Integer.valueOf(this.atomLine.substring(6, 11));

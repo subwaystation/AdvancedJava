@@ -5,6 +5,9 @@ import _rna_3d_viewer.io.PdbAtom;
 import java.util.*;
 
 /**
+ * Class representing a way to extract coordinates necessary
+ * to display covalent bonds.
+ *
  * Created by heumos on 06.01.16.
  */
 public class CovalentBondCoordinateExtractor {
@@ -43,6 +46,12 @@ public class CovalentBondCoordinateExtractor {
         return coordinates;
     }
 
+    /**
+     *
+     * @param atomNameCoordinatesMap all atom coordinates hashed by their atom name
+     * @param isPurine is the given nucleotide a purine?
+     * @return float[] the resulting 3D coordinates
+     */
     public static float[] extractCovalentBondCoordinates(Map<String, float[]> atomNameCoordinatesMap, boolean isPurine) {
         float[] coordinates = new float[6];
         HashMap<String, Integer> bondSet;
