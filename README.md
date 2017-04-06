@@ -40,6 +40,25 @@ classes for the secondary and primary structure representations view
 # view
 classes for the 3D viewer view
 
+```JADE
+doctype html
+html(lang="en")
+  head
+    title= pageTitle
+    script(type='text/javascript').
+      if (foo) bar(1 + 5)
+  body
+    h1 Pug - node template engine
+    #container.col
+      if youAreUsingPug
+        p You are amazing
+      else
+        p Get on it!
+      p.
+        Pug is a terse and simple templating language with a
+        strong focus on performance and powerful features.
+```
+becomes
 ```HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -59,22 +78,3 @@ classes for the 3D viewer view
   </body>
 </html>
 ```
-becomes
-```JADE
-doctype html
-html(lang="en")
-  head
-    title= pageTitle
-    script(type='text/javascript').
-      if (foo) bar(1 + 5)
-  body
-    h1 Pug - node template engine
-    #container.col
-      if youAreUsingPug
-        p You are amazing
-      else
-        p Get on it!
-      p.
-        Pug is a terse and simple templating language with a
-        strong focus on performance and powerful features.
-```        
