@@ -78,3 +78,17 @@ becomes
   </body>
 </html>
 ```
+```JSON
+{
+  "Name": "Heumos",
+  "Vorname": "Simon",
+  "Hobbys": [ "Bouldern", "Schwimmen", "Yoga" ],
+  "Anschrift":
+  {
+    "Stad": "Tuebingen",
+    "PLZ": "72070",
+    "Strasse": "Am Arsch der Welt",
+    "Hausnummer:" "666"
+  }
+}
+```
