@@ -83,7 +83,7 @@ becomes
   "Name": "Random",
   "First Name": "J",
   "Hobbies": [ "Foo", "Bar", "Baz" ],
-  "Anschrift":
+  "Address":
   {
     "City": "Tron",
     "ZIP": "42424",
