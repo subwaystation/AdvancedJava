@@ -80,15 +80,15 @@ becomes
 ```
 ```JSON
 {
-  "Name": "Heumos",
-  "Vorname": "Simon",
-  "Hobbys": [ "Bouldern", "Schwimmen", "Yoga" ],
+  "Name": "Random",
+  "First Name": "J",
+  "Hobbies": [ "Foo", "Bar", "Baz" ],
   "Anschrift":
   {
-    "Stad": "Tuebingen",
-    "PLZ": "72070",
-    "Strasse": "Am Arsch der Welt",
-    "Hausnummer:" "666"
+    "City": "Tron",
+    "ZIP": "42424",
+    "Street": "The Grid",
+    "House Number:" "42"
   }
 }
 ```
